@@ -30,5 +30,6 @@
         <TextBox Text="Patronymic" Margin="29,200,18,224"></TextBox>
         <TextBox Text="Email" Margin="29,251,218,172"></TextBox>
         <Button Content="Отмена" Click="Cancellation_Click" Margin="58,367,236,45"/>
+        
     </Grid>
 </Window>
