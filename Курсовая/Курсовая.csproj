@@ -64,6 +64,7 @@
     <Compile Include="ComeIn.xaml.cs">
       <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataBase.cs" />
     <Compile Include="InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
@@ -109,6 +110,14 @@
     <Page Include="Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource dictionary\BorderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource dictionary\InputText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="Resource dictionary\AdmittanceStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +165,10 @@
     <Resource Include="Images\instagram.png" />
     <Resource Include="Images\telegram.png" />
     <Resource Include="Images\vk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\invisible.png" />
+    <Resource Include="Images\view.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
