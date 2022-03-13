@@ -12,8 +12,8 @@
         ResizeMode="NoResize"
         Title="Registration" Height="450" Width="400">
     <Grid>
-        <TextBlock Style="{StaticResource TextStyle}" FontSize="18" Text="Присоединяйтесь к Horizont" Margin="74,32,74,377"></TextBlock>
-        <Button x:Name="Button_log" Style="{DynamicResource ButtonStyle}" Content="Войти" Focusable="False" Margin="10,58,292,360" Background="#00000000"></Button>
+        <TextBlock Style="{StaticResource TextStyle}" FontSize="18" Text="Присоединяйтесь к Horizon" Margin="74,32,74,377"></TextBlock>
+        <Button x:Name="Button_log" Click="ComeIn_Click" Style="{DynamicResource ButtonStyle}" Content="Войти" Focusable="False" Margin="10,58,292,360" Background="#00000000"></Button>
         <Button x:Name="Button_reg" Style="{DynamicResource ButtonStyle}" Content="Регистрация" Margin="90,52,200,354"></Button>
         <Polygon Points="40,100 350,100" StrokeThickness="2" Stroke="Black" Margin="0,-10,0,10"/>
         <Polygon x:Name="log" Points="40,100 80,100" StrokeThickness="2" Stroke="Blue" Margin="0,-10,0,10" ></Polygon>

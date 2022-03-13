@@ -15,17 +15,23 @@ using System.Windows.Shapes;
 namespace Курсовая
 {
     /// <summary>
-    /// Логика взаимодействия для Registration.xaml
+    /// Логика взаимодействия для ComeIn.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class ComeIn : Window
     {
-        public Registration()
+        private WorkWithInterface workWithInterface;
+        
+        public ComeIn()
         {
             InitializeComponent();
-            reg.Visibility = Visibility.Visible;
-            Button_reg.Foreground = Brushes.Blue;
-            log.Visibility = Visibility.Hidden;
-            Button_log.Foreground = Brushes.Black;
+
+            reg.Visibility = Visibility.Hidden;
+            Button_reg.Foreground = Brushes.Black;
+
+            log.Visibility = Visibility.Visible;
+            Button_log.Foreground = Brushes.Blue;
+            
+            workWithInterface = new WorkWithInterface();
         }
 
         private void Cancellation_Click(object sender, RoutedEventArgs e)
@@ -34,11 +40,12 @@ namespace Курсовая
             MainRoot.windowEntrance = null;
         }
 
-        private void ComeIn_Click(object sender, RoutedEventArgs e)
+        private void Registration_Click(object sender, RoutedEventArgs e)
         {
             Close();
-            MainRoot.windowEntrance = new ComeIn();
+            MainRoot.windowEntrance = new Registration();
             MainRoot.windowEntrance.Show();
+
         }
     }
 }

@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:Курсовая"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="700" 
-      Title="MainRoot">
-    
+      Title="MainRoot" >
+
     <Page.Resources>
         <Style TargetType="Button" x:Key="VkBtn">
             <Setter Property="Template">
@@ -56,7 +56,7 @@
                     </Setter>
                 </Trigger>
             </Style.Triggers>
-        </Style> 
+        </Style>
         <Style TargetType="Button" x:Key="TelBtn">
             <Setter Property="Template">
                 <Setter.Value>
@@ -132,17 +132,18 @@
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" MaxWidth="250" MinHeight="100" Margin="10" Source="/Images/Самолёт.jpg"/>
                     <Border Grid.Row="1"  >
-                        <Button MaxWidth="250" Height="50" Margin="10" VerticalAlignment="Center" Content="Войти">
+                        <Button MaxWidth="250" Height="50" Margin="10,0,10,10" Click="Login_Click" VerticalAlignment="Bottom" Content="Войти">
                         </Button>
                     </Border>
                     <Border Grid.Row="2" >
-                        <Button MaxWidth="250" Height="50" Margin="10" Content="Зарегистрироваться">
+                        <Button MaxWidth="250" Height="50" Margin="10" Click="Registration_Click" Content="Зарегистрироваться">
                         </Button>
                     </Border>
                 </Grid>
             </Border>
             <Border  BorderThickness="2" Grid.Row="1">
                 <Border VerticalAlignment="Center" Grid.Column="1" BorderThickness="2">
+                    
                     <Grid HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -168,12 +169,24 @@
             </Grid.ColumnDefinitions>
             <StackPanel HorizontalAlignment="Right" Height="40" Grid.Column="2" Orientation="Horizontal">
                 <Button Click="LinkVk_Click" Grid.Column="0" Width="40" Height="40" Margin="0 0 15 0" Style="{StaticResource VkBtn}" />
-                <Button Cursor="Hand" Width="40" Height="40" Grid.Column="1" Margin="0 0 15 0" Style="{StaticResource InstBtn}"></Button>
+                <Button Click="LinkInst_Click" Cursor="Hand" Width="40" Height="40" Grid.Column="1" Margin="0 0 15 0" Style="{StaticResource InstBtn}"></Button>
                 <Button Cursor="Hand" Width="40" Height="40" Grid.Column="2" Margin="0 0 15 0" Style="{StaticResource TelBtn}"></Button>
                 <Button Cursor="Hand" Width="40" Height="40" Grid.Column="3" Margin="0 0 15 0" Style="{StaticResource EmailBtn}"></Button>
 
             </StackPanel>
             <!--<Border BorderBrush="AliceBlue" BorderThickness="2" Grid.Column="0"></Border>-->
+        </Grid>
+        <Grid Grid.Column="1" VerticalAlignment="Bottom" Margin="10,0,25,400">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Right" Height="20" Grid.Column="2" Orientation="Horizontal">
+                <Button Click="CloseProgramm_Click" Content="X" Margin="0 0 1 0"></Button>
+                <Button Click="CollapseProgramm_Click" Content="-" Margin="0 0 1 0"></Button>
+                <Button Content="О программе" Click="InfoAboutProgramm_Click"></Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

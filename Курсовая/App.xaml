@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Курсовая"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource dictionary/AdmittanceStyle.xaml"/>
+                <ResourceDictionary Source="Resource dictionary/StyleText.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
