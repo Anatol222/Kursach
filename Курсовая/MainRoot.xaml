@@ -6,11 +6,107 @@
       xmlns:local="clr-namespace:Курсовая"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="700" 
-      Title="MainRoot" 
-      Loaded="MainRoot_Loaded">
+      Title="MainRoot" >
 
     <Page.Resources>
-        
+        <Style TargetType="Button" x:Key="VkBtn">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Cursor="Hand">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/vk.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"></ScaleTransform>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="InstBtn">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Cursor="Hand">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/instagram.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"></ScaleTransform>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="TelBtn">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Cursor="Hand">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/telegram.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"></ScaleTransform>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="EmailBtn">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Rectangle Cursor="Hand">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="/Images/email.png"/>
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.2" ScaleY="1.2"></ScaleTransform>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="RegLogBtn">
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.Background>
@@ -47,28 +143,23 @@
             </Border>
             <Border  BorderThickness="2" Grid.Row="1">
                 <Border VerticalAlignment="Center" Grid.Column="1" BorderThickness="2">
-
+                    
                     <Grid HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition MinWidth="15"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <ComboBox Grid.Column="0" Name="LangBox" VerticalContentAlignment="Center"  >
                             <TextBlock Width="35" Text="RU" FontSize="16"></TextBlock>
                         </ComboBox>
-                        <Border BorderBrush="Azure" VerticalAlignment="Center" MaxWidth="50" BorderThickness="2" Grid.Column="2">
+                        <Border BorderBrush="Azure" VerticalAlignment="Center" MaxWidth="50" BorderThickness="2" Grid.Column="3">
                             <Image  Source="\Images\Русский флаг.png" ></Image>
-
                         </Border>
-                        <Button Grid.Column="3" Width="30" Height="30" Margin="15 0 0  0" Style="{StaticResource InfoBtn}" Click="InfoAboutProgramm_Click"></Button>
-
                     </Grid>
                 </Border>
                 <!--<Button VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" Content="Связь с разработчиками"></Button>-->
             </Border>
-
         </Grid>
         <Grid Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 30 20">
             <Grid.ColumnDefinitions>
@@ -79,33 +170,23 @@
             <StackPanel HorizontalAlignment="Right" Height="40" Grid.Column="2" Orientation="Horizontal">
                 <Button Click="LinkVk_Click" Grid.Column="0" Width="40" Height="40" Margin="0 0 15 0" Style="{StaticResource VkBtn}" />
                 <Button Click="LinkInst_Click" Cursor="Hand" Width="40" Height="40" Grid.Column="1" Margin="0 0 15 0" Style="{StaticResource InstBtn}"></Button>
-                <Button Click="Button_Click" Cursor="Hand" Width="40" Height="40" Grid.Column="2" Margin="0 0 15 0" Style="{StaticResource TelBtn}">
-                </Button>
-                <Button Cursor="Hand" Width="40" Height="40" Grid.Column="3" Margin="0 0 15 0" Style="{StaticResource EmailBtn}">
-
-                </Button>
+                <Button Cursor="Hand" Width="40" Height="40" Grid.Column="2" Margin="0 0 15 0" Style="{StaticResource TelBtn}"></Button>
+                <Button Cursor="Hand" Width="40" Height="40" Grid.Column="3" Margin="0 0 15 0" Style="{StaticResource EmailBtn}"></Button>
 
             </StackPanel>
+            <!--<Border BorderBrush="AliceBlue" BorderThickness="2" Grid.Column="0"></Border>-->
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" VerticalAlignment="Bottom" Margin="10,0,25,400">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="0.05*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.05*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <StackPanel  Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-                <Button Click="CollapseProgramm_Click" Width="30" Margin="0 0 15 0" Height="30" Style="{StaticResource CollapseBtn}" ></Button>
-                <Button x:Name="MinimiseBtn" Click="Minimise_Programm_Click" Style="{StaticResource MinimiseBtn}" Margin="0 0 15 0" Width="30" Height="30" BorderBrush="Transparent" >
-                </Button>
-                <Button Click="CloseProgramm_Click" Margin="0 0 15 0" Width="30" Height="30" Style="{StaticResource CloseBtn}" ></Button>
+            <StackPanel HorizontalAlignment="Right" Height="20" Grid.Column="2" Orientation="Horizontal">
+                <Button Click="CloseProgramm_Click" Content="X" Margin="0 0 1 0"></Button>
+                <Button Click="CollapseProgramm_Click" Content="-" Margin="0 0 1 0"></Button>
+                <Button Content="О программе" Click="InfoAboutProgramm_Click"></Button>
             </StackPanel>
         </Grid>
-
     </Grid>
 </Page>

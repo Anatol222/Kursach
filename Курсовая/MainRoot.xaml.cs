@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Tulpep.NotificationWindow;
 
 namespace Курсовая
 {
@@ -24,7 +23,7 @@ namespace Курсовая
     {
         public static Window windowEntrance;
         public static InfoAboutProgramm infoWindow;
-        private PopupNotifier popup = null;
+
         public MainRoot()
         {
             InitializeComponent();
@@ -74,34 +73,6 @@ namespace Курсовая
             else infoWindow.Activate();
         }
 
-        private void Minimise_Programm_Click(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-            }
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            popup.Popup();
-            Clipboard.SetText("@Mr_Anatol");
-        }
-
-        private void MainRoot_Loaded(object sender, RoutedEventArgs e)
-        {
-            popup = new PopupNotifier();
-            popup.Image = Properties.Resources.telegram;
-            popup.ImageSize = new System.Drawing.Size(75, 75);
-            popup.TitleText = "Уведомление!";
-            popup.ContentText = "Ссылка на Telegram успешно скорирована!";
-            popup.ShowGrip = false;
-            popup.ShowOptionsButton = false;
-        }
+        
     }
 }

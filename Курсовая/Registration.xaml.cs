@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleFree;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -24,8 +25,24 @@ namespace Курсовая
         private WorkWithInterface workWithInterface;
         private Registration registration;
         private DataBase dataBase;
+        private Email email;
 
         private string _firstName, _lastName, _patronymic, _email, _number, _firstPassword, _secondPassword;
+
+        public string FirstName_Text { get { return _firstName; } }
+        public string LastName_Text { get { return _lastName; } }
+        public string Patronymic_Text { get { return _patronymic; } }
+        public string Email_Text { get { return _email; } }
+        public string Number_Text { get { return _number; } }
+        public string FirstPassword_Text { get { return _firstPassword; } }
+
+        public static string G_FirsName {get;set;}
+        public static string G_LastName {get;set;}
+        public static string G_Patromic { get;set;}
+        public static string G_Email { get;set;}
+        public static  string G_Number { get;set;}
+        public static string G_FirstPassword { get;set;}
+        public static string CodeConfirm { get; set; }
 
         public Registration()
         {
@@ -38,10 +55,13 @@ namespace Курсовая
 
             workWithInterface = new WorkWithInterface();
             registration = this;
-
+            email = new Email();
             dataBase = new DataBase();
 
             MaxLenghtDataTable();
+
+            FirstPassword.ToolTip = workWithInterface.NotificationPassword;
+            
         }
 
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
@@ -56,8 +76,10 @@ namespace Курсовая
             ((TextBox)sender).Foreground = Brushes.Black;
         }
 
+
         private void ConfirmEmail_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
                 _lastName = LastName.Text;
@@ -67,31 +89,42 @@ namespace Курсовая
                 _number = PhoneNumber.Text;
                 _firstPassword = FirstPassword.Password;
                 _secondPassword = ConfirmPassword.Password;
+
+                G_FirsName = _firstName;
+                G_LastName = _lastName;
+                G_Email = _email;
+                G_FirstPassword = _firstPassword;
+                G_Patromic = _patronymic;
+                G_Number = _number;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка при регистрации", MessageBoxButton.OK);
             }
 
-            //Обработать Пароль
-            if ((_lastName != "" && _lastName != "Ведите фамилию") && (_firstName != "" &&_firstName!= "Ведите имя")
-                && (_patronymic != "" && _patronymic!= "Ведите отчество") && (_email != "" && _email != "Ведите эл. почту") 
-                && (_number != "" && _number != "Ведите номер")  && (_firstPassword != "")  && (_secondPassword != ""))
+            if ((_lastName != "" && _lastName != "Ведите фамилию") && (_firstName != "" && _firstName != "Ведите имя")
+                && (_patronymic != "" && _patronymic != "Ведите отчество") && (_email != "" && _email != "Ведите эл. почту")
+                && (_number != "" && _number != "Ведите номер") && (_firstPassword != "") && (_secondPassword != ""))
             {
-                if (_firstPassword == _secondPassword)
+                if (workWithInterface.PasswordProcessing(_firstPassword, _secondPassword))
                 {
+                   
                     if (!checkuser())
                     {
-                        string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}')";
-                        SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-                        dataBase.OpenConnection();
-                        if (command.ExecuteNonQuery() == 1)
-                        {
-                            MessageBox.Show("Norm", "sex");
-                        }
-                        else
-                            MessageBox.Show("(", "gg");
-                        dataBase.CloseConnection();
+                        CodeConfirm = email.CreatingCodeConfirmation();
+                        email.SendMessageConfirmationEmail(CodeConfirm, Email_Text);
+                        workWithInterface.SwitchAnotherWindon(sender, e, registration, new ConfirmEmail());
+
+                        //string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}')";
+                        //SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+                        //dataBase.OpenConnection();
+                        //if (command.ExecuteNonQuery() == 1)
+                        //{
+                        //    MessageBox.Show("Norm", "sex");
+                        //}
+                        //else
+                        //    MessageBox.Show("(", "gg");
+                        //dataBase.CloseConnection();
                     }
                 }
                 else
@@ -99,46 +132,41 @@ namespace Курсовая
             }
             else
                 MessageBox.Show("Поля пустые");
-        }
-        private Boolean checkuser()
-        {
-            var number = PhoneNumber.Text;
 
+        }
+        private bool checkuser()
+        {
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataTable table = new DataTable();
-
-            string querystring = $"select * from UserPersonalData where Number = '{number}'";
-
+            //string querystring = $"SELECT * FROM UserPersonalData AS UP JOIN PersonalLoginData AS PL ON PL.UserPersonalDataId=UP.Id AND (PL.Email = '{_email}' OR UP.Number = '{PhoneNumber}')";
+            //string querystring = $"select * from UserPersonalData where Number = '{number}'";
+            string querystring = $"select * from PersonalLoginData where Email = '{_email}'";
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
             adapter.SelectCommand = command;
             adapter.Fill(table);
             if (table.Rows.Count>0)
             {
-                MessageBox.Show("Пользователь существует");
+                MessageBox.Show("Пользователь c такой почтой уже существует");
                 return true;
             }
             else return false;
-
-
         }
 
         private void ShowPassword_Click(object sender, RoutedEventArgs e)
         {
             ViewPassword.Text = FirstPassword.Password;
-            ViewPassword.Visibility = Visibility.Visible;
-            FirstPassword.Visibility = Visibility.Hidden;
-            HidePassword.Visibility = Visibility.Visible;
-            ShowPassword.Visibility = Visibility.Hidden;
+            ShowOrHidePassword_Click(sender, e,Visibility.Visible, Visibility.Hidden, Visibility.Visible,Visibility.Hidden);
         }
 
-        private void HidePassword_Click(object sender, RoutedEventArgs e)
+        private void HidePassword_Click(object sender, RoutedEventArgs e)=>
+            ShowOrHidePassword_Click(sender,e,Visibility.Hidden,Visibility.Visible,Visibility.Hidden,Visibility.Visible);
+        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e,Visibility view,Visibility firstPassword,Visibility hide,Visibility show)
         {
-            ViewPassword.Visibility = Visibility.Hidden;
-            FirstPassword.Visibility = Visibility.Visible;
-            HidePassword.Visibility = Visibility.Hidden;
-            ShowPassword.Visibility = Visibility.Visible;
+            ViewPassword.Visibility = view;
+            FirstPassword.Visibility = firstPassword;
+            HidePassword.Visibility = hide;
+            ShowPassword.Visibility = show;
         }
-
         //Добавить кодовое слово
         private void MaxLenghtDataTable()
         {

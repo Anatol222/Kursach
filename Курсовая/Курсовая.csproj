@@ -37,7 +37,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -46,9 +45,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Tulpep.NotificationWindow, Version=1.1.38.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tulpep.NotificationWindow.1.1.38\lib\net40\Tulpep.NotificationWindow.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -68,7 +64,11 @@
     <Compile Include="ComeIn.xaml.cs">
       <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmEmail.xaml.cs">
+      <DependentUpon>ConfirmEmail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataBase.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
@@ -85,6 +85,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ComeIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfirmEmail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,10 +127,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resource dictionary\MainRootButtons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Resource Include="Resource dictionary\AdmittanceStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,7 +154,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -174,19 +173,6 @@
     <Resource Include="Images\instagram.png" />
     <Resource Include="Images\telegram.png" />
     <Resource Include="Images\vk.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\close.png" />
-    <Resource Include="Images\information-button.png" />
-    <Resource Include="Images\maximize.png" />
-    <Resource Include="Images\minimize-sign.png" />
-    <Resource Include="Images\minimize.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\telegram.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\invisible.png" />
