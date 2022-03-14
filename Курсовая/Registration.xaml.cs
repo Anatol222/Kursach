@@ -149,5 +149,6 @@ namespace Курсовая
             FirstPassword.MaxLength = 16;
             Email.MaxLength = 30;
         }
+
     }
 }

@@ -76,13 +76,27 @@ namespace Курсовая
 
         private void Minimise_Programm_Click(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow.WindowState == WindowState.Normal)
+            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
             {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+                Image image = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("Images/maximize.png", UriKind.Relative);
+                bitmap.EndInit();
+                image.Source = bitmap;
+                MinimiseBtn.Content = image;
             }
             else
             {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
+                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                Image image = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("Images/minimize.png", UriKind.Relative);
+                bitmap.EndInit();
+                image.Source = bitmap;
+                MinimiseBtn.Content = image;
             }
 
         }

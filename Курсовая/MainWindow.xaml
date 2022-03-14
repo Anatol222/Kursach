@@ -9,9 +9,5 @@
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None"
         MouseLeftButtonDown="Page_MouseLeftButtonDown"
         KeyDown="Window_KeyDown">
-    <Grid>
-        <Frame Name="MainFrame">
-            
-        </Frame>
-    </Grid>
+    <Frame Name="MainFrame"></Frame>
 </Window>

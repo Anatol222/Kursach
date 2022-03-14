@@ -192,4 +192,35 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <ControlTemplate TargetType="Button" x:Key="MaxMinBtn">
+        <Border x:Name="buttonBorder"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}">
+
+            <ContentControl Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding Content}">
+            </ContentControl>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontWeight" Value="Bold" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1" ScaleY="1"></ScaleTransform>
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="buttonBorder" Property="Background" Value="transparent" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>
