@@ -33,13 +33,5 @@ namespace Курсовая
         {
             this.DragMove();
         }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key==Key.Escape)
-            {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
-            }
-        }
     }
 }

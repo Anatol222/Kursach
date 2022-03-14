@@ -60,15 +60,11 @@
                         </ComboBox>
                         <Border BorderBrush="Azure" VerticalAlignment="Center" MaxWidth="50" BorderThickness="2" Grid.Column="2">
                             <Image  Source="\Images\Русский флаг.png" ></Image>
-
                         </Border>
-                        <Button Grid.Column="3" Width="30" Height="30" Margin="15 0 0  0" Style="{StaticResource InfoBtn}" Click="InfoAboutProgramm_Click"></Button>
-
                     </Grid>
                 </Border>
                 <!--<Button VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" Content="Связь с разработчиками"></Button>-->
             </Border>
-
         </Grid>
         <Grid Grid.Column="1" VerticalAlignment="Bottom" Margin="0 0 30 20">
             <Grid.ColumnDefinitions>
@@ -107,6 +103,5 @@
                 <Button Click="CloseProgramm_Click" Margin="0 0 15 0" Width="30" Height="30" Style="{StaticResource CloseBtn}" ></Button>
             </StackPanel>
         </Grid>
-
     </Grid>
 </Page>
