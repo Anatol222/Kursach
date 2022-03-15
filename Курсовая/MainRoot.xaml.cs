@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tulpep.NotificationWindow;
 
 namespace Курсовая
 {
@@ -23,7 +24,7 @@ namespace Курсовая
     {
         public static Window windowEntrance;
         public static InfoAboutProgramm infoWindow;
-
+        private PopupNotifier popup = null;
         public MainRoot()
         {
             InitializeComponent();

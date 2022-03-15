@@ -10,28 +10,37 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Курсовая
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для StartWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartWindow : Window
     {
-        public MainWindow()
+        public StartWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new MainRoot();
-        }
-        private void Page_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            StartFrame.Content = new MainRoot();
+
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+            }
         }
     }
 }
