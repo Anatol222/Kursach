@@ -67,6 +67,9 @@
     <Compile Include="Admittance\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComeIn.xaml.cs">
       <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Page Include="Admittance\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ComeIn.xaml">
       <SubType>Designer</SubType>
@@ -220,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\telegram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Confirm.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
