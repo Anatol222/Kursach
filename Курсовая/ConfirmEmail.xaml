@@ -11,26 +11,27 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="ConfirmEmail" Height="450" Width="400">
     <Border CornerRadius="50" Background="#d8edf0" BorderBrush="LightGreen" BorderThickness="2">
-        <Grid Margin="2,-8,-2,8">
+        <Grid Margin="-1,-9,1,9">
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Подтвердите адресс эл. почты" Margin="0,22,0,0" VerticalAlignment="Top" Height="28" Width="240"/>
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Введите код подтверждения" Margin="0,55,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="TextInfo" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,93,0,0"/>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="98,161,0,0" Width="34">
-                <TextBox Style="{DynamicResource TextNew}" MinWidth="10" x:Name="FirstSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged"></TextBox>
+            <TextBox TextAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" x:Name="TextInfo" FontSize="14" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,93,0,0"/>
+            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="61,161,0,0" Width="47">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FirstSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="136,161,0,0" Width="34">
-                <TextBox Style="{DynamicResource TextNew}" MinWidth="10" x:Name="SecondSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged"></TextBox>
+            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="113,161,0,0" Width="47">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="SecondSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="176,161,0,0" Width="34">
-                <TextBox Style="{DynamicResource TextNew}" MinWidth="10" x:Name="ThirdSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged"></TextBox>
+            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="165,161,0,0" Width="47">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="ThirdSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="214,161,0,0" Width="34">
-                <TextBox Style="{DynamicResource TextNew}" MinWidth="10" x:Name="FourthSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" ></TextBox>
+            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="217,161,0,0" Width="47">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FourthSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="254,161,0,0" Width="34">
-                <TextBox Style="{DynamicResource TextNew}" MinWidth="10" x:Name="FifthSymbol" Foreground="Black"></TextBox>
+            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="269,161,0,0" Width="47">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FifthSymbol" Foreground="Black" Width="46"></TextBox>
             </Border>
 
             <Button Content="Отправить ещё раз" Click="SendAgain_Click" Margin="52,193,218,223"/>
@@ -38,9 +39,12 @@
 
             <Button Foreground="Blue" FontStyle="Italic" FontSize="12" Click="ReturnRegistr_Click" Style="{DynamicResource ButtonStyle}" Content="Перейти к регистрации" Focusable="False" Margin="198,221,34,196" Background="#00000000"></Button>
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Добавление резервной почты" Margin="74,250,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <Label x:Name="ReserveInfo" Margin="10,269,10,0" Height="98" VerticalAlignment="Top"/>
-            <Border Style="{DynamicResource BorderStyle}" Margin="83,330,0,0" Width="220">
-                <TextBox Style="{DynamicResource TextNew}" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve" Text="Введите резервную эл. почту" Width="200" ></TextBox>
+            <TextBox HorizontalAlignment="Center"  TextAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" x:Name="ReserveInfo" TextWrapping="Wrap" Margin="10,269,10,0" Height="98" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ChoiceEmail" Margin="256,342,42,80" SelectionChanged="ChoiceEmail_SelectionChanged">
+
+            </ComboBox>
+            <Border Style="{DynamicResource BorderStyle}" Margin="31,342,0,0" Width="220">
+                <TextBox PreviewTextInput="Email_PreviewTextInput" Style="{DynamicResource TextNew}" GotFocus="EmailReserve_GotFocus" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve"  Width="200" ></TextBox>
             </Border>
             <Button Content="Подтвердить" Click="Confirm_Click" Margin="198,374,54,12"/>
             <Button Content="Отмена" Click="Cancellation_Click" Margin="53,372,233,10"/>

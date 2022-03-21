@@ -75,17 +75,25 @@
     </Compile>
     <Compile Include="DataBase.cs" />
     <Compile Include="Email.cs" />
+    <Compile Include="IConfidentiality.cs" />
     <Compile Include="InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IRegistr.cs" />
     <Compile Include="MainFrame.xaml.cs">
       <DependentUpon>MainFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationWindow.xaml.cs">
+      <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReserveInCome.xaml.cs">
+      <DependentUpon>ReserveInCome.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
@@ -126,6 +134,10 @@
     <Compile Include="MainRoot.xaml.cs">
       <DependentUpon>MainRoot.xaml</DependentUpon>
     </Compile>
+    <Page Include="NotificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +145,10 @@
     <Page Include="Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReserveInCome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource dictionary\BorderStyle.xaml">
       <SubType>Designer</SubType>
