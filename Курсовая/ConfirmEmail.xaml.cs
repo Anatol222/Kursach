@@ -107,13 +107,17 @@ namespace Курсовая
                     command = new SqlCommand(querystring, dataBase.GetConnection());
                     if (command.ExecuteNonQuery() == 1)
                     {
-                        if  (EmailReserve.Text !="")
+                        if  (EmailReserve.Text !="" && EmailReserve.Text!="Введите резервную эл. почту")
                             querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, ReserveEmail, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}','{EmailReserve.Text+ _continuationEmail}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
                         else
                             querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
                         command = new SqlCommand(querystring, dataBase.GetConnection());
                         if (command.ExecuteNonQuery() == 1)
+                        { 
                             MessageBox.Show("Norm");
+                            workWithInterface.SwitchAnotherWindon(sender, e, confirmEmail, new MainFrame());
+
+                        }
                         else
                             Notification?.Invoke("gg");
                         if (notificationWindow != null)

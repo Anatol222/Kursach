@@ -28,7 +28,7 @@ namespace Курсовая
         private DataBase dataBase;
 
         private string _email,_password;
-        private bool _saveUserFirst, _saveUserLast,_existEmail,_reserveEmailExist;
+        private bool _saveUserFirst, _saveUserLast,_reserveEmailExist;
         public ComeIn()
         {
             InitializeComponent();
@@ -67,38 +67,42 @@ namespace Курсовая
 
         private void UseReserveEmail_Click(object sender, RoutedEventArgs e)
         {
-            _email = Email.Text;
-            string reserveEmail = default;
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
-            string querystring = $"SELECT ReserveEmail FROM PersonalLoginData WHERE Email ='{_email}'; ";
-            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-            dataBase.OpenConnection();
-            SqlDataReader reader = command.ExecuteReader();
-            try
+            if (ExaminationEmail())
             {
-                while (reader.Read())
-                    reserveEmail = reader.GetString(0);
+                string reserveEmail = default;
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable table = new DataTable();
+                string querystring = $"SELECT ReserveEmail FROM PersonalLoginData WHERE Email ='{_email}'; ";
+                SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                dataBase.OpenConnection();
+                SqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                        reserveEmail = reader.GetString(0);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Вы не указали резервную почту");
+                    _reserveEmailExist = true;
+                }
+                dataBase.CloseConnection();
+                if (!_reserveEmailExist)
+                {
+                    string reservePassword = email.CreatingPassword();
+                    email.SendMessageNewPassword(reservePassword, reserveEmail);
+                    workWithInterface.SwitchAnotherWindon(sender, e, comeIn, new ReserveInCome(reservePassword, reserveEmail, _email));
+                }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Вы не указали резервную почту");
-                _reserveEmailExist = true;
-            }
-            dataBase.CloseConnection();
-            if (!_reserveEmailExist)
-            {
-                string reservePassword = email.CreatingPassword();
-                email.SendMessageNewPassword(reservePassword, reserveEmail);
-                workWithInterface.SwitchAnotherWindon(sender, e, comeIn, new ReserveInCome(reservePassword, reserveEmail, _email));
-            }
+            else
+                MessageBox.Show("Такого аккаунта не существует");
         }
 
         private void NewPassword_Click(object sender, RoutedEventArgs e)
         {
-            if (_existEmail)
+            if (ExaminationEmail())
             {
                 string newPassword = email.CreatingPassword();
                 string querystring = $"UPDATE PersonalPassword SET Password='{newPassword}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
@@ -107,16 +111,18 @@ namespace Курсовая
                 if (command.ExecuteNonQuery() == 1)
                 {
                     email.SendMessageNewPassword(newPassword, _email);
-                    MessageBox.Show("Norm"); 
+                    MessageBox.Show("Новый пароль у вас на почте"); 
                 }
                 else
-                    MessageBox.Show("gg");
+                    MessageBox.Show("Ошибка");
                 dataBase.CloseConnection();
             }
             else
                 MessageBox.Show("аккаунт с такой почтой не зарегистрирован");
 
         }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 
         private void InCome_Click(object sender, RoutedEventArgs e)
         {
@@ -128,7 +134,7 @@ namespace Курсовая
             DataTable table = new DataTable();
 
             string querystring = $" SELECT Password FROM PersonalPassword WHERE Id = (SELECT PersonalPasswordId FROM PersonalLoginData WHERE Email ='{_email}'); ";
-            
+
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
             adapter.SelectCommand = command;
             adapter.Fill(table);
@@ -142,21 +148,55 @@ namespace Курсовая
 
             if (table.Rows.Count == 1)
             {
-                _existEmail=true;
                 if (_password == extractPasswordFromBasaData)
                 {
                     _saveUserFirst = true;
-                    MessageBox.Show("успешно вошли", "kek", MessageBoxButton.OK); 
+                    workWithInterface.SwitchAnotherWindon(sender,e,comeIn,new MainFrame()); 
+                    MessageBox.Show("успешно вошли"); 
                 }
 
                 else
-                    MessageBox.Show("Пароль", "kek", MessageBoxButton.OK);
+                    MessageBox.Show("Пароль");
             }
             else
-                MessageBox.Show("Такого аккаунта не существует", "kek", MessageBoxButton.OK);
+                MessageBox.Show("Такого аккаунта не существует");
             dataBase.CloseConnection();
 
         }
+
+        private bool ExaminationEmail()
+        {
+            _email = Email.Text;
+            _password = FirstPassword.Password;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+            string querystring = $"select * from PersonalLoginData where Email = '{_email}'";
+            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count > 0)
+                return true;
+            return false;
+        }
+
+        private void ShowPassword_Click(object sender, RoutedEventArgs e)
+        {
+            ViewPassword.Text = FirstPassword.Password;
+            ShowOrHidePassword_Click(sender, e, Visibility.Visible, Visibility.Hidden, Visibility.Visible, Visibility.Hidden);
+        }
+        //переделать
+
+        private void HidePassword_Click(object sender, RoutedEventArgs e) =>
+            ShowOrHidePassword_Click(sender, e, Visibility.Hidden, Visibility.Visible, Visibility.Hidden, Visibility.Visible);
+        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e, Visibility view, Visibility firstPassword, Visibility hide, Visibility show)
+        {
+            ViewPassword.Visibility = view;
+            FirstPassword.Visibility = firstPassword;
+            HidePassword.Visibility = hide;
+            ShowPassword.Visibility = show;
+        }
+        private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
+           FirstPassword.Password = ViewPassword.Text;
 
         private void SaveUser_Click(object sender, RoutedEventArgs e)=>_saveUserLast= true;
     }

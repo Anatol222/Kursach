@@ -44,7 +44,7 @@
 
             </ComboBox>
             <Border Style="{DynamicResource BorderStyle}" Margin="31,342,0,0" Width="220">
-                <TextBox PreviewTextInput="Email_PreviewTextInput" Style="{DynamicResource TextNew}" GotFocus="EmailReserve_GotFocus" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve"  Width="200" ></TextBox>
+                <TextBox PreviewTextInput="Email_PreviewTextInput" Text="Введите резервную эл. почту" Style="{DynamicResource TextNew}" GotFocus="EmailReserve_GotFocus" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve"  Width="200" ></TextBox>
             </Border>
             <Button Content="Подтвердить" Click="Confirm_Click" Margin="198,374,54,12"/>
             <Button Content="Отмена" Click="Cancellation_Click" Margin="53,372,233,10"/>
