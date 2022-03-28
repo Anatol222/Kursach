@@ -70,16 +70,16 @@
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ComeIn.xaml.cs">
+    <Compile Include="StartWindowForms\ComeIn.xaml.cs">
       <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConfirmEmail.xaml.cs">
+    <Compile Include="StartWindowForms\ConfirmEmail.xaml.cs">
       <DependentUpon>ConfirmEmail.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataBase.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="IConfidentiality.cs" />
-    <Compile Include="InfoAboutProgramm.xaml.cs">
+    <Compile Include="StartWindowForms\InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
     <Compile Include="IRegistr.cs" />
@@ -92,10 +92,10 @@
     <Compile Include="ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Registration.xaml.cs">
+    <Compile Include="StartWindowForms\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReserveInCome.xaml.cs">
+    <Compile Include="StartWindowForms\ReserveInCome.xaml.cs">
       <DependentUpon>ReserveInCome.xaml</DependentUpon>
     </Compile>
     <Compile Include="StartWindow.xaml.cs">
@@ -114,15 +114,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ComeIn.xaml">
+    <Page Include="StartWindowForms\ComeIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ConfirmEmail.xaml">
+    <Page Include="StartWindowForms\ConfirmEmail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InfoAboutProgramm.xaml">
+    <Page Include="StartWindowForms\InfoAboutProgramm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,7 +130,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainRoot.xaml">
+    <Page Include="StartWindowForms\MainRoot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +138,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainRoot.xaml.cs">
+    <Compile Include="StartWindowForms\MainRoot.xaml.cs">
       <DependentUpon>MainRoot.xaml</DependentUpon>
     </Compile>
     <Page Include="NotificationWindow.xaml">
@@ -149,11 +149,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Registration.xaml">
+    <Page Include="StartWindowForms\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReserveInCome.xaml">
+    <Page Include="StartWindowForms\ReserveInCome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

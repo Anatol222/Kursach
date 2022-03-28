@@ -82,7 +82,7 @@ namespace Курсовая
                 Image image = new Image();
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri("Images/maximize.png", UriKind.Relative);
+                bitmap.UriSource = new Uri("../Images/maximize.png", UriKind.Relative);
                 bitmap.EndInit();
                 image.Source = bitmap;
                 MinimiseBtn.Content = image;
@@ -93,7 +93,7 @@ namespace Курсовая
                 Image image = new Image();
                 BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri("Images/minimize.png", UriKind.Relative);
+                bitmap.UriSource = new Uri("../Images/minimize.png", UriKind.Relative);
                 bitmap.EndInit();
                 image.Source = bitmap;
                 MinimiseBtn.Content = image;

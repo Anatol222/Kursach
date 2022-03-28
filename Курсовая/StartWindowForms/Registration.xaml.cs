@@ -214,7 +214,7 @@ namespace Курсовая
             if (notificationWindow != null)
                 notificationWindow.Close();
             notificationWindow = new NotificationWindow(messange);
-            notificationWindow.Show();
+            notificationWindow.ShowDialog();
         }
 
         private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e,Visibility view,Visibility firstPassword,Visibility hide,Visibility show)
