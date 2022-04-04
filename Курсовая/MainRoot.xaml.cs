@@ -36,12 +36,12 @@ namespace Курсовая
         private void LinkInst_Click(object sender, RoutedEventArgs e) =>
             Process.Start("https://www.instagram.com/polesskie.brodyagi/");
 
-        private void Registration_Click(object sender, RoutedEventArgs e)=>
+        private void Registration_Click(object sender, RoutedEventArgs e) =>
             SetIn(sender, e, new Registration());
 
-        private void Login_Click(object sender, RoutedEventArgs e)=>
+        private void Login_Click(object sender, RoutedEventArgs e) =>
             SetIn(sender, e, new ComeIn());
-
+        
 
         private void SetIn(object sender, RoutedEventArgs e,Window window)
         {

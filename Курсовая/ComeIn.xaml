@@ -32,8 +32,7 @@
                 <PasswordBox x:Name="FirstPassword"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
             </Border>
 
-            <CheckBox x:Name="SaveUser" Margin="90,247,289,177" Click="SaveUser_Click"/>
-            <TextBlock  Text="Не выходить из системы" Margin="117,246,138,177"/>
+            <CheckBox x:Name="CheckBoxSaveUser" Content="Не выходить из системы" Margin="90,252,101,172" IsChecked="False" Click="SaveUser_Click"/>
 
             <TextBox x:Name="ViewPassword" Style="{DynamicResource TextNew}" Visibility="Hidden" Foreground="Black" HorizontalAlignment="Left" Margin="111,0,0,0" TextChanged="ViewPassword_TextChanged"/>
 

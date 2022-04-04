@@ -67,6 +67,13 @@ namespace Курсовая
             else if (FirstSymbol.Text.Length == 1)
                 SecondSymbol.Focus();
         }
+
+        private void Retry_Click(object sender, RoutedEventArgs e)
+        {
+            _reservePassword = email.CreatingPassword();
+            email.SendMessageNewPassword(_reservePassword, _reserveEmail);
+        }
+
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             string code = FirstSymbol.Text;
@@ -80,7 +87,7 @@ namespace Курсовая
              
             if (code==_reservePassword)
             {
-                string querystring = $"UPDATE PersonalPassword SET Password='{_reservePassword}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
+                string querystring = $"UPDATE PersonalPassword SET Password='{workWithInterface.encode(_reservePassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
                 SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                 dataBase.OpenConnection();
                 if (command.ExecuteNonQuery() == 1)
@@ -88,9 +95,7 @@ namespace Курсовая
                     querystring = $"UPDATE PersonalLoginData SET Email = '{_reserveEmail}' WHERE Email = '{_email}'; ";
                     command = new SqlCommand(querystring, dataBase.GetConnection());
                     if (command.ExecuteNonQuery() == 1)
-                    {
-                        MessageBox.Show("Norm");
-                    }
+                        workWithInterface.SwitchAnotherWindon(sender, e, inCome, new MainFrame());
                     else
                         MessageBox.Show("gg");
                 }

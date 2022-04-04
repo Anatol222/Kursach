@@ -1,19 +1,15 @@
 ﻿using ConsoleFree;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Runtime.Serialization.Json;
 
 namespace Курсовая
 {
@@ -28,10 +24,17 @@ namespace Курсовая
         private DataBase dataBase;
 
         private string _email,_password;
-        private bool _saveUserFirst, _saveUserLast,_reserveEmailExist;
+        private bool  _saveUser,_reserveEmailExist;
         public ComeIn()
         {
             InitializeComponent();
+
+            workWithInterface = new WorkWithInterface();
+            comeIn = this;
+            email = new Email();
+            dataBase = new DataBase();
+
+            InComeWithoutPassword();
 
             reg.Visibility = Visibility.Hidden;
             Button_reg.Foreground = Brushes.Black;
@@ -39,10 +42,26 @@ namespace Курсовая
             log.Visibility = Visibility.Visible;
             Button_log.Foreground = Brushes.Blue;
             
-            workWithInterface = new WorkWithInterface();
-            comeIn = this;
-            email = new Email();
-            dataBase = new DataBase();
+            
+        }
+
+        private  void InComeWithoutPassword()
+        {
+            if (File.Exists("saveUser.json"))
+            {
+                DataContractJsonSerializer jsonF = new DataContractJsonSerializer(typeof(List<SaveUser>));
+                List<SaveUser> dataUserSave = new List<SaveUser>();               
+                using (FileStream fs = new FileStream("saveUser.json", FileMode.Open))
+                    dataUserSave = (List<SaveUser>)jsonF.ReadObject(fs);
+                if (dataUserSave[0].IsComeIn)
+                {
+                    Email.Text = dataUserSave[0].Email;
+                    FirstPassword.Password = dataUserSave[0].Password;
+                    CheckBoxSaveUser.IsChecked = true;
+                    _saveUser = dataUserSave[0].IsComeIn;
+                }
+            }
+            
         }
 
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
@@ -105,7 +124,7 @@ namespace Курсовая
             if (ExaminationEmail())
             {
                 string newPassword = email.CreatingPassword();
-                string querystring = $"UPDATE PersonalPassword SET Password='{newPassword}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
+                string querystring = $"UPDATE PersonalPassword SET Password='{workWithInterface.encode(newPassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
                 SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                 dataBase.OpenConnection();
                 if (command.ExecuteNonQuery() == 1)
@@ -122,7 +141,6 @@ namespace Курсовая
 
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 
         private void InCome_Click(object sender, RoutedEventArgs e)
         {
@@ -148,13 +166,20 @@ namespace Курсовая
 
             if (table.Rows.Count == 1)
             {
-                if (_password == extractPasswordFromBasaData)
+                if (workWithInterface.decode(_password) == extractPasswordFromBasaData)
                 {
-                    _saveUserFirst = true;
-                    workWithInterface.SwitchAnotherWindon(sender,e,comeIn,new MainFrame()); 
-                    MessageBox.Show("успешно вошли"); 
+                    if (_saveUser)
+                    {
+                        List<SaveUser> list = new List<SaveUser>()
+                        {
+                            new SaveUser(_email,_password,_saveUser)
+                        };
+                        File.WriteAllText("saveUser.json", JsonConvert.SerializeObject(list));
+                    }
+                    else
+                        File.Delete("saveUser.json");
+                    workWithInterface.SwitchAnotherWindon(sender, e, comeIn, new MainFrame()); 
                 }
-
                 else
                     MessageBox.Show("Пароль");
             }
@@ -197,7 +222,8 @@ namespace Курсовая
         }
         private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
            FirstPassword.Password = ViewPassword.Text;
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 
-        private void SaveUser_Click(object sender, RoutedEventArgs e)=>_saveUserLast= true;
+        private void SaveUser_Click(object sender, RoutedEventArgs e)=>_saveUser= (bool)CheckBoxSaveUser.IsChecked;
     }
 }
