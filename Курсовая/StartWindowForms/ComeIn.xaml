@@ -22,22 +22,27 @@
         <Polygon x:Name="log" Points="40,100 80,100" StrokeThickness="2" Stroke="Blue" Margin="0,-10,0,10" ></Polygon>
         <Polygon x:Name="reg" Points="100,100 190,100" StrokeThickness="2" Stroke="Blue" Visibility="Visible" Margin="0,-10,0,10" ></Polygon>
 
-        <TextBlock Style="{StaticResource TextStyle}" Text="Эл.почта" Margin="0,122,0,0" VerticalAlignment="Top" Height="14" Width="73"/>
-        <Border Style="{DynamicResource BorderStyle}" Margin="102,144,0,0">
-            <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Email_PreviewTextInput"  GotFocus="TextClear_GotFocus" x:Name="Email" Text="Введите эл. почту" ></TextBox>
-        </Border>
+            <TextBlock Style="{StaticResource TextStyle}" Text="Эл.почта" Margin="0,122,0,0" VerticalAlignment="Top" Height="14" Width="73"/>
+            <Border Style="{DynamicResource BorderStyle}" Margin="102,144,0,0">
+                <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Email_PreviewTextInput"  GotFocus="TextClear_GotFocus" x:Name="Email" Text="Введите эл. почту" ></TextBox>
+            </Border>
 
-        <TextBlock Style="{StaticResource TextStyle}" Text="Пароль" Margin="164,180,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-        <Border Style="{DynamicResource BorderStyle}" Margin="102,0,0,0" VerticalAlignment="Center">
-            <PasswordBox x:Name="FirstPassword"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
-        </Border>
+            <TextBlock Style="{StaticResource TextStyle}" Text="Пароль" Margin="164,180,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+            <Border Style="{DynamicResource BorderStyle}" Margin="102,0,0,0" VerticalAlignment="Center">
+                <PasswordBox x:Name="FirstPassword"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
+            </Border>
 
-        <CheckBox x:Name="SaveUser" Margin="112,246,268,178" Click="SaveUser_Click"/>
-        <TextBlock  Text="Не выходить из системы" Margin="136,245,119,178"/>
-        <Button x:Name="UseReserveEmail" Content="Нет доступа к почте" Click="UseReserveEmail_Click" Margin="59,293,190,132"/>
-        <Button x:Name="NewPassword" Content="Забыли пароль" Click="NewPassword_Click" Margin="237,300,22,113"/>
-        <Button Content="Отмена" Click="Cancellation_Click" Margin="44,323,200,54"></Button>
-        <Button Content="Войти" Click="InCome_Click" Margin="216,342,22,54"/>
-    </Grid>
+            <CheckBox x:Name="CheckBoxSaveUser" Content="Не выходить из системы" Margin="90,252,101,172" IsChecked="False" Click="SaveUser_Click"/>
+
+            <TextBox x:Name="ViewPassword" Style="{DynamicResource TextNew}" Visibility="Hidden" Foreground="Black" HorizontalAlignment="Left" Margin="111,0,0,0" TextChanged="ViewPassword_TextChanged"/>
+
+            <Button x:Name="ShowPassword" Click="ShowPassword_Click" Content="П" Margin="306,210,52,208"/>
+            <Button x:Name="HidePassword" Click="HidePassword_Click" Visibility="Hidden" Content="C" Margin="306,210,52,208"/>
+
+            <Button x:Name="UseReserveEmail" Content="Нет доступа к почте" Click="UseReserveEmail_Click" Margin="59,293,190,132"/>
+            <Button x:Name="NewPassword" Content="Забыли пароль" Click="NewPassword_Click" Margin="237,300,22,113"/>
+            <Button Content="Отмена" Click="Cancellation_Click" Margin="44,323,200,54"></Button>
+            <Button Content="Войти" Click="InCome_Click" Margin="216,342,22,54"/>
+        </Grid>
     </Border>
 </Window>

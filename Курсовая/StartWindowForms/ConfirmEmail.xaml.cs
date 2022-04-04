@@ -27,6 +27,7 @@ namespace Курсовая
         private NotificationWindow notificationWindow;
 
         private string _firstName, _lastName, _patronymic, _number, _email, _password, _codeConfirm, _continuationEmail;
+        public static bool ConfirmRule; 
 
         public ConfirmEmail(string firstName, string lastName, string patronymic, string number, string email, string password, string codeConfirm)
         {
@@ -49,7 +50,7 @@ namespace Курсовая
             _patronymic = patronymic;
             _number = number;
             _email = email;
-            _password = password;
+            _password = workWithInterface.encode(password);
             _codeConfirm = codeConfirm;
 
             foreach (var item in this.email.Emails)
@@ -88,6 +89,12 @@ namespace Курсовая
         private void ReturnRegistr_Click(object sender, RoutedEventArgs e)=>
             workWithInterface.SwitchAnotherWindon(sender, e, confirmEmail, new Registration(_firstName,_lastName,_patronymic,_number,_password));
 
+        private void Rule_Click(object sender, RoutedEventArgs e)
+        {
+            MainRoot.windowEntrance= new AgreementPolicy();
+            MainRoot.windowEntrance.Show();
+        }
+
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             string code = FirstSymbol.Text;
@@ -98,35 +105,39 @@ namespace Курсовая
 
             if (code == _codeConfirm)
             {
-                string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}'); ";
-                SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-                dataBase.OpenConnection();
-                if (command.ExecuteNonQuery() == 1)
+                if (ConfirmRule)
                 {
-                    querystring = $"INSERT INTO PersonalPassword(UserPersonalDataId,Password) VALUES((SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}'),'{_password}');";
-                    command = new SqlCommand(querystring, dataBase.GetConnection());
+                    string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}'); ";
+                    SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+                    dataBase.OpenConnection();
                     if (command.ExecuteNonQuery() == 1)
                     {
-                        if  (EmailReserve.Text !="")
-                            querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, ReserveEmail, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}','{EmailReserve.Text+ _continuationEmail}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
-                        else
-                            querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                        querystring = $"INSERT INTO PersonalPassword(UserPersonalDataId,Password) VALUES((SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}'),'{_password}');";
                         command = new SqlCommand(querystring, dataBase.GetConnection());
                         if (command.ExecuteNonQuery() == 1)
-                            MessageBox.Show("Norm");
+                        {
+                            if (EmailReserve.Text != "" && EmailReserve.Text != "Введите резервную эл. почту")
+                                querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, ReserveEmail, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}','{EmailReserve.Text + _continuationEmail}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                            else
+                                querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                            command = new SqlCommand(querystring, dataBase.GetConnection());
+                            if (command.ExecuteNonQuery() == 1)
+                                workWithInterface.SwitchAnotherWindon(sender, e, confirmEmail, new MainFrame());
+                            else
+                                Notification?.Invoke("gg");
+                            if (notificationWindow != null)
+                                notificationWindow.Close();
+                        }
                         else
                             Notification?.Invoke("gg");
-                        if (notificationWindow != null)
-                            notificationWindow.Close();
                     }
-                else
+                    else
                         Notification?.Invoke("gg");
+                    dataBase.CloseConnection();
                 }
                 else
-                    Notification?.Invoke( "gg");
-                dataBase.CloseConnection();
+                    Notification?.Invoke("Вы не прочитали пользовательское соглашение");
             }
-            code = default;
         }
         private void Display(string messange)
         {

@@ -19,6 +19,7 @@ namespace Курсовая
     /// </summary>
     public partial class InfoAboutProgramm : Window
     {
+        
         public InfoAboutProgramm()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace Курсовая
         {
             Close();
             MainRoot.infoWindow = null;
+
         }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ReserveInCome" Height="450" Width="430">
     <Grid>
-        <TextBlock Text="Введите код, который отправлен на резервную почту" Margin="10,10,10,379"/>
+        <TextBlock FontSize="16" Text="   Для смены пароля и почты вам необходимо ввести код, который мы отправили на вашу резервную почту. После подверждения кода, он станет вашым паролем, который мы рекомендуем изменить в учётной записи, и резервная почта станет основной почтой, с помощью которой вы сможете входить в приложение" TextWrapping="Wrap" Margin="10,10,10,300"/>
         <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="10,161,0,0" Width="47">
             <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FirstSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
         </Border>
@@ -32,6 +32,8 @@
         <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="373,161,0,0" Width="47">
             <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="EighthSymbol" Foreground="Black" Width="46"></TextBox>
         </Border>
+        <TextBlock TextWrapping="Wrap" FontSize="16" Text=" Если код не пришёл на вашу резурвную элетронную почту, повторите попытку" Margin="10,202,10,190"></TextBlock>
+        <Button x:Name="Retry" Margin="128,250,128,162" Content="повторить попытку" Click="Retry_Click"></Button>
         <Button Content="Подтвердить" Click="Confirm_Click" Margin="198,374,54,12"/>
         <Button Content="Отмена" Click="Cancellation_Click" Margin="53,372,233,10"/>
     </Grid>

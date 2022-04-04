@@ -25,7 +25,11 @@ namespace ConsoleFree
                 MailAddress to = new MailAddress(email);
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = "Подтверждение электронной почты для регистрации";
-                message.Body = $"<h2>{code}</h2>";
+                message.Body = $"<h2>Ваш проверочный код: {code}" +
+                "<h2>Здравствуйте, странник!</h2>" +
+                "<h2> Нам пришел запрос на создание учётной записи в приложении «Horizon». Пожалуйста, введите указанный выше код, чтобы подтвердить владение данной электронной почтой.<h2>" +
+                "<h2> Внимание! Данный код действителен в течение всего 10 минут.Рекомендуем ввести его как можно скорее.</h2>" +
+                "<h2> Приятных поездок! С уважением, Horison </h2>";
                 message.IsBodyHtml = true;
                 SmtpClient smtp = new SmtpClient("smtp.mail.ru");
                 smtp.Credentials = new NetworkCredential("kirill10.01.2003@mail.ru", "p08KRZ0HyusCFfM1y0ig");
@@ -46,7 +50,10 @@ namespace ConsoleFree
             MailAddress to = new MailAddress(email);
             MailMessage message = new MailMessage(from, to);
             message.Subject = "Сброс пароля учётной записи";
-            message.Body = $"<h2>{password}</h2>";
+            message.Body = $"<h2>   Вы оставили заявку на сброс пароля:</h2>" +
+                $"<h2>Ваш новый пароль: {password}</h2>" +
+                "<h2>В целях безопасности рекомендуем его сменить в личном кабинете сразу после авторизации." +
+                "Если вы не осуществляли сброс пароля - свяжитесь с тех. поддержкой через приложение, или пришлите письмо на kirill10.01.2003@mail.ru" + "</ h2>";
             message.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.mail.ru");
             smtp.Credentials = new NetworkCredential("kirill10.01.2003@mail.ru", "p08KRZ0HyusCFfM1y0ig");

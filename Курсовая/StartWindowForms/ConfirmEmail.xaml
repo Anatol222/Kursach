@@ -15,6 +15,7 @@
         Title="ConfirmEmail" Height="450" Width="400">
     <Border CornerRadius="50" Background="#d8edf0" BorderBrush="LightGreen" BorderThickness="2">
         <Grid Margin="-1,-9,1,9">
+            <Button Content="Политика соглашения" x:Name="Rule" Click="Rule_Click" Margin="227,203,63,223" />
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Подтвердите адресс эл. почты" Margin="0,22,0,0" VerticalAlignment="Top" Height="28" Width="240"/>
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Введите код подтверждения" Margin="0,55,0,0" VerticalAlignment="Top"/>
             <TextBox TextAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" x:Name="TextInfo" FontSize="14" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,93,0,0"/>
@@ -44,7 +45,7 @@
 
             </ComboBox>
             <Border Style="{DynamicResource BorderStyle}" Margin="31,342,0,0" Width="220">
-                <TextBox PreviewTextInput="Email_PreviewTextInput" Style="{DynamicResource TextNew}" GotFocus="EmailReserve_GotFocus" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve"  Width="200" ></TextBox>
+                <TextBox PreviewTextInput="Email_PreviewTextInput" Text="Введите резервную эл. почту" Style="{DynamicResource TextNew}" GotFocus="EmailReserve_GotFocus" ToolTip="Это поле является необязательным параметром" x:Name="EmailReserve"  Width="200" ></TextBox>
             </Border>
             <Button Content="Подтвердить" Click="Confirm_Click" Margin="198,374,54,12"/>
             <Button Content="Отмена" Click="Cancellation_Click" Margin="53,372,233,10"/>
