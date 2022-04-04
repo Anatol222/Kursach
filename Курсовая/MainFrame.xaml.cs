@@ -19,11 +19,63 @@ namespace Курсовая
     /// </summary>
     public partial class MainFrame : Window
     {
+        Uri ProfilePage = new Uri("MainFrameForms/ProfilePage.xaml", UriKind.RelativeOrAbsolute);
         public MainFrame()
         {
             InitializeComponent();
-            Frame.Content = new ProfilePage();
-
         }
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btnRestore_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else
+                WindowState = WindowState.Normal;
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void rdHome_Click(object sender, RoutedEventArgs e)
+        {
+            // PagesNavigation.Navigate(new HomePage());
+
+            PagesNavigation.Navigate(ProfilePage);
+        }
+
+        private void PagesNavigation_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(ProfilePage);
+        }
+
+        //private void rdSounds_Click(object sender, RoutedEventArgs e)
+        //{
+        //    PagesNavigation.Navigate(new System.Uri("Pages/SoundsPage.xaml", UriKind.RelativeOrAbsolute));
+        //}
+
+        //private void rdNotes_Click(object sender, RoutedEventArgs e)
+        //{
+        //    PagesNavigation.Navigate(new System.Uri("Pages/NotesPage.xaml", UriKind.RelativeOrAbsolute));
+        //}
+
+        //private void rdPayment_Click(object sender, RoutedEventArgs e)
+        //{
+        //    PagesNavigation.Navigate(new System.Uri("Pages/PaymentPage.xaml", UriKind.RelativeOrAbsolute));
+        //}
     }
 }

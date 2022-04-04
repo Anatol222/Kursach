@@ -70,7 +70,9 @@
         </Style>
 
     </Page.Resources>
-    <Grid Background="LightGoldenrodYellow">
+    <Border CornerRadius="10" Background="BlanchedAlmond" >
+        
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="Auto" MinWidth="150"></ColumnDefinition>
@@ -79,12 +81,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.15*" MinHeight="70"></RowDefinition>
+            <RowDefinition Height="0.15*" MinHeight="70"></RowDefinition>
+            <RowDefinition Height="0.15*" MinHeight="70"></RowDefinition>
+            <RowDefinition Height="0.15*" MinHeight="70"></RowDefinition>
+            <RowDefinition Height="0.15*" MinHeight="70"></RowDefinition>
+            <RowDefinition Height="1*" MinHeight="70"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -202,7 +204,7 @@
             </Border>
         </Grid>
         <Grid Grid.Row="5" Grid.Column="1">
-            <Border Padding="15">
+            <Border Padding="15" VerticalAlignment="Top">
                 <Button VerticalContentAlignment="Stretch" MaxHeight="50" Style="{StaticResource ChangePassBtn}" HorizontalContentAlignment="Stretch">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -213,7 +215,7 @@
                             <TextBlock Text="Принять изменения" VerticalAlignment="Center" ></TextBlock>
                         </Border>
                         <Border Padding="5">
-                            <Image Source="Images/Confirm.png"></Image>
+                            <Image Source="../Images/Confirm.png"></Image>
                         </Border>
                     </Grid>
                 </Button>
@@ -221,4 +223,6 @@
             
         </Grid>
     </Grid>
+    </Border>
+
 </Page>

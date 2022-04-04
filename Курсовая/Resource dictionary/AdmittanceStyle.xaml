@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Color x:Key="MouseLeave"  A="0" R="0" G="0" B="0" />
     <Color x:Key="MouseOver"  A="0" R="0" G="0" B="0"/>
-        <SolidColorBrush x:Key="BorderBrush" Color="#EEE"/>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+    <SolidColorBrush x:Key="BorderBrush" Color="#EEE"/>
+    <Style x:Key="TransparentBtnStyle" TargetType="Button">
         <Style.Triggers >
             <Trigger  Property="IsMouseOver" Value="True">
                 <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -63,4 +63,5 @@
             </Setter>
             
         </Style>
+    <!--<ControlTemplate Ke></ControlTemplate>-->
 </ResourceDictionary>

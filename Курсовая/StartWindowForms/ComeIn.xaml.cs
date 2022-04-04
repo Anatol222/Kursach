@@ -159,5 +159,7 @@ namespace Курсовая
         }
 
         private void SaveUser_Click(object sender, RoutedEventArgs e)=>_saveUserLast= true;
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
+
     }
 }

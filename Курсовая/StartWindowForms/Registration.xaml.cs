@@ -198,15 +198,35 @@ namespace Курсовая
         }
         //переделать
 
-        private void ShowPassword_Click(object sender, RoutedEventArgs e)
+        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e)
         {
             ViewPassword.Text = FirstPassword.Password;
-            ShowOrHidePassword_Click(sender, e,Visibility.Visible, Visibility.Hidden, Visibility.Visible,Visibility.Hidden);
+            if (ViewPassword.Visibility==Visibility.Hidden)
+            {
+                ViewPassword.Visibility = Visibility.Visible;
+                FirstPassword.Visibility = Visibility.Hidden;
+                Image image = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("../Images/invisible.png", UriKind.Relative);
+                bitmap.EndInit();
+                image.Source = bitmap;
+                ShowOrHidePassword.Content = image;
+            }
+            else
+            {
+                ViewPassword.Visibility = Visibility.Hidden;
+                FirstPassword.Visibility = Visibility.Visible;
+                Image image = new Image();
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri("../Images/view.png", UriKind.Relative);
+                bitmap.EndInit();
+                image.Source = bitmap;
+                ShowOrHidePassword.Content = image;
+            }
         }
         //переделать
-
-        private void HidePassword_Click(object sender, RoutedEventArgs e)=>
-            ShowOrHidePassword_Click(sender,e,Visibility.Hidden,Visibility.Visible,Visibility.Hidden,Visibility.Visible);
 
         //переделать
         private void Display(string messange)
@@ -216,15 +236,6 @@ namespace Курсовая
             notificationWindow = new NotificationWindow(messange);
             notificationWindow.ShowDialog();
         }
-
-        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e,Visibility view,Visibility firstPassword,Visibility hide,Visibility show)
-        {
-            ViewPassword.Visibility = view;
-            FirstPassword.Visibility = firstPassword;
-            HidePassword.Visibility = hide;
-            ShowPassword.Visibility = show;
-        }
-
 
         //переделать
         private void StaticMaxLenghtDataTable()
