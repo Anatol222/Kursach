@@ -97,12 +97,9 @@
     <Compile Include="DeleteAfter.xaml.cs">
       <DependentUpon>DeleteAfter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PagesComeIn\ComeIn.xaml.cs"/>
+    <Compile Include="PagesComeIn\ComeIn.xaml.cs" />
     <Compile Include="MainFrameForms\SityBusPage.xaml.cs">
       <DependentUpon>SityBusPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StartWindowForms\ComeIn.xaml.cs">
-      <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="PagesRegistration\ConfirmEmail.xaml.cs">
       <DependentUpon>ConfirmEmail.xaml</DependentUpon>

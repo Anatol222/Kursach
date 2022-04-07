@@ -76,22 +76,7 @@ namespace Курсовая.PagesRegistration
             ChoiceEmail.SelectedIndex = 5;
         }
 
-        //Переделать
-        private void Cancellation_Click(object sender, RoutedEventArgs e) =>
-            workWithInterface.Cancellation(sender, e, registration);
-
-        private void ComeIn_Click(object sender, RoutedEventArgs e) =>
-            workWithInterface.SwitchAnotherWindon(sender, e, registration, new ComeIn());
-
-        private void TextClear_GotFocus(object sender, RoutedEventArgs e)
-        {
-            ((TextBox)sender).Clear();
-            ((TextBox)sender).Foreground = Brushes.Black;
-        }
-
-        private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
-            FirstPassword.Password = ViewPassword.Text;
-
+        
         //переделать
         private void ConfirmEmail_Click(object sender, RoutedEventArgs e)
         {
@@ -188,44 +173,7 @@ namespace Курсовая.PagesRegistration
         }
         //переделать
 
-        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e)
-        {
-            ViewPassword.Text = FirstPassword.Password;
-            if (ViewPassword.Visibility==Visibility.Hidden)
-            {
-                ViewPassword.Visibility = Visibility.Visible;
-                FirstPassword.Visibility = Visibility.Hidden;
-                Image image = new Image();
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri("../Images/invisible.png", UriKind.Relative);
-                bitmap.EndInit();
-                image.Source = bitmap;
-                ShowOrHidePassword.Content = image;
-            }
-            else
-            {
-                ViewPassword.Visibility = Visibility.Hidden;
-                FirstPassword.Visibility = Visibility.Visible;
-                Image image = new Image();
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri("../Images/view.png", UriKind.Relative);
-                bitmap.EndInit();
-                image.Source = bitmap;
-                ShowOrHidePassword.Content = image;
-            }
-        }
-        //переделать
-
-        //переделать
-        private void Display(string messange)
-        {
-            if (notificationWindow != null)
-                notificationWindow.Close();
-            notificationWindow = new NotificationWindow(messange);
-            notificationWindow.ShowDialog();
-        }
+       
 
         private void StaticMaxLenghtDataTable()
         {
