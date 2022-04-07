@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Курсовая
 {
-    internal class WorkWithInterface:Window
+    internal class TextInterface:Window
     {
         private string _notifyAboutCodeEmail = "    Мы отправили 5-значный код на Email. Подтвердите, что почта принадлежит вам, чтобы обезопасить свою учётную запись. Код действует в течении 10 минут";
         public string NotifyAboutCodeEmail { get => _notifyAboutCodeEmail; }
@@ -50,25 +50,5 @@ namespace Курсовая
             "   *Отличный сервис уведомлений: подскажет, что ваш рейс скоро и пора собирать чемоданы, что уже время выдвигаться в аэропорт, что начинается ваша регистрация — когда предвкушаешь поездку, на такие уведомления всегда реагируешь с улыбкой, да и забота приятна чисто по-человечески.";
 
         public string AboutAppHorizon { get => _aboutApp; }
-
-        public string decode(string str) => encode(str);
-
-        public string encode(string str)
-        {
-            string text = string.Empty;
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (str[i] >= 'a' && str[i] <= 'z')
-                    text += Cipher(str[i], 'a', 'z');
-                else if (str[i] >= 'A' && str[i] <= 'Z')
-                    text += Cipher(str[i], 'A', 'Z');
-                else if (str[i] >= '0' && str[i] <= '9')
-                    text += Cipher(str[i], '0', '9');
-            }
-            return text;
-        }
-
-        private char Cipher(char letter, int firstLatter, int lastLatter) =>
-            (char)(lastLatter - (letter - firstLatter));
     }
 }

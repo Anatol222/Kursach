@@ -42,13 +42,13 @@ namespace Курсовая.Setting
         {
             ((TextBox)sender).Text = ((TextBox)sender).Text.Trim();
             ((TextBox)sender).Select(((TextBox)sender).Text.Length, 0);
-            if (((TextBox)sender).Text.Length == 0 && ((Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122) || (Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90)))
+            if (((TextBox)sender).Text.Length == 0 && ((Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122) || (Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90) || (Convert.ToChar(e.Text) >= (char)1072 && Convert.ToChar(e.Text) <= (char)1103) || (Convert.ToChar(e.Text) >= (char)1040 && Convert.ToChar(e.Text) <= (char)1071)))
             {
                 ((TextBox)sender).Text = e.Text.ToUpper();
                 ((TextBox)sender).Select(((TextBox)sender).Text.Length, 0);
                 e.Handled = true;
             }
-            else if ((Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90) || (Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122))
+            else if ((Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90) || (Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122) || (Convert.ToChar(e.Text) >= (char)1072 && Convert.ToChar(e.Text) <= (char)1103) || (Convert.ToChar(e.Text) >= (char)1040 && Convert.ToChar(e.Text) <= (char)1071))
                 e.Handled = false;
             else e.Handled = true;
         }

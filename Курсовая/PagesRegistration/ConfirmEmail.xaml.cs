@@ -12,7 +12,7 @@ namespace Курсовая.PagesRegistration
 
     public partial class ConfirmEmail : Window
     {
-        private WorkWithInterface workWithInterface;
+        private TextInterface workWithInterface;
         private CipherPassword cipherPassword;
         private ConfirmEmail confirmEmail;
         private Email email;
@@ -30,7 +30,7 @@ namespace Курсовая.PagesRegistration
         {
             InitializeComponent();
 
-            workWithInterface = new WorkWithInterface();
+            workWithInterface = new TextInterface();
             cipherPassword = new CipherPassword();
             confirmEmail = this;
             this.email = new Email();

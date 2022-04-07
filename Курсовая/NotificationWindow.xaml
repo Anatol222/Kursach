@@ -11,13 +11,14 @@
         ResizeMode="NoResize"
         AllowsTransparency="True"
         Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="NotificationWindow" Height="200" Width="250">
-    <Border CornerRadius="50" Background="White">
+    <Border CornerRadius="50" Background="LightYellow" BorderBrush="LightGreen" BorderThickness="2">
         <Grid Background="Transparent">
             <Border>
-                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" x:Name="NotificationBox" Width="Auto" Margin="10,25,10,44"/>
+                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" x:Name="NotificationBox" Width="Auto" Margin="10,25,10,44"/>
             </Border>
-            <Button Content="OK" x:Name="Cancellation" Click="Cancellation_Click" Margin="62,156,62,5"/>
+            <Button Content="OK" Style="{DynamicResource ButtonStyle}" x:Name="Cancellation" Click="Cancellation_Click" Margin="62,156,62,5"/>
         </Grid>
     </Border>
 

@@ -130,7 +130,7 @@
     </Compile>
     <Compile Include="Interface\TemperatureInfo.cs" />
     <Compile Include="Interface\Weather.cs" />
-    <Compile Include="Setting\WorkWithInterface.cs" />
+    <Compile Include="Setting\TextInterface.cs" />
     <Page Include="PagesRegistration\AgreementPolicy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

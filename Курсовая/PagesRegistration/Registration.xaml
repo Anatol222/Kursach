@@ -48,10 +48,8 @@
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="PhoneNumber_PreviewTextInput" GotFocus="TextClear_GotFocus" x:Name="PhoneNumber" Text="Введите номер"></TextBox>
             </Border>
 
-            <ComboBox x:Name="ChoiceEmail" Margin="236,258,62,164" SelectionChanged="ChoiceEmail_SelectionChanged">
-                
-            </ComboBox>
-            
+            <ComboBox x:Name="ChoiceEmail" Margin="236,258,62,164" SelectionChanged="ChoiceEmail_SelectionChanged"/>
+
             <TextBlock Style="{StaticResource TextStyle}" Text="Пароль" Margin="76,288,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
             <Border Style="{DynamicResource BorderStyle}" Margin="20,307,0,0">
                 <PasswordBox x:Name="FirstPassword" PreviewTextInput="Password_PreviewTextInput" ToolTip=""  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>

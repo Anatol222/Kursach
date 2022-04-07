@@ -9,7 +9,7 @@ namespace Курсовая.PagesRegistration
     public partial class AgreementPolicy : Window
     {
         private NotificationWindow notificationWindow;
-        private WorkWithInterface workWithInterface;
+        private TextInterface workWithInterface;
         private DataBase dataBase;
         private AgreementPolicy agreementPolicy;
 
@@ -24,7 +24,7 @@ namespace Курсовая.PagesRegistration
         {
             InitializeComponent();
 
-            workWithInterface = new WorkWithInterface();
+            workWithInterface = new TextInterface();
             dataBase = new DataBase();
             agreementPolicy = this;
 

@@ -5,13 +5,13 @@ namespace Курсовая
 {
     public partial class InfoAboutProgramm : Window
     {
-        private WorkWithInterface workWithInterface;
+        private TextInterface workWithInterface;
 
         public InfoAboutProgramm()
         {
             InitializeComponent();
 
-            workWithInterface = new WorkWithInterface();
+            workWithInterface = new TextInterface();
 
             InfoProg.Text = workWithInterface.AboutAppHorizon;
         }

@@ -15,7 +15,7 @@ namespace Курсовая.PagesRegistration
 
     public partial class Registration : Window
     {
-        private WorkWithInterface workWithInterface;
+        private TextInterface workWithInterface;
         private Registration registration;
         private DataBase dataBase;
         private Email email;
@@ -58,7 +58,7 @@ namespace Курсовая.PagesRegistration
             log.Visibility = Visibility.Hidden;
             Button_log.Foreground = Brushes.Black;
 
-            workWithInterface = new WorkWithInterface();
+            workWithInterface = new TextInterface();
             registration = this;
             email = new Email();
             dataBase = new DataBase();
