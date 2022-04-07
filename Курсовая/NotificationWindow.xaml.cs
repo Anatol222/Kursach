@@ -1,38 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Курсовая.ProgrammInterface;
+using Курсовая.Setting;
 
 namespace Курсовая
 {
-    /// <summary>
-    /// Логика взаимодействия для NotificationWindow.xaml
-    /// </summary>
     public partial class NotificationWindow : Window
     {
-        private WorkWithInterface workWithInterface;
         private NotificationWindow NW;
+
+        private INavigation navigation;
 
         public NotificationWindow(string text)
         {
             InitializeComponent();
 
-            workWithInterface = new WorkWithInterface();
             NW = this;
+            navigation = new ProgrammNavigation();
 
             NotificationBox.Text = text;
         }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 
         private void Cancellation_Click(object sender, RoutedEventArgs e)=>
-            workWithInterface.Cancellation(sender, e, NW);
+            navigation.Cancellation(NW);
     }
 }
