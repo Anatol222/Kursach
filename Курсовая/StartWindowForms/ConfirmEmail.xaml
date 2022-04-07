@@ -38,10 +38,10 @@
             <Button Content="Отправить ещё раз" Click="SendAgain_Click" Margin="52,193,218,223"/>
             <TextBlock Text="Обновить электронный адресс:" Margin="31,228,186,194"/>
 
-            <Button Foreground="Blue" FontStyle="Italic" FontSize="12" Click="ReturnRegistr_Click" Style="{DynamicResource ButtonStyle}" Content="Перейти к регистрации" Focusable="False" Margin="198,221,34,196" Background="#00000000"></Button>
+            <Button Foreground="Blue" FontStyle="Italic" BorderThickness="0" FontSize="12" Click="ReturnRegistr_Click" Style="{DynamicResource ButtonStyle}" Content="Перейти к регистрации" Focusable="False" Margin="198,221,34,196" Background="#00000000"></Button>
             <TextBlock Style="{StaticResource TextStyle}" FontSize="16" Text="Добавление резервной почты" Margin="74,250,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <TextBox HorizontalAlignment="Center"  TextAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" x:Name="ReserveInfo" TextWrapping="Wrap" Margin="10,269,10,0" Height="98" VerticalAlignment="Top"/>
-            <ComboBox x:Name="ChoiceEmail" Margin="256,342,42,80" SelectionChanged="ChoiceEmail_SelectionChanged">
+            <ComboBox x:Name="ChoiceEmail" FontSize="16" Margin="256,342,42,80" SelectionChanged="ChoiceEmail_SelectionChanged">
 
             </ComboBox>
             <Border Style="{DynamicResource BorderStyle}" Margin="31,342,0,0" Width="220">

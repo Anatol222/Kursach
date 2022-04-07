@@ -20,6 +20,7 @@ namespace Курсовая
     public partial class MainFrame : Window
     {
         Uri ProfilePage = new Uri("MainFrameForms/ProfilePage.xaml", UriKind.RelativeOrAbsolute);
+        Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
         public MainFrame()
         {
             InitializeComponent();
@@ -48,6 +49,9 @@ namespace Курсовая
 
             PagesNavigation.Navigate(ProfilePage);
         }
+        private void rdSounds_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
         private void PagesNavigation_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -62,6 +66,12 @@ namespace Курсовая
         {
             PagesNavigation.Navigate(ProfilePage);
         }
+
+        private void rdNotes_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(SityBusPage);
+        }
+
 
         //private void rdSounds_Click(object sender, RoutedEventArgs e)
         //{

@@ -2,16 +2,20 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Курсовая"
-             StartupUri="MainFrame.xaml">
+             StartupUri="StartWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resource dictionary/InputText.xaml"/>
-                <ResourceDictionary Source="Resource dictionary/AdmittanceStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="Resource dictionary/StyleText.xaml"/>
-                <ResourceDictionary Source="Resource dictionary/BorderStyle.xaml"/>
-                <ResourceDictionary Source="Resource dictionary\MainRootButtons.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resource dictionary/ColorsStyle.xaml"/>
+                <ResourceDictionary Source="Resource dictionary\ButtonsStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resource dictionary\MainFrameStyle\MainStyle.xaml"></ResourceDictionary>
+
+                <!--Material-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
