@@ -57,7 +57,6 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -82,31 +81,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Admittance\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Admittance\Registration.xaml.cs">
-      <DependentUpon>Registration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AgreementPolicy.xaml.cs">
+    <Compile Include="PagesRegistration\AgreementPolicy.xaml.cs">
       <DependentUpon>AgreementPolicy.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChangePassword.xaml.cs">
+    <Compile Include="Interface\AllDataWeather.cs" />
+    <Compile Include="MainFrameForms\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartWindowForms\ComeIn.xaml.cs">
+    <Compile Include="DeleteAfter.xaml.cs">
+      <DependentUpon>DeleteAfter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PagesComeIn\ComeIn.xaml.cs">
       <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartWindowForms\ConfirmEmail.xaml.cs">
+    <Compile Include="PagesRegistration\ConfirmEmail.xaml.cs">
       <DependentUpon>ConfirmEmail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataBase.cs" />
-    <Compile Include="Email.cs" />
-    <Compile Include="IConfidentiality.cs" />
+    <Compile Include="ProgrammInterface\IDataProcessing.cs" />
+    <Compile Include="ProgrammInterface\INavigation.cs" />
+    <Compile Include="ProgrammInterface\IRegComeIn.cs" />
+    <Compile Include="Setting\CipherPassword.cs" />
+    <Compile Include="Setting\DataBase.cs" />
+    <Compile Include="Setting\DataProcessing.cs" />
+    <Compile Include="Setting\Email.cs" />
+    <Compile Include="Setting\ProgrammNavigation.cs" />
+    <Compile Include="Setting\RegComeIn.cs" />
     <Compile Include="StartWindowForms\InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IRegistr.cs" />
     <Compile Include="MainFrame.xaml.cs">
       <DependentUpon>MainFrame.xaml</DependentUpon>
     </Compile>
@@ -116,30 +118,28 @@
     <Compile Include="MainFrameForms\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartWindowForms\Registration.xaml.cs">
+    <Compile Include="PagesRegistration\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartWindowForms\ReserveInCome.xaml.cs">
+    <Compile Include="PagesComeIn\ReserveInCome.xaml.cs">
       <DependentUpon>ReserveInCome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SaveUser.cs" />
+    <Compile Include="Setting\SaveUser.cs" />
     <Compile Include="StartWindow.xaml.cs">
       <DependentUpon>StartWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WorkWithInterface.cs" />
-    <Page Include="Admittance\Login.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Admittance\Registration.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="AgreementPolicy.xaml">
+    <Compile Include="Interface\TemperatureInfo.cs" />
+    <Compile Include="Interface\Weather.cs" />
+    <Compile Include="Setting\WorkWithInterface.cs" />
+    <Page Include="PagesRegistration\AgreementPolicy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangePassword.xaml">
+    <Page Include="MainFrameForms\ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteAfter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,11 +147,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartWindowForms\ComeIn.xaml">
+    <Page Include="PagesComeIn\ComeIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartWindowForms\ConfirmEmail.xaml">
+    <Page Include="PagesRegistration\ConfirmEmail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,15 +182,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartWindowForms\Registration.xaml">
+    <Page Include="PagesRegistration\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="StartWindowForms\ReserveInCome.xaml">
+    <Page Include="PagesComeIn\ReserveInCome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resource dictionary\BorderStyle.xaml">
+    <Page Include="Resource dictionary\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -287,5 +287,26 @@
   <ItemGroup>
     <Resource Include="Images\h.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImagesWeather\01d.png" />
+    <Resource Include="Images\ImagesWeather\01n.png" />
+    <Resource Include="Images\ImagesWeather\02d.png" />
+    <Resource Include="Images\ImagesWeather\02n.png" />
+    <Resource Include="Images\ImagesWeather\03d.png" />
+    <Resource Include="Images\ImagesWeather\03n.png" />
+    <Resource Include="Images\ImagesWeather\04d.png" />
+    <Resource Include="Images\ImagesWeather\04n.png" />
+    <Resource Include="Images\ImagesWeather\09d.png" />
+    <Resource Include="Images\ImagesWeather\09n.png" />
+    <Resource Include="Images\ImagesWeather\10d.png" />
+    <Resource Include="Images\ImagesWeather\10n.png" />
+    <Resource Include="Images\ImagesWeather\11d.png" />
+    <Resource Include="Images\ImagesWeather\11n.png" />
+    <Resource Include="Images\ImagesWeather\13d.png" />
+    <Resource Include="Images\ImagesWeather\13n.png" />
+    <Resource Include="Images\ImagesWeather\50d.png" />
+    <Resource Include="Images\ImagesWeather\50n.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

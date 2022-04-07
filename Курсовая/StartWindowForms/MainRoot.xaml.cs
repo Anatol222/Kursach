@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Tulpep.NotificationWindow;
+using Курсовая.PagesComeIn;
+using Курсовая.PagesRegistration;
 
 namespace Курсовая
 {
@@ -24,7 +16,7 @@ namespace Курсовая
     {
         public static Window windowEntrance;
         public static InfoAboutProgramm infoWindow;
-        //public InfoAboutProgramm infoWindow;
+        //private InfoAboutProgramm infoWindow;
         private PopupNotifier popup = null;
         public MainRoot()
         {
@@ -37,13 +29,13 @@ namespace Курсовая
             Process.Start("https://www.instagram.com/polesskie.brodyagi/");
 
         private void Registration_Click(object sender, RoutedEventArgs e) =>
-            SetIn(sender, e, new Registration());
+            SetIn(new Registration());
 
         private void Login_Click(object sender, RoutedEventArgs e) =>
-            SetIn(sender, e, new ComeIn());
+            SetIn(new ComeIn());
         
 
-        private void SetIn(object sender, RoutedEventArgs e,Window window)
+        private void SetIn(Window window)
         {
             if (windowEntrance == null)
             {
@@ -67,7 +59,6 @@ namespace Курсовая
 
         private void InfoAboutProgramm_Click(object sender, RoutedEventArgs e)
         {
-            //if (infoWindow != new InfoAboutProgramm())
             if(infoWindow == null)
             {
                 infoWindow = new InfoAboutProgramm();
@@ -102,10 +93,7 @@ namespace Курсовая
             }
 
         }
-        public void NextPage(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new MainFrame());
-        }
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             popup.Popup();

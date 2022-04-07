@@ -10,9 +10,20 @@
         Left="850"
         WindowStyle="None"
         ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="InfoAboutProgramm" Height="450" Width="400">
-    <Grid Background="Gray">
-        <Label Content="О программе" Margin="38,39,47,81"></Label>
-        <Button Content="Close" Click="CloseWindow_Click" Margin="120,397,120,10"></Button>
-    </Grid>
+    <Border CornerRadius="50" Background="Gray" BorderBrush="LightGreen" BorderThickness="2">
+        <Grid >
+            <TextBlock  Margin="38,39,47,81"></TextBlock>
+            
+            <ScrollViewer Margin="21,25,20,26">
+                <StackPanel>
+                    <TextBlock x:Name="InfoProg" Text="" FontSize="16" Foreground="White" TextWrapping="Wrap" Margin="10,10,10,34"></TextBlock>
+                    <Button Content="Close" Style="{DynamicResource ButtonStyle}" Background="LightGray" Foreground="Black" Click="CloseWindow_Click" Width="87" Height="36"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
 </Window>
