@@ -63,6 +63,16 @@ namespace Курсовая.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hors {
+            get {
+                object obj = ResourceManager.GetObject("hors", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap telegram {
             get {
                 object obj = ResourceManager.GetObject("telegram", resourceCulture);

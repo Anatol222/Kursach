@@ -8,7 +8,6 @@ namespace Курсовая.PagesRegistration
     
     public partial class AgreementPolicy : Window
     {
-        private NotificationWindow notificationWindow;
         private TextInterface workWithInterface;
         private DataBase dataBase;
         private AgreementPolicy agreementPolicy;
@@ -64,11 +63,12 @@ namespace Курсовая.PagesRegistration
                         querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
                     command = new SqlCommand(querystring, dataBase.GetConnection());
                     if (command.ExecuteNonQuery() == 1)
-                        navigation.SwitchAnotherWindon(agreementPolicy, new MainFrame());
+                    { 
+                        navigation.SwitchAnotherWindon(agreementPolicy, new MainFrame(_email));
+                        StartWindow.startWindow.Close();
+                    }
                     else
                         Notification?.Invoke("Не удается установить создать аккаунт");
-                    if (notificationWindow != null)
-                        notificationWindow.Close();
                 }
                 else
                     Notification?.Invoke("Не удается установить пароль");

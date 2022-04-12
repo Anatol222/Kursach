@@ -19,9 +19,11 @@ namespace Курсовая
     /// </summary>
     public partial class StartWindow : Window
     {
+        public static StartWindow startWindow;
         public StartWindow()
         {
             InitializeComponent();
+            startWindow = this;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

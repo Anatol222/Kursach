@@ -2,7 +2,7 @@
 
 namespace Курсовая
 {
-    internal class DataBase
+    public class DataBase
     {
         SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-HOHELQO;Initial Catalog=allData;Integrated Security=True");
         public void OpenConnection()

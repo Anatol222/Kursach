@@ -78,5 +78,13 @@ namespace Курсовая.Setting
             }
             e.Handled = true;
         }
+
+        public void Birthday(object sender, TextCompositionEventArgs e)
+        {
+            ((DatePicker)sender).Text = ((DatePicker)sender).Text.Trim();
+            if ((Convert.ToChar(e.Text) >= (char)48 && Convert.ToChar(e.Text) <= (char)57) || Convert.ToChar(e.Text)==(char)46)
+                e.Handled = false;
+            else e.Handled = true;
+        }
     }
 }

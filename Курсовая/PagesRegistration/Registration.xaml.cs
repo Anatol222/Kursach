@@ -23,6 +23,7 @@ namespace Курсовая.PagesRegistration
         private IRegComeIn regComeIn;
         private INavigation navigation;
         private IDataProcessing dataProcessing;
+        private IDataBaseUserDataVerification userDataVerification;
 
         private delegate void InvoceMessageBox(string messange);
         private event InvoceMessageBox Notification;
@@ -65,6 +66,7 @@ namespace Курсовая.PagesRegistration
             regComeIn = new RegComeIn();
             navigation = new ProgrammNavigation();
             dataProcessing = new DataProcessing();
+            userDataVerification = new UserDataVerification();
 
             Notification += navigation.Display;
 
@@ -100,7 +102,7 @@ namespace Курсовая.PagesRegistration
                 if (dataProcessing.SatisfactionRulesPassword(_firstPassword, _secondPassword))
                 {
 
-                    if (!CheckuUser())
+                    if (!CheckUser())
                     {
                         string codeConfirm = email.CreatingCodeConfirmation();
                         email.SendMessageConfirmationEmail(codeConfirm, Email_Text);
@@ -119,16 +121,15 @@ namespace Курсовая.PagesRegistration
             dataProcessing.PhoneNumberProcessing(sender, e);
         private void Latters_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.LattersProcessing(sender, e);
+        private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
+           dataProcessing.EmailTextInput(sender, e);
+        private void Password_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
+            dataProcessing.PasswordProcessing(sender, e);
 
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
             navigation.Cancellation(registration);
         private void ComeIn_Click(object sender, RoutedEventArgs e) =>
             navigation.SwitchAnotherWindon(registration, new ComeIn());
-
-        private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
-            dataProcessing.EmailTextInput(sender, e);
-        private void Password_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
-            dataProcessing.PasswordProcessing(sender, e);
 
         private void TextClear_GotFocus(object sender, RoutedEventArgs e) =>
            regComeIn.TextClear(sender, e);
@@ -142,7 +143,7 @@ namespace Курсовая.PagesRegistration
         private void ChoiceEmail_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             _continuationEmail = ChoiceEmail.SelectedItem.ToString();
 
-        private bool CheckuUser()
+        private bool CheckUser()
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataTable table = new DataTable();
@@ -150,7 +151,7 @@ namespace Курсовая.PagesRegistration
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
             adapter.SelectCommand = command;
             adapter.Fill(table);
-            if (table.Rows.Count > 0)
+            if (table.Rows.Count>0)
             {
                 Notification?.Invoke("Пользователь c такой почтой уже существует");
                 return true;
