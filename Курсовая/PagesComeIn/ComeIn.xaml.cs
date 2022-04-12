@@ -97,33 +97,30 @@ namespace Курсовая.PagesComeIn
             if (ExaminationEmail())
             {
                 string reserveEmail = default;
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable table = new DataTable();
                 string querystring = $"SELECT ReserveEmail FROM PersonalLoginData WHERE Email ='{_email}'; ";
                 SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
                 dataBase.OpenConnection();
                 SqlDataReader reader = command.ExecuteReader();
                 try
                 {
-                    if (reader.HasRows)
                     while (reader.Read())
                         reserveEmail = reader.GetString(0);
-                    else
-                        Notification?.Invoke("Вы не указали резервную почту");
                 }
                 catch (Exception)
                 {
                     Notification?.Invoke("Вы не указали резервную почту");
                     _reserveEmailExist = true;
                 }
-                finally
+                dataBase.CloseConnection();
+                if (!_reserveEmailExist)
                 {
-                    reader.Close();
-                    dataBase.CloseConnection();
-                    if (!_reserveEmailExist)
-                    {
-                        string reservePassword = email.CreatingPassword();
-                        email.SendMessageNewPassword(reservePassword, reserveEmail);
-                        navigation.SwitchAnotherWindon(comeIn, new ReserveInCome(reservePassword, reserveEmail, _email));
-                    }
+                    string reservePassword = email.CreatingPassword();
+                    email.SendMessageNewPassword(reservePassword, reserveEmail);
+                    navigation.SwitchAnotherWindon(comeIn, new ReserveInCome(reservePassword, reserveEmail, _email));
                 }
             }
             else
@@ -188,8 +185,7 @@ namespace Курсовая.PagesComeIn
                     }
                     else
                         File.Delete("saveUser.json");
-                    navigation.SwitchAnotherWindon(comeIn, new MainFrame(_email));
-                    StartWindow.startWindow.Close();
+                    navigation.SwitchAnotherWindon(comeIn, new MainFrame()); 
                 }
                 else
                     Notification?.Invoke("Неверный пароль");

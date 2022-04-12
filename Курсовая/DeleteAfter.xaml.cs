@@ -5,33 +5,25 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json;
 using System.Windows.Media.Imaging;
-using ProfileClassLibrary;
-using System.Data.SqlClient;
-using System.Data;
-using Курсовая.ProgrammInterface;
-using Курсовая.Setting;
 
 namespace Курсовая
 {
+    /// <summary>
+    /// Логика взаимодействия для DeleteAfter.xaml
+    /// </summary>
     public partial class DeleteAfter : Page
     {
-        private DataBase dataBase;
-        private CipherPassword cipherPassword;
-        private IRegComeIn regComeIn;
-        private INavigation navigation;
-        private IDataProcessing dataProcessing;
+        private int _mm=9, _ss=60;
+        private bool _ok=true;
 
+        
         public DeleteAfter()
         {
             InitializeComponent();
             StartClock();
+            StartTimer();
             WeatherInfo();
             Blackout.End = DateTime.Now.AddDays(-1);
-            dataBase = new DataBase();
-            regComeIn = new RegComeIn();
-            navigation = new ProgrammNavigation();
-            dataProcessing = new DataProcessing();
-            cipherPassword = new CipherPassword();
         }
 
 
@@ -66,32 +58,31 @@ namespace Курсовая
             RealTime.Text = DateTime.Now.ToString(@"hh\:mm\:ss");
 
 
-        private void UserData_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void StartTimer()
         {
-            User user = new User("gorboveckirill@gmail.com");
-            //string querystring = $"SELECT UPD.FirstName,UPD.LastName,UPD.Patronymic,UPD.Number,UPD.Birthday,UPD.Gender,PLD.ReserveEmail,PP.Password FROM UserPersonalData AS UPD,PersonalLoginData AS PLD,PersonalPassword AS PP WHERE UPD.Id=PP.UserPersonalDataId AND UPD.Id = PLD.UserPersonalDataId AND PLD.Email='{_email}'; ";
-            //SqlCommand sqlCommand = new SqlCommand(querystring, dataBase.GetConnection());
-            //SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-            //try
-            //{
-            //    while (sqlDataReader.Read())
-            //    { 
-            //        _lastName = Convert.ToString(sqlDataReader["LastName"]);
-            //        _firstname = Convert.ToString(sqlDataReader["FirstName"]);
-            //        _patronimic = Convert.ToString(sqlDataReader["Patronymic"]);
-            //        _number = Convert.ToString(sqlDataReader["Number"]);
-            //        _birthday = Convert.ToString(sqlDataReader["Birthday"]);
-            //        _gender = Convert.ToString(sqlDataReader["Gender"]);
-            //        _reserveEmail = Convert.ToString(sqlDataReader["ReserveEmail"]);
-            //        _password = cipherPassword.decode(Convert.ToString(sqlDataReader["Password"]));
-            //    }
-            //        //read = sqlDataReader.GetString(0);
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
-
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            _ss--;
+            if (_ss == 00)
+            {
+                _ss = 59;
+                _mm--;
+                if (_mm == -1)
+                {
+                    _ok = false;
+                    TimerCode.Text = "Время вышло";
+                    ((DispatcherTimer)sender).Stop();
+                }
+            }
+            TimerCode.Text = new DateTime(2003, 10, 20, 00, _mm, _ss).ToString(@"mm\:ss");
+        }
+
+       
     }
 }

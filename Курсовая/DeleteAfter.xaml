@@ -22,7 +22,8 @@
                 </Calendar.BlackoutDates>
             </Calendar>
             <TextBlock Text="{Binding ElementName=Calendar, Path=SelectedDate}"></TextBlock>
+            
         </StackPanel>
-        <!--<Button x:Name="UserData" Click="UserData_Click" Margin="130,225,518,184"/>-->
+        
     </Grid>
 </Page>

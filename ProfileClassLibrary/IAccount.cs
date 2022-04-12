@@ -10,11 +10,11 @@ namespace ProfileClassLibrary
     {
         string Email { get; }
         string ReserveEmail { get; }
-        string Phone { get; }
+        int Phone { get; }
         void ChangeName(string newName);
         void ChangeLastName(string newLastName);
         void ChangePotronymic(string newPatronymic);
-        void ChangePhone(string newPhone);
+        void ChangePhone(int newPhone);
         void ChangePassword(string pass,string newPass,string repeatNewPass);
         void ChangeEmail(string email);
         void ChangeReserveEmail(string newResEmail);

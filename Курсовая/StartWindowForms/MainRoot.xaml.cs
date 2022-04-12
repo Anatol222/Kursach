@@ -9,10 +9,14 @@ using Курсовая.PagesRegistration;
 
 namespace Курсовая
 {
+    /// <summary>
+    /// Логика взаимодействия для MainRoot.xaml
+    /// </summary>
     public partial class MainRoot : Page
     {
         public static Window windowEntrance;
         public static InfoAboutProgramm infoWindow;
+        //private InfoAboutProgramm infoWindow;
         private PopupNotifier popup = null;
         public MainRoot()
         {

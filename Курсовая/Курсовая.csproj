@@ -81,12 +81,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainFrameForms\HotkeysPage.xaml.cs">
-      <DependentUpon>HotkeysPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainFrameForms\TrainPage.xaml.cs">
-      <DependentUpon>TrainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PagesRegistration\AgreementPolicy.xaml.cs">
       <DependentUpon>AgreementPolicy.xaml</DependentUpon>
     </Compile>
@@ -103,24 +97,15 @@
     <Compile Include="PagesRegistration\ConfirmEmail.xaml.cs">
       <DependentUpon>ConfirmEmail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProgrammInterface\IDataBaseUserDataVerification.cs" />
     <Compile Include="ProgrammInterface\IDataProcessing.cs" />
     <Compile Include="ProgrammInterface\INavigation.cs" />
     <Compile Include="ProgrammInterface\IRegComeIn.cs" />
     <Compile Include="Setting\CipherPassword.cs" />
-    <Compile Include="Setting\ConfirmEmailWinow.xaml.cs">
-      <DependentUpon>ConfirmEmailWinow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Setting\DataBase.cs" />
     <Compile Include="Setting\DataProcessing.cs" />
     <Compile Include="Setting\Email.cs" />
-    <Compile Include="Setting\IconUser.cs" />
     <Compile Include="Setting\ProgrammNavigation.cs" />
     <Compile Include="Setting\RegComeIn.cs" />
-    <Compile Include="Setting\SaveNewUserData.xaml.cs">
-      <DependentUpon>SaveNewUserData.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Setting\UserDataVerification.cs" />
     <Compile Include="StartWindowForms\InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
@@ -146,14 +131,6 @@
     <Compile Include="Interface\TemperatureInfo.cs" />
     <Compile Include="Interface\Weather.cs" />
     <Compile Include="Setting\TextInterface.cs" />
-    <Page Include="MainFrameForms\HotkeysPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainFrameForms\TrainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PagesRegistration\AgreementPolicy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,10 +143,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resource dictionary\ButtonStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resource dictionary\MainFrameStyle\MainStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,14 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PagesRegistration\ConfirmEmail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Setting\ConfirmEmailWinow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Setting\SaveNewUserData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +187,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PagesComeIn\ReserveInCome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource dictionary\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -338,40 +307,6 @@
     <Resource Include="Images\ImagesWeather\50d.png" />
     <Resource Include="Images\ImagesWeather\50n.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\iconAnimals\panda.png" />
-    <Resource Include="Images\iconAnimals\nature.png" />
-    <Resource Include="Images\iconAnimals\bird.png" />
-    <Resource Include="Images\iconAnimals\dog.png" />
-    <Resource Include="Images\iconAnimals\camel.png" />
-    <Resource Include="Images\iconAnimals\hors.png" />
-    <Resource Include="Images\iconAnimals\elephant.png" />
-    <Resource Include="Images\iconAnimals\goose.png" />
-    <Resource Include="Images\iconAnimals\cat.png" />
-    <Resource Include="Images\iconAnimals\giraffe.png" />
-    <Resource Include="Images\iconAnimals\lion.png" />
-    <Resource Include="Images\iconAnimals\wolf.png" />
-    <Resource Include="Images\iconAnimals\ape.png" />
-    <Resource Include="Images\iconAnimals\duck.png" />
-    <Resource Include="Images\iconAnimals\mouse.png" />
-    <Resource Include="Images\iconAnimals\tartaruga.png" />
-    <Resource Include="Images\iconAnimals\tiger.png" />
-    <Resource Include="Images\iconAnimals\bull.png" />
-    <Resource Include="Images\iconAnimals\cow.png" />
-    <Resource Include="Images\iconAnimals\green_love.png" />
-    <Resource Include="Images\iconAnimals\owl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ProfileIcon\EditFalse.png" />
-    <Resource Include="Images\ProfileIcon\EditTrue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\ProfileIcon\ExitIn.png" />
-    <Resource Include="Images\ProfileIcon\ExitOut.png" />
-    <Resource Include="Images\ProfileIcon\Hotkeys.png" />
-    <Resource Include="Images\ProfileIcon\Hotkeys2.png" />
-    <Resource Include="Images\ProfileIcon\Wallet.png" />
-    <Resource Include="Images\ProfileIcon\WalletOpen.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
