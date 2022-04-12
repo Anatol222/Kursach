@@ -25,6 +25,7 @@ namespace Курсовая
     public partial class MainFrame : Window
     {
         Uri TrainPage = new Uri("MainFrameForms/TrainPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
         public static MainFrame mainFrame;
         public static User user;
         private string _email { get; }
@@ -147,7 +148,7 @@ namespace Курсовая
 
         private void rdNotes_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(TrainPage);
+            PagesNavigation.Navigate(SityBusPage);
         }
 
 
