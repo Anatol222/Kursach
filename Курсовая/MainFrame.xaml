@@ -8,7 +8,7 @@
         Title="MainFrame" Height="600" Width="1200" MinHeight="550" MinWidth="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize"
-        WindowState="Normal" MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="MainFrame_Loaded">
+        WindowState="Normal" MouseLeftButtonDown="Window_MouseLeftButtonDown" KeyDown="Window_KeyDown" Loaded="MainFrame_Loaded">
     <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
                     </StackPanel>
 
                     <!-- Menu -->
-                    <ToggleButton x:Name="btnMenu"  Grid.Row="0" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" VerticalAlignment="Center" Style="{StaticResource MenuIconStyle}" Margin="0 0 15 0">
+                    <ToggleButton x:Name="btnMenu" Click="UpateInfoUser_Click" Grid.Row="0" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" VerticalAlignment="Center" Style="{StaticResource MenuIconStyle}" Margin="0 0 15 0">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                 <BeginStoryboard>
@@ -56,7 +56,7 @@
                     </ToggleButton>
 
                     <StackPanel Grid.Row="3">
-                        <RadioButton x:Name="rdHome" IsChecked="True" Content="Авиарейсы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xE709;" Click="rdHome_Click"/>
+                        <RadioButton x:Name="rdHome" IsChecked="True" Content="Авиарейсы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xE709;" Click="rdHome_Click" Cursor="Hand"/>
                         <RadioButton x:Name="rdSounds" Content="Поезда" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7c0;"  Margin="0 5 0 5" />
                         <RadioButton x:Name="rdNotes" Content="Городские автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe806;"  />
                         <RadioButton x:Name="rdPayment" Content="Междугородние автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xeb47;" Margin="0 5 0 5" Cursor="Hand" />
@@ -64,14 +64,17 @@
                     </StackPanel>
                     <!--UserPanel-->
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
-                        <Ellipse Width="40" Height="40" Margin="10 0 0 0">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Images/User.png"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
+                        <TextBlock MaxHeight="10" MaxWidth="10" Width="10"/>
+                        <Button Name="OpenSetting" Background="Transparent" MaxHeight="40" MaxWidth="40" BorderBrush="Transparent" Style="{DynamicResource TransparentBtnStyle}" Click="OpenSetting_Click" RenderTransformOrigin="0.965,0.458">
+                            <Ellipse Width="40" Height="40" Margin="10 0 0 0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Images/User.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Button>
                         <StackPanel Orientation="Vertical" Margin="8 0 0 0">
-                            <Label Content="Scarlett Gwen" Foreground="{DynamicResource TextPrimaryColor}" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
-                            <Label Content="scarlettgwen@gmail.com" Foreground="{DynamicResource PrimaryGrayColor}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 -10 0 0"/>
+                            <Label x:Name="FNamePatronymic" Content="Scarlett Gwen" Foreground="{DynamicResource TextPrimaryColor}" FontSize="10" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left"/>
+                            <Label x:Name="EmailUres" Content="scarlettgwen@gmail.com" Foreground="{DynamicResource PrimaryGrayColor}" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 -10 0 0"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

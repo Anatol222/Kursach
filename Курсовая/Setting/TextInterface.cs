@@ -6,18 +6,18 @@ namespace Курсовая
 {
     internal class TextInterface:Window
     {
-        private string _notifyAboutCodeEmail = "    Мы отправили 5-значный код на Email. Подтвердите, что почта принадлежит вам, чтобы обезопасить свою учётную запись. Код действует в течении 10 минут";
+        private readonly string _notifyAboutCodeEmail = "    Мы отправили 5-значный код на Email. Подтвердите, что почта принадлежит вам, чтобы обезопасить свою учётную запись. Код действует в течении 10 минут";
         public string NotifyAboutCodeEmail { get => _notifyAboutCodeEmail; }
 
-        private string _notifyAboutReserveEmail = " Укажите резервную почту. Она поможет восстановить доступ, если не получится войти в аккаунт. Также на эту почту будут приходить уведомления о действиях, связанных с безопасностью аккаунта";
+        private readonly string _notifyAboutReserveEmail = " Укажите резервную почту. Она поможет восстановить доступ, если не получится войти в аккаунт. Также на эту почту будут приходить уведомления о действиях, связанных с безопасностью аккаунта";
         public string NotificationAboutReserveEmail { get => _notifyAboutReserveEmail; }
 
-        private string _notificationPassword = "Пароль должен содержать:" + Environment.NewLine + " • Минимум 8 элементов"
+        private readonly string _notificationPassword = "Пароль должен содержать:" + Environment.NewLine + " • Минимум 8 элементов"
                 + Environment.NewLine + " • Одну большую букву" + Environment.NewLine + " • Одну маленькую букву"
                 + Environment.NewLine + " • Одну цифру" + Environment.NewLine + " • И содержать в себе символы (A,Z,a,z,0,9)";
         public string NotificationPassword { get => _notificationPassword;}
 
-        private string _policy = " СОГЛАШЕНИЕ ДЛЯ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ"+Environment.NewLine + 
+        private readonly string _policy = " СОГЛАШЕНИЕ ДЛЯ ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ И ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ"+Environment.NewLine + 
             "   Присоединяясь к настоящему Соглашению и оставляя свои данные в Horizont, путем заполнения полей в Личном кабинете(регистрации), Пользователь:"+Environment.NewLine + 
             "1. Подтверждает, что все указанные им данные принадлежат лично ему;"+Environment.NewLine +
             "2. Подтверждает и признает, что им внимательно в полном объеме прочитано Соглашение и условия обработки его персональных данных, указываемых им в полях регистрации в Личном кабинете(регистрации), текст соглашения и условия обработки персональных данных ему понятны;" + Environment.NewLine +
@@ -32,7 +32,7 @@ namespace Курсовая
             "   Horizon имеет право вносить изменения в настоящее Соглашение.При внесении изменений в актуальной редакции указывается дата последнего обновления.Новая редакция Соглашения вступает в силу с момента ее размещения, если иное не предусмотрено новой редакцией Соглашения.";
         public string Policy { get => _policy; }
 
-        private string _aboutApp = "    С Windows приложением «Horizon» вся информация о Вашей поездке всегда под рукой." + Environment.NewLine +
+        private readonly string _aboutApp = "    С Windows приложением «Horizon» вся информация о Вашей поездке всегда под рукой." + Environment.NewLine +
             "   *Планирование поездки: получайте актуальную информацию о расписании поездов и наличии свободных мест в режиме реального времени." + Environment.NewLine +
             "   *Оформление электронных проездных документов (билетов): оформляйте билеты всего за несколько шагов." + Environment.NewLine +
             "   *Личный кабинет: оцените преимущества использования личного кабинета." + Environment.NewLine +
@@ -48,7 +48,21 @@ namespace Курсовая
             "   * Приложение копит баллы за совершенные вами покупки, чем становится выгодным для частных путешественников: чем чаще летаете, тем больше баллов падает в копилку и впоследствии меняются на скидки." + Environment.NewLine +
             "   * Предлагает страховку от отмены рейса и других неблагоприятностей — это поможет в случае чего вернуть почти 100% цены билета" + Environment.NewLine +
             "   *Отличный сервис уведомлений: подскажет, что ваш рейс скоро и пора собирать чемоданы, что уже время выдвигаться в аэропорт, что начинается ваша регистрация — когда предвкушаешь поездку, на такие уведомления всегда реагируешь с улыбкой, да и забота приятна чисто по-человечески.";
-
+        
         public string AboutAppHorizon { get => _aboutApp; }
+
+        private readonly string _hotkeysInfo = "   CTRL + 1 - переход на страницу городский автобусов" + Environment.NewLine +
+            "   CTRL + 2 - переход на страницу междугородних автобусов" + Environment.NewLine +
+            "   CTRL + 3 - переход на страницу поездов" + Environment.NewLine +
+            "   CTRL + 4 - переход на страницу самолётов" + Environment.NewLine +
+            "   CTRL + 5 - переход в корзину" + Environment.NewLine +
+            "   CTRL + 6 - переход в профиль" + Environment.NewLine +
+            "   ESC - маленькое/большое окно" + Environment.NewLine +
+            "   CTRL + F - поиск" + Environment.NewLine +
+            "   CTRL + R - обновить страницу" + Environment.NewLine +
+            "   CTRL + Q - зыкрыть программу" + Environment.NewLine +
+            "   CTRL + M - сернуть программу";
+
+        public string HotkeysInfo { get => _hotkeysInfo; }
     }
 }
