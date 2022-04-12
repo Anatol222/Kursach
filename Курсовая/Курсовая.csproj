@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.11.42.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.42\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.5.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.5\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -87,6 +90,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml.cs">
+      <DependentUpon>BusNumbersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\StationsPage.xaml.cs">
+      <DependentUpon>StationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PagesRegistration\AgreementPolicy.xaml.cs">
       <DependentUpon>AgreementPolicy.xaml</DependentUpon>
     </Compile>
@@ -138,6 +147,14 @@
     <Compile Include="Interface\TemperatureInfo.cs" />
     <Compile Include="Interface\Weather.cs" />
     <Compile Include="Setting\TextInterface.cs" />
+    <Page Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\SityBusPages\StationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PagesRegistration\AgreementPolicy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

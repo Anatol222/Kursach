@@ -21,6 +21,7 @@ namespace Курсовая
     {
         public StartWindow()
         {
+
             InitializeComponent();
         }
 

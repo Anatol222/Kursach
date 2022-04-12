@@ -118,7 +118,7 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" FontWeight="Bold" FontSize="15" Text="Телефон:"  VerticalAlignment="Center"></TextBlock>
-                <Border Grid.Column="2" Style="{StaticResource ProfileBorder}">
+                <Border Grid.Column="2" Style="{StaticResource ProfileBorder}" Cursor="Hand">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="3"></DropShadowEffect>
                     </Border.Effect>

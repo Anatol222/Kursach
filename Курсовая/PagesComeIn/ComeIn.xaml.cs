@@ -185,7 +185,7 @@ namespace Курсовая.PagesComeIn
                     }
                     else
                         File.Delete("saveUser.json");
-                    navigation.SwitchAnotherWindon(comeIn, new MainFrame()); 
+                    navigation.SwitchAnotherWindon(comeIn, new MainFrame());
                 }
                 else
                     Notification?.Invoke("Неверный пароль");
