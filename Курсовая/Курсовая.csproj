@@ -103,12 +103,9 @@
     <Compile Include="DeleteAfter.xaml.cs">
       <DependentUpon>DeleteAfter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PagesComeIn\ComeIn.xaml.cs">
+    <Compile Include="PagesComeIn\ComeIn.xaml.cs" />
     <Compile Include="MainFrameForms\SityBusPage.xaml.cs">
       <DependentUpon>SityBusPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="StartWindowForms\ComeIn.xaml.cs">
-      <DependentUpon>ComeIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="PagesRegistration\ConfirmEmail.xaml.cs">
       <DependentUpon>ConfirmEmail.xaml</DependentUpon>
@@ -176,6 +173,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resource dictionary\ButtonsStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resource dictionary\ButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,14 +237,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="PagesComeIn\ReserveInCome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resource dictionary\InputText.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resource dictionary\MainRootButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

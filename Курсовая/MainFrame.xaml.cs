@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Курсовая.MainFrameForms;
 using Курсовая.Setting;
 
 namespace Курсовая
@@ -146,7 +147,7 @@ namespace Курсовая
 
         private void rdNotes_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(SityBusPage);
+            PagesNavigation.Navigate(TrainPage);
         }
 
 

@@ -123,7 +123,7 @@
                         <Border BorderBrush="Azure" VerticalAlignment="Center" MaxWidth="50" BorderThickness="2" Grid.Column="2">
                             <Image  Source="\Images\Русский флаг.png" ></Image>
                         </Border>
-                        <Button Grid.Column="3" Width="30" Height="30" Margin="15 0 0  0" Style="{StaticResource InfoBtn}" Click="InfoAboutProgramm_Click"></Button>
+                        <Button Grid.Column="3" Width="30" Height="30" Margin="15 0 0  0" Style="{StaticResource InfoBtn}" Click="InfoAboutProgramm_Click" Cursor="Hand"></Button>
                     </Grid>
                 </Border>
             </Border>

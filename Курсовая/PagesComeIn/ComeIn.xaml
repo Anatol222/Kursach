@@ -29,7 +29,7 @@
 
             <TextBlock Style="{StaticResource TextStyle}" Text="Пароль" Margin="164,180,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
             <Border Style="{DynamicResource BorderStyle}" Margin="102,0,0,0" VerticalAlignment="Center">
-                <PasswordBox x:Name="FirstPassword"  PreviewTextInput="Password_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
+                <PasswordBox x:Name="FirstPassword" Style="{x:Null}" PreviewTextInput="Password_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
             </Border>
 
             <CheckBox x:Name="CheckBoxSaveUser" Content="Не выходить из системы" Margin="90,252,101,172" IsChecked="False" Click="SaveUser_Click"/>
@@ -40,8 +40,8 @@
             <Button x:Name="NewPassword" Style="{DynamicResource ButtonStyle}" FontSize="14" Content="Забыли пароль" Click="NewPassword_Click" Margin="198,292,40,104"/>
             <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" Click="Cancellation_Click" Margin="40,357,198,39"></Button>
             <Button Content="Войти" Style="{DynamicResource ButtonStyle}" Click="InCome_Click" Margin="198,357,40,39"/>
-            <Button x:Name="ShowOrHidePassword" Click="ShowOrHidePassword_Click" Template="{StaticResource MaxMinBtn}" Margin="282,212,76,212">
-                <Image Source="../Images/view.png"></Image>
+            <Button x:Name="ShowOrHidePassword" Style="{x:Null}" Click="ShowOrHidePassword_Click" Template="{StaticResource MaxMinBtn}" Margin="282,212,76,212">
+                <Image Source="../Images/view.png" ></Image>
             </Button>
         </Grid>
     </Border>

@@ -304,7 +304,7 @@
             <Grid Grid.Column="4" Grid.Row="6" Background="Gray"/>
             <Grid Grid.Column="6" Grid.Row="6" Background="Gray"/>
             <Grid Grid.Row="9" Grid.Column="2">
-                <Button></Button>
+                <Button ></Button>
             </Grid>
             <Grid Grid.Row="9" Grid.Column="4">
                 <Button></Button>
