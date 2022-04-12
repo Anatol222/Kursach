@@ -86,6 +86,9 @@ namespace Курсовая
 
             PagesNavigation.Navigate(TrainPage);
         }
+        private void rdSounds_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
         private void PagesNavigation_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -140,6 +143,12 @@ namespace Курсовая
                 ALTtrue = !ALTtrue;
             }
         }
+
+        private void rdNotes_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(SityBusPage);
+        }
+
 
         //private void rdSounds_Click(object sender, RoutedEventArgs e)
         //{
