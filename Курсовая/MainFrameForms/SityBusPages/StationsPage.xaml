@@ -1,0 +1,61 @@
+﻿<Page x:Class="Курсовая.MainFrameForms.SityBusPages.StationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Курсовая.MainFrameForms.SityBusPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StationsPage">
+    <Page.Resources>
+        <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
+    </Page.Resources>
+    <ScrollViewer>
+
+        <Grid>
+            <ListBox Background="Transparent" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False " SelectionChanged="StationsList_SelectionChanged" Margin="20 20 0 20" Name="StationsList"  ItemsSource="{Binding directions}" Padding="30 20" >
+                
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Style="{x:Null}" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Style="{x:Null}" MinWidth="200" Margin="20 0 20 0">
+                            <!--Название направления-->
+                            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                                <TextBlock FontFamily="Segoe Fluent Icons" Text="&#xe8cb;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0 0 5 0"></TextBlock>
+                                <TextBlock Name="DirectionNameText" Style="{x:Null}"  FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" Text="{Binding DrName}"></TextBlock>
+                            </StackPanel>
+                            <!--Список остановок-->
+                            <ListBox Template="{StaticResource AllowScroll}" x:Name="StationsListBox" ItemsSource="{Binding busStations}" HorizontalContentAlignment="Center" Height="1000">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{x:Null}">
+                                            <Button.Template>
+                                                <ControlTemplate>
+                                                    <Border >
+                                                        <TextBlock x:Name="BusStationName" Text="{Binding StName}" FontSize="18"></TextBlock>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ScrollViewer>
+</Page>

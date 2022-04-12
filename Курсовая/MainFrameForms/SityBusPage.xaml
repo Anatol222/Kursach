@@ -28,8 +28,8 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Выберите город:" Grid.Column="0" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
-                    <ComboBox Name="SityComboBox" ItemsSource="{Binding sity}"  Grid.Column="2" Width="200" FontSize="18" HorizontalAlignment="Left">
-                        
+                    <ComboBox Name="SityComboBox" ItemsSource="{Binding sities}" SelectionChanged="SityComboBox_SelectionChanged"  Grid.Column="2" Width="200" FontSize="18" HorizontalAlignment="Left">
+
                     </ComboBox>
                     <Grid Grid.Column="4" HorizontalAlignment="Left">
                         <Grid.ColumnDefinitions>
@@ -41,7 +41,7 @@
                              Style="{StaticResource MaterialDesignRaisedButton}"
                              materialDesign:ButtonAssist.CornerRadius="10"
                              Content="Купить билет"
-                                FontSize="16"
+                             FontSize="16"
                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
                         </Button>
                         <Button Background="Black" Width="40" Height="40" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}"
@@ -52,13 +52,9 @@
                 </Grid>
             </Border>
             <!--Row-2-->
-            <ScrollViewer Grid.Row="1">
-                <Grid>
-                    <ListView>
-                        
-                    </ListView>
-                </Grid>
-            </ScrollViewer>
+            <Frame Name="BusSheduleFrame" Grid.Row="1" Loaded="BusSheduleFrame_Loaded">
+
+            </Frame>
         </Grid>
     </Border>
 </Page>

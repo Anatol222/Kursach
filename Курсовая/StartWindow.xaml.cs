@@ -22,6 +22,7 @@ namespace Курсовая
         public static StartWindow startWindow;
         public StartWindow()
         {
+
             InitializeComponent();
             startWindow = this;
         }
