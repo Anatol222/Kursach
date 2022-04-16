@@ -70,20 +70,27 @@ namespace Курсовая.PagesComeIn
              
             if (code==_reservePassword)
             {
-                string querystring = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(_reservePassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
-                SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-                dataBase.OpenConnection();
-                if (command.ExecuteNonQuery() == 1)
+                try
                 {
-                    querystring = $"UPDATE PersonalLoginData SET Email = '{_reserveEmail}' WHERE Email = '{_email}'; ";
-                    command = new SqlCommand(querystring, dataBase.GetConnection());
+                    string querystring = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(_reservePassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
+                    SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
+                    dataBase.OpenConnection();
                     if (command.ExecuteNonQuery() == 1)
-                        navigation.SwitchAnotherWindon(inCome, new MainFrame());
+                    {
+                        querystring = $"UPDATE PersonalLoginData SET Email = '{_reserveEmail}' WHERE Email = '{_email}'; ";
+                        command = new SqlCommand(querystring, dataBase.GetConnection());
+                        if (command.ExecuteNonQuery() == 1)
+                            navigation.SwitchAnotherWindon(inCome, new MainFrame());
+                        else
+                            Notification?.Invoke("Не удается обновить резервную почту");
+                    }
                     else
-                        Notification?.Invoke("Не удается обновить резервную почту");
+                        Notification?.Invoke("Не удается обновить пароль");
                 }
-                else
+                catch (System.Exception)
+                {
                     Notification?.Invoke("Не удается обновить пароль");
+                }
                 dataBase.CloseConnection();
             }
             else

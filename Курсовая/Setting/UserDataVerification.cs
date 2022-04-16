@@ -26,11 +26,21 @@ namespace Курсовая.Setting
         {
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             DataTable dataTable = new DataTable();
-            dataBase.OpenConnection();
-            SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-            sqlDataAdapter.SelectCommand = sqlCommand;
-            sqlDataAdapter.Fill(dataTable);
-            dataBase.CloseConnection();
+            try
+            {
+                dataBase.OpenConnection();
+                SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
+                sqlDataAdapter.SelectCommand = sqlCommand;
+                sqlDataAdapter.Fill(dataTable);
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                dataBase.CloseConnection();
+            }
             return dataTable.Rows.Count > 0;
         }
     }

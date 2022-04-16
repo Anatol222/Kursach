@@ -51,30 +51,36 @@ namespace Курсовая.PagesRegistration
             string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}'); ";
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
             dataBase.OpenConnection();
-            if (command.ExecuteNonQuery() == 1)
+            try
             {
-                querystring = $"INSERT INTO PersonalPassword(UserPersonalDataId,Password) VALUES((SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}'),'{_password}');";
-                command = new SqlCommand(querystring, dataBase.GetConnection());
                 if (command.ExecuteNonQuery() == 1)
                 {
-                    if (_reserveEmail != "" && _reserveEmail != "Введите резервную эл. почту")
-                        querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, ReserveEmail, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}','{_reserveEmail + _continuationEmail}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
-                    else
-                        querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                    querystring = $"INSERT INTO PersonalPassword(UserPersonalDataId,Password) VALUES((SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}'),'{_password}');";
                     command = new SqlCommand(querystring, dataBase.GetConnection());
                     if (command.ExecuteNonQuery() == 1)
-                    { 
-                        navigation.SwitchAnotherWindon(agreementPolicy, new MainFrame(_email));
-                        StartWindow.startWindow.Close();
+                    {
+                        if (_reserveEmail != "" && _reserveEmail != "Введите резервную эл. почту")
+                            querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, ReserveEmail, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}','{_reserveEmail + _continuationEmail}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                        else
+                            querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
+                        command = new SqlCommand(querystring, dataBase.GetConnection());
+                        if (command.ExecuteNonQuery() == 1)
+                        {
+                            navigation.SwitchAnotherWindon(agreementPolicy, new MainFrame(_email));
+                            StartWindow.startWindow.Close();
+                        }
+                        else
+                            Notification?.Invoke("Не удается установить создать аккаунт");
                     }
                     else
-                        Notification?.Invoke("Не удается установить создать аккаунт");
+                        Notification?.Invoke("Не удается установить пароль");
                 }
                 else
-                    Notification?.Invoke("Не удается установить пароль");
+                    Notification?.Invoke("Не удается установить персональные даные");
             }
-            else
-                Notification?.Invoke("Не удается установить персональные даные");
+            catch {
+                Notification?.Invoke("Неверный формат. Повторите попытку");
+            }
             dataBase.CloseConnection();
         }
 

@@ -1,9 +1,11 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Курсовая.MainFrameForms.SityBusPages;
+using Курсовая.Setting;
 
 namespace Курсовая.MainFrameForms
 {
@@ -17,6 +19,7 @@ namespace Курсовая.MainFrameForms
             InitializeComponent();
             DataContext = this;
 
+            FillinSpreadsheetDataBase fillinSpreadsheetDataBase = new FillinSpreadsheetDataBase();
             //HtmlWeb web = new HtmlWeb();
             //HtmlDocument doc = web.Load("https://zippybus.com/");
 
@@ -30,6 +33,7 @@ namespace Курсовая.MainFrameForms
             //{
             //    //Выводим название города
             //    sities.Add(Sities.ElementAt(i).InnerText);
+
             //    //Получаем получаем ссылки на номера автобусов в городе
             //    string SityLink = busLinks[i].GetAttributeValue("href", null);
 
@@ -47,34 +51,31 @@ namespace Курсовая.MainFrameForms
             //    foreach (var busNumber in busNumbers)
             //    {
             //        BusNumber.Add(busNumber.InnerText);
-            //string busNumberLink = busNumber.GetAttributeValue("href", null);
-            //HtmlDocument BusNumberShedule = web.Load(busNumberLink);
-            //var firstDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/h4");
-            //Console.WriteLine(firstDirection[0].InnerText);
-            //var Stations = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/div//a");
-            //foreach (var station in Stations)
-            //{
-            //    Console.WriteLine(station.InnerText);
-            //}
-            //var secondDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[4]/h4");
-            ////TODO удалить ненужные символы
-            //if (secondDirection != null)
-            //{
-            //    Console.WriteLine(secondDirection[0].InnerText);
-            //    foreach (var station in Stations)
-            //    {
-            //        Console.WriteLine(station.InnerText);
+            //        string busNumberLink = busNumber.GetAttributeValue("href", null);
+            //        HtmlDocument BusNumberShedule = web.Load(busNumberLink);
+            //        var firstDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/h4");
+            //        Console.WriteLine(firstDirection[0].InnerText);
+            //        var Stations = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/div//a");
+            //        foreach (var station in Stations)
+            //        {
+            //            Console.WriteLine(station.InnerText);
+            //        }
+            //        var secondDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[4]/h4");
+            //        //TODO удалить ненужные символы
+            //        if (secondDirection != null)
+            //        {
+            //            Console.WriteLine(secondDirection[0].InnerText);
+            //            foreach (var station in Stations)
+            //            {
+            //                Console.WriteLine(station.InnerText);
+            //            }
+            //        }
             //    }
             //}
         }
 
-
-
-
-        public List<string> sities { get; set; } = new List<string>() { "Пинск", "Минск" };
-
-
-
+        public List<string> BusNumber{ get; set; } = new List<string>();
+        public List<string> sities { get; set; } = new List<string>() { };
         
         private void BusSheduleFrame_Loaded(object sender, RoutedEventArgs e)
         {

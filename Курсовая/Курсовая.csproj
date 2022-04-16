@@ -130,6 +130,7 @@
     <Compile Include="Setting\DataBase.cs" />
     <Compile Include="Setting\DataProcessing.cs" />
     <Compile Include="Setting\Email.cs" />
+    <Compile Include="Setting\FillinSpreadsheetDataBase.cs" />
     <Compile Include="Setting\IconUser.cs" />
     <Compile Include="Setting\ProgrammNavigation.cs" />
     <Compile Include="Setting\RegComeIn.cs" />

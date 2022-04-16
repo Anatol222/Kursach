@@ -138,13 +138,20 @@ namespace Курсовая.PagesComeIn
                 string querystring = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(newPassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
                 SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                 dataBase.OpenConnection();
-                if (command.ExecuteNonQuery() == 1)
+                try
                 {
-                    email.SendMessageNewPassword(newPassword, _email);
-                    Notification?.Invoke("Новый пароль у вас на почте"); 
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                        email.SendMessageNewPassword(newPassword, _email);
+                        Notification?.Invoke("Новый пароль у вас на почте");
+                    }
+                    else
+                        Notification?.Invoke("Не удается обновить пароль");
                 }
-                else
-                    Notification?.Invoke("Не удается обновить пароль");
+                catch
+                {
+                    Notification?.Invoke("Ошибка при обновлении пароля");
+                }
                 dataBase.CloseConnection();
             }
             else

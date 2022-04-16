@@ -66,13 +66,20 @@ namespace Курсовая
 
                 if (dataProcessing.SatisfactionRulesPassword(NewPasswordBox.Password,ConfirmNewPasswordBox.Password))
                 {
-                    string query = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(NewPasswordBox.Password)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{MainFrame.user.Email}' AND PLD.PersonalPasswordId=PP.Id); ";
-                    SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-                    dataBase.OpenConnection();
-                    if (sqlCommand.ExecuteNonQuery() == 1)
-                        return true;
-                    else
-                        Notification?.Invoke("Не удается обновить пароль");
+                    try
+                    {
+                        string query = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(NewPasswordBox.Password)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{MainFrame.user.Email}' AND PLD.PersonalPasswordId=PP.Id); ";
+                        SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        if (sqlCommand.ExecuteNonQuery() == 1)
+                            return true;
+                        else
+                            Notification?.Invoke("Не удается обновить пароль");
+                    }
+                    catch (System.Exception)
+                    {
+                        return false;
+                    }
                 }
                 else
                     Notification?.Invoke("Новый пароль не совпадает, или не соответствует требованием");

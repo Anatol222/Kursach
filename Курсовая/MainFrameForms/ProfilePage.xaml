@@ -197,7 +197,7 @@
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="3"></DropShadowEffect>
                     </Border.Effect>
-                    <DatePicker Name="BirthdayBox" PreviewTextInput="Birthday_PreviewTextInput" IsEnabled="False" Background="Transparent" HorizontalAlignment="Center"  Cursor="Hand" FontSize="15" BorderThickness="0" BorderBrush="Transparent" FontWeight="Bold" Foreground="Black" VerticalContentAlignment="Center" Margin="0,-10,0,-10" Width="166" >
+                    <DatePicker Name="BirthdayBox" Style="{x:Null}" PreviewTextInput="Birthday_PreviewTextInput" IsEnabled="False" Background="Transparent" HorizontalAlignment="Center"  Cursor="Hand" FontSize="15" BorderThickness="0" BorderBrush="Transparent" FontWeight="Bold" Foreground="Black" VerticalContentAlignment="Center" Margin="0,-10,0,-10" Width="166" >
                     </DatePicker>
                     <!--<TextBox Name="BirthdayBox" PreviewTextInput="Birthday_PreviewTextInput" IsReadOnly="True"  Background="Transparent" HorizontalAlignment="Center" TextAlignment="Center" Cursor="Hand" FontSize="15" BorderThickness="0" BorderBrush="Transparent" FontWeight="Bold" Foreground="Black" VerticalContentAlignment="Center" Margin="0,-10,0,-10"/>-->
                 </Border>
