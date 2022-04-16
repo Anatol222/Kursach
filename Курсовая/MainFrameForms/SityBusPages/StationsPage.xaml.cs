@@ -20,10 +20,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
     /// </summary>
     public partial class StationsPage : Page
     {
-        public StationsPage(string busNum, string sity)
+        public StationsPage(string busNum, string sity,Border BackBorder)
         {
             InitializeComponent();
             DataContext = this;
+            BackBorder.Visibility = Visibility.Visible;
             //Сделать запрос для вытягивания направлений 
             string Fdr = "";
             string Sdr ;

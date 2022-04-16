@@ -60,7 +60,7 @@
                         <RadioButton x:Name="rdSounds" Content="Поезда" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7c0;"  Margin="0 5 0 5" Cursor="Hand" />
                         <RadioButton x:Name="rdNotes" Content="Городские автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe806;" Click="rdNotes_Click" Cursor="Hand" />
                         <RadioButton x:Name="rdPayment" Content="Междугородние автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xeb47;" Margin="0 5 0 5" Cursor="Hand" />
-                        <RadioButton x:Name="rdBucket" Content="Корзина" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7bf;" Margin="0 5 0 5" Cursor="Hand" />
+                        <RadioButton x:Name="rdBucket" Content="Корзина" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7bf;" Margin="0 5 0 5" Cursor="Hand" Click="rdBucket_Click"/>
                     </StackPanel>
                     <!--UserPanel-->
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">

@@ -19,11 +19,20 @@ namespace Курсовая.Setting
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
-                ProfilePage.IsSaveNewData=true;
-            if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
-                ProfilePage.IsEmptyFields = false;
-            navigation.Cancellation(SNUD);
+            if (Confirm.Content.ToString() == "Да")
+            {
+                this.Close();
+                new NotificationWindow("В ближайшее время будет оформлен возврат средств, ожидайте.").ShowDialog();
+            }
+            else
+            {
+                if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
+                    ProfilePage.IsSaveNewData = true;
+                if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
+                    ProfilePage.IsEmptyFields = false;
+                navigation.Cancellation(SNUD);
+            }
+
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 
@@ -34,6 +43,7 @@ namespace Курсовая.Setting
                 ProfilePage.IsSaveNewData = false;
             if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
                 ProfilePage.IsEmptyFields = true;
+
         }
     }
 }

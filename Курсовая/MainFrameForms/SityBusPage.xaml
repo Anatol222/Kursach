@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовая"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="SityBus"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextOptions.TextFormattingMode="Ideal"
@@ -36,6 +36,8 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="10"></ColumnDefinition>
                             <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                            <ColumnDefinition Width="15"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Height="40" Background="#eef090" Foreground="Black"
                              Style="{StaticResource MaterialDesignRaisedButton}"
@@ -48,11 +50,14 @@
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                             <materialDesign:PackIcon Width="20" Height="20"  Kind="CartPlus" ></materialDesign:PackIcon>
                         </Button>
+                        <Border Grid.Column="4" Name="BackBorder" Visibility="Hidden">
+                            <Button Name="BackBtn" Width="Auto" Content="Назад" Click="BackBtn_Click" Cursor="Hand"></Button>
+                        </Border>
                     </Grid>
                 </Grid>
             </Border>
             <!--Row-2-->
-            <Frame Name="BusSheduleFrame" Grid.Row="1" Loaded="BusSheduleFrame_Loaded">
+            <Frame Name="BusSheduleFrame" Grid.Row="1" >
 
             </Frame>
         </Grid>

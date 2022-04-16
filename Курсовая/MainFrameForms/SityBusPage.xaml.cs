@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Курсовая.MainFrameForms.SityBusPages;
@@ -47,45 +48,40 @@ namespace Курсовая.MainFrameForms
             //    foreach (var busNumber in busNumbers)
             //    {
             //        BusNumber.Add(busNumber.InnerText);
-            //string busNumberLink = busNumber.GetAttributeValue("href", null);
-            //HtmlDocument BusNumberShedule = web.Load(busNumberLink);
-            //var firstDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/h4");
-            //Console.WriteLine(firstDirection[0].InnerText);
-            //var Stations = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/div//a");
-            //foreach (var station in Stations)
-            //{
-            //    Console.WriteLine(station.InnerText);
-            //}
-            //var secondDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[4]/h4");
-            ////TODO удалить ненужные символы
-            //if (secondDirection != null)
-            //{
-            //    Console.WriteLine(secondDirection[0].InnerText);
-            //    foreach (var station in Stations)
-            //    {
-            //        Console.WriteLine(station.InnerText);
-            //    }
+            //        string busNumberLink = busNumber.GetAttributeValue("href", null);
+            //        HtmlDocument BusNumberShedule = web.Load(busNumberLink);
+            //        var firstDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/h4");
+            //        Console.WriteLine(firstDirection[0].InnerText);
+            //        var Stations = BusNumberShedule.DocumentNode.SelectNodes("//div[3]/div//a");
+            //        foreach (var station in Stations)
+            //        {
+            //            Console.WriteLine(station.InnerText);
+            //        }
+            //        var secondDirection = BusNumberShedule.DocumentNode.SelectNodes("//div[4]/h4");
+            //        //TODO удалить ненужные символы
+            //        if (secondDirection != null)
+            //        {
+            //            Console.WriteLine(secondDirection[0].InnerText);
+            //            foreach (var station in Stations)
+            //            {
+            //                Console.WriteLine(station.InnerText);
+            //            }
+            //        }
+                //}
             //}
         }
-
-
-
 
         public List<string> sities { get; set; } = new List<string>() { "Пинск", "Минск" };
 
-
-
-        
-        private void BusSheduleFrame_Loaded(object sender, RoutedEventArgs e)
-        {
-            //BusSheduleFrame.Navigate(new BusNumbersPage());
-        }
-
         private void SityComboBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame));
+            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame,BackBorder));
         }
 
-        
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BusSheduleFrame.NavigationService.GoBack();
+            BackBorder.Visibility = Visibility.Hidden;
+        }
     }
 }

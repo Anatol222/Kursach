@@ -67,7 +67,7 @@ namespace Курсовая
                 EditAccess(true, "../Images/ProfileIcon/EditFalse.png");
             else if (!_textBoxList[0].IsReadOnly)
             {
-                ChangeData();
+                //ChangeData();
                 if (!IsEmptyFields)
                 {
                     InfoAboutUser();

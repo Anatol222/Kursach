@@ -22,11 +22,13 @@ namespace Курсовая.MainFrameForms.SityBusPages
     public partial class BusNumbersPage : Page
     {
         private Frame BusSheduleFrame;
-        public BusNumbersPage(Frame frame)
+        private Border BorderBack;
+        public BusNumbersPage(Frame frame,Border BackBorder)
         {
             InitializeComponent();
             DataContext = this;
-            BusSheduleFrame = frame;    
+            BusSheduleFrame = frame;
+            BorderBack = BackBorder;
         }
         public List<Bus> BusList { get; set; } = BusItems.GetBuses();
         public class BusItems
@@ -52,7 +54,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
         }
         private void BusNumList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BusSheduleFrame.Navigate(new StationsPage("1", "fwffe"));
+            BusSheduleFrame.Navigate(new StationsPage("1", "fwffe",BorderBack));
         }
     }
 }

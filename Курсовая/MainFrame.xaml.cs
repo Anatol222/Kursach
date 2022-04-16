@@ -24,7 +24,7 @@ namespace Курсовая
     /// </summary>
     public partial class MainFrame : Window
     {
-        Uri TrainPage = new Uri("MainFrameForms/TrainPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri BusketPage = new Uri("MainFrameForms/BucketPage.xaml", UriKind.RelativeOrAbsolute);
         Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
         public static MainFrame mainFrame;
         public static User user;
@@ -33,7 +33,7 @@ namespace Курсовая
         public MainFrame()
         {
             InitializeComponent();
-            ChangeData();
+            //ChangeData();
         }
         public MainFrame(string email)
         {
@@ -86,7 +86,7 @@ namespace Курсовая
         {
             // PagesNavigation.Navigate(new HomePage());
 
-            PagesNavigation.Navigate(TrainPage);
+            //PagesNavigation.Navigate(TrainPage);
         }
         private void rdSounds_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +103,7 @@ namespace Курсовая
 
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(TrainPage);
+            PagesNavigation.Navigate(SityBusPage);
         }
 
         private void OpenSetting_Click(object sender, RoutedEventArgs e)
@@ -149,6 +149,12 @@ namespace Курсовая
         private void rdNotes_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(SityBusPage);
+        }
+
+        private void rdBucket_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(BusketPage);
+
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Environment;
 
 namespace Курсовая
 {
@@ -35,6 +37,20 @@ namespace Курсовая
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             StartFrame.Content = new MainRoot();
+            if (File.Exists(System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows), "Fonts", "SegoeIcons.ttf")))
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("нету");
+
+                File.Copy("Resourse dictionary/MainFrameStyle/Segoe Fluent Icons.ttf", System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows),
+                        "Fonts", "Segoe Fluent Icons.ttf"));
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
+                key.SetValue("Шрифт для иконок", "Segoe Fluent Icons.tff");
+                key.Close();
+            }
 
         }
 

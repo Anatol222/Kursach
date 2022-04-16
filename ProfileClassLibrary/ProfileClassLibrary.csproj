@@ -44,6 +44,8 @@
     <Compile Include="BusClasses\Bus.cs" />
     <Compile Include="BusClasses\BusStation.cs" />
     <Compile Include="BusClasses\Trip.cs" />
+    <Compile Include="BusketClasses\BucketItem.cs" />
+    <Compile Include="BusketClasses\Buscket.cs" />
     <Compile Include="UserClasses\IAccount.cs" />
     <Compile Include="UserClasses\Person.cs" />
     <Compile Include="UserClasses\User.cs" />
