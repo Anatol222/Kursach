@@ -56,7 +56,7 @@ namespace Курсовая
             Warning += userDataVerification.Display;
 
             IsEmptyFields = true;
-
+            
             BirthdayBox.DisplayDateEnd = DateTime.Now.AddYears(-14);
             BirthdayBox.DisplayDateStart = new DateTime(1920, 01, 01);
         }
@@ -216,35 +216,43 @@ namespace Курсовая
                     {
                         if (!userDataVerification.Verification($"SELECT * FROM PersonalLoginData WHERE Email='{ReserveEmail.Text.Trim()}' OR ReserveEmail = '{ReserveEmail.Text.Trim()}'"))
                         {
-                            string query = $"UPDATE UserPersonalData SET FirstName='{FirstNameBox.Text.Trim()}',LastName='{LastNameBox.Text.Trim()}',Number='{NumberBox.Text.Trim()}'," +
-                                $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{BirthdayBox.Text.Trim()}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
-                            SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-                            dataBase.OpenConnection();
-                            if (sqlCommand.ExecuteNonQuery() == 1)
+                            try
                             {
-                                if (ReserveEmail.Text.Trim() != "Резервная почта не указана" && ReserveEmail.Text.Trim() != "" && ReserveEmail.Text.Trim() != MainFrame.user.ReserveEmail)
+                                string query = $"UPDATE UserPersonalData SET FirstName='{FirstNameBox.Text.Trim()}',LastName='{LastNameBox.Text.Trim()}',Number='{NumberBox.Text.Trim()}'," +
+                                    $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).ToString(@"MM/dd/yyyy")}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
+                                SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
+                                dataBase.OpenConnection();
+                                if (sqlCommand.ExecuteNonQuery() == 1)
                                 {
-                                    query = $"UPDATE PersonalLoginData SET ReserveEmail = '{ReserveEmail.Text.Trim()}' WHERE Email = '{MainFrame.user.Email}'; ";
-                                    sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-                                    if (sqlCommand.ExecuteNonQuery() != 1)
-                                        Notification?.Invoke("Не удается обновить резервную почту");
-                                }
-                                if (EmailBox.Text.Trim() != MainFrame.user.Email && EmailBox.Text.Trim() != "")
-                                {
-                                    confirmEmailWindow = new ConfirmEmailWinow(EmailBox.Text.Trim());
-                                    confirmEmailWindow.ShowDialog();
-                                    if (!ConfirmEmailWinow.IsReplecement)
-                                        EmailBox.Text = MainFrame.user.Email;
-                                    ConfirmEmailWinow.IsReplecement = false;
-                                }
-                                IsEmptyFields = true;
-                                EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
-                                MainFrame.user = new User(EmailBox.Text);
-                                InfoAboutUser();
+                                    if (ReserveEmail.Text.Trim() != "Резервная почта не указана" && ReserveEmail.Text.Trim() != "" && ReserveEmail.Text.Trim() != MainFrame.user.ReserveEmail)
+                                    {
+                                        query = $"UPDATE PersonalLoginData SET ReserveEmail = '{ReserveEmail.Text.Trim()}' WHERE Email = '{MainFrame.user.Email}'; ";
+                                        sqlCommand = new SqlCommand(query, dataBase.GetConnection());
+                                        if (sqlCommand.ExecuteNonQuery() != 1)
+                                            Notification?.Invoke("Не удается обновить резервную почту");
+                                    }
+                                    if (EmailBox.Text.Trim() != MainFrame.user.Email && EmailBox.Text.Trim() != "")
+                                    {
+                                        confirmEmailWindow = new ConfirmEmailWinow(EmailBox.Text.Trim());
+                                        confirmEmailWindow.ShowDialog();
+                                        if (!ConfirmEmailWinow.IsReplecement)
+                                            EmailBox.Text = MainFrame.user.Email;
+                                        ConfirmEmailWinow.IsReplecement = false;
+                                    }
+                                    IsEmptyFields = true;
+                                    EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
+                                    MainFrame.user = new User(EmailBox.Text);
+                                    dataBase.CloseConnection();
+                                    InfoAboutUser();
 
+                                }
+                                else
+                                    Notification?.Invoke("Не удается обновить личные данные");
                             }
-                            else
-                                Notification?.Invoke("Не удается обновить личные данные");
+                            catch
+                            {
+                                Notification?.Invoke("Ошибка при обновлении данных");
+                            }
                         }
                         else
                             Notification?.Invoke("Пользователь с такой почтой уже существует. Вы не можете изменить резервную почту");

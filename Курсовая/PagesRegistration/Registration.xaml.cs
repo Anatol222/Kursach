@@ -144,28 +144,35 @@ namespace Курсовая.PagesRegistration
 
         private bool CheckUser()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
-            string querystring = $"select * from PersonalLoginData where Email = '{Email_Text}'";
-            SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-            if (table.Rows.Count>0)
+            try
             {
-                Notification?.Invoke("Пользователь c такой почтой уже существует");
-                return true;
-            }
-            else
-            {
-                querystring = $"SELECT * FROM UserPersonalData WHERE Number ='{Number_Text}'; ";
-                command = new SqlCommand(querystring, dataBase.GetConnection());
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable table = new DataTable();
+                string querystring = $"select * from PersonalLoginData where Email = '{Email_Text}'";
+                SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                 adapter.SelectCommand = command;
                 adapter.Fill(table);
                 if (table.Rows.Count > 0)
                 {
-                    Notification?.Invoke("Пользователь c таким номером уже существует");
+                    Notification?.Invoke("Пользователь c такой почтой уже существует");
                     return true;
                 }
+                else
+                {
+                    querystring = $"SELECT * FROM UserPersonalData WHERE Number ='{Number_Text}'; ";
+                    command = new SqlCommand(querystring, dataBase.GetConnection());
+                    adapter.SelectCommand = command;
+                    adapter.Fill(table);
+                    if (table.Rows.Count > 0)
+                    {
+                        Notification?.Invoke("Пользователь c таким номером уже существует");
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
                 return false;
             }
         }

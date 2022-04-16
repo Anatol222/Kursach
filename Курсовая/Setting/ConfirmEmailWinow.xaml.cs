@@ -55,17 +55,24 @@ namespace Курсовая.Setting
 
             if (code == _codeConfirm)
             {
-                string query = $"UPDATE PersonalLoginData SET Email = '{_newEmail}' WHERE Email = '{MainFrame.user.Email}'; ";
-                SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-                dataBase.OpenConnection();
-                if (sqlCommand.ExecuteNonQuery() != 1)
-                    Notification?.Invoke("Не удается обновить почту");
-                else
+                try
                 {
-                    dataBase.CloseConnection();
-                    File.Delete("saveUser.json");
-                    IsReplecement = true;
-                    navigation.Cancellation(this);
+                    string query = $"UPDATE PersonalLoginData SET Email = '{_newEmail}' WHERE Email = '{MainFrame.user.Email}'; ";
+                    SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
+                    dataBase.OpenConnection();
+                    if (sqlCommand.ExecuteNonQuery() != 1)
+                        Notification?.Invoke("Не удается обновить почту");
+                    else
+                    {
+                        dataBase.CloseConnection();
+                        File.Delete("saveUser.json");
+                        IsReplecement = true;
+                        navigation.Cancellation(this);
+                    }
+                }
+                catch (Exception)
+                {
+                    Notification?.Invoke("Не удается обновить почту");
                 }
                 dataBase.CloseConnection();
         }
