@@ -9,7 +9,7 @@ namespace Курсовая.Setting
     {
         public FillinSpreadsheetDataBase()
         {
-            BusSpreadsheet();
+            //BusSpreadsheet();
         }
         private void BusSpreadsheet()
         {

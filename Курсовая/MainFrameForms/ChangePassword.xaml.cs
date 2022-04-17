@@ -90,11 +90,11 @@ namespace Курсовая
         }
 
         //Имя кнопки -ShowOrHidePassword
-        //private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e) =>
-        //    regComeIn.ShowOrHidePassword(OldTextBox, OldPasswordBox, ShowOrHidePassword);
+        private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e) =>
+            regComeIn.ShowOrHidePassword(OldTextBox, OldPasswordBox, ShowOrHidePassword);
 
         //Имя кнопки - ShowOrHideNewPassword
-        //private void ShowOrHidТNewePassword_Click(object sender, RoutedEventArgs e) =>
-        //    regComeIn.ShowOrHidePassword(NewTextBox, NewPasswordBox, ShowOrHideNewPassword);
+        private void ShowOrHidТNewePassword_Click(object sender, RoutedEventArgs e) =>
+            regComeIn.ShowOrHidePassword(NewTextBox, NewPasswordBox, ShowOrHideNewPassword);
     }
 }

@@ -8,6 +8,7 @@ namespace Курсовая.Setting
     {
         private INavigation navigation;
         private SaveNewUserData SNUD;
+        public static bool CanRemoveFromBucket;
         public SaveNewUserData(string conten, string buttonText)
         {
             InitializeComponent();
@@ -23,15 +24,17 @@ namespace Курсовая.Setting
             {
                 this.Close();
                 new NotificationWindow("В ближайшее время будет оформлен возврат средств, ожидайте.").ShowDialog();
+                CanRemoveFromBucket = true;
             }
             else
             {
-                if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
-                    ProfilePage.IsSaveNewData = true;
-                if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
-                    ProfilePage.IsEmptyFields = false;
-                navigation.Cancellation(SNUD);
+                CanRemoveFromBucket = false;
             }
+            if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
+                ProfilePage.IsSaveNewData = true;
+            if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
+                ProfilePage.IsEmptyFields = false;
+            navigation.Cancellation(SNUD);
 
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();

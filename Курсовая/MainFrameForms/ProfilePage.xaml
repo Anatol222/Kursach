@@ -222,7 +222,7 @@
                     <TextBox x:Name="ReserveEmail" Style="{x:Null}" MaxLength="35" Width="Auto" Height="35"  PreviewTextInput="Email_PreviewTextInput" IsReadOnly="True"  Background="Transparent" HorizontalAlignment="Center" TextAlignment="Center" Cursor="Hand" FontSize="15" BorderThickness="0" BorderBrush="Transparent" FontWeight="Bold" Foreground="Black" VerticalContentAlignment="Center" Margin="0,-10,0,-10"/>
                 </Border>
             </Grid>
-            <Grid Grid.Row="7" Grid.Column="1" >
+            <Grid Grid.Row="7" Grid.Column="1" Cursor="Hand" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*"></RowDefinition>
                     <RowDefinition Height="0.1*"></RowDefinition>

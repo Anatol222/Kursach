@@ -44,7 +44,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
             }
             Fdirection.busStations = Direction.GetStations(/*busNum, Fdr*/);
         }
-        public List<Direction> directions { get; set; } = new List<Direction>() { new Direction("1323-2134grgggggggggggggggggreg") { busStations = Direction.GetStations() }, new Direction("1323-2134rgewgerwgewgewrg") { busStations = Direction.GetStations() } };
+        public StationsPage()
+        {
+            DataContext = this;
+        }
+        public List<Direction> directions { get; set; } = new List<Direction>() { new Direction("1323-2134grgggggggggggggggggreg") { busStations = Direction.GetStations1() }, new Direction("1323-2134rgewgerwgewgewrg") { busStations = Direction.GetStations() } };
         private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -64,6 +68,10 @@ namespace Курсовая.MainFrameForms.SityBusPages
         {
             //сделать вытягивание
             return new List<Busstation>() { new Busstation() { StName = "123" }, new Busstation() { StName = "123" } };
+        }public static List<Busstation> GetStations1(/*string busNum, string DrName*/)
+        {
+            //сделать вытягивание
+            return new List<Busstation>() { new Busstation() { StName = "апав" }, new Busstation() { StName = "вапвап" } };
         }
 
     }
