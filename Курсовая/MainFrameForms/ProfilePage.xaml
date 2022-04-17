@@ -96,16 +96,22 @@
                 <RowDefinition Height="0.05*" MinHeight="10"></RowDefinition>
                 <RowDefinition Height="0.3*" MinHeight="10"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Column="0" Grid.Row="1" Width="Auto">
-                <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="250" Margin="0 0 0 20">
-                    <Button x:Name="ChoiceIcon" Padding="10,0,0,0" Click="ChoiceIcon_Click" Background="Transparent" BorderBrush="Transparent" Style="{DynamicResource TransparentBtnStyle}">
-                        <Image Source="../Images/iconAnimals/ape.png"/>
-                    </Button>
-                    <StackPanel Orientation="Vertical" Margin="8 0 0 0" Width="Auto">
-                        <Label x:Name="FNamePatronymic" Foreground="White" FontSize="14" FontWeight="SemiBold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" />
-                        <Label x:Name="EmailUres" Foreground="White" FontSize="11" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="0 -10 0 0"/>
-                    </StackPanel>
-                </StackPanel>
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Width="Auto">
+                    <Grid Grid.Row="3" VerticalAlignment="Bottom" Margin="0 0 0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="10"></ColumnDefinition>
+                        <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="ChoiceIcon" HorizontalAlignment="Right" Click="ChoiceIcon_Click" Background="Transparent" BorderBrush="Transparent" Style="{DynamicResource TransparentBtnStyle}">
+                            <Image Source="../Images/iconAnimals/ape.png"/>
+                        </Button>
+                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                            <TextBlock x:Name="FNamePatronymic" Foreground="White" TextWrapping="Wrap" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Left" />
+                            <Label x:Name="EmailUres" Foreground="White" FontSize="14" FontWeight="Regular" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="-3 -5 0 0"/>
+                        </StackPanel>
+                    </Grid>
+               
             </Grid>
             <Grid Grid.Row="1" Grid.Column="6">
                 <Grid.ColumnDefinitions>
@@ -174,7 +180,7 @@
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="3"></DropShadowEffect>
                     </Border.Effect>
-                    <TextBox x:Name="PatronymicBox" Style="{x:Null}" Width="Auto" Height="35" Text="dsgrwgrwgrewge" MaxLength="20" PreviewTextInput="Latters_PreviewTextInput"
+                    <TextBox x:Name="PatronymicBox" Style="{x:Null}" Width="Auto" Height="35" MaxLength="20" PreviewTextInput="Latters_PreviewTextInput"
                              IsReadOnly="True"  Background="Transparent" HorizontalAlignment="Center" TextAlignment="Center"
                              Cursor="Hand" FontSize="15" BorderThickness="0" BorderBrush="Transparent" FontWeight="Bold"
                              Foreground="Black" VerticalContentAlignment="Center" Margin="0,-10,0,-10"/>
@@ -228,7 +234,7 @@
                     <RowDefinition Height="0.1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" FontWeight="Bold" FontSize="15" Text="Дата рождения:"  VerticalAlignment="Center"></TextBlock>
-                <Border Grid.Row="2" Style="{StaticResource ProfileBorder}" Cursor="Hand" Padding="0 2 0 0">
+                <Border Grid.Row="2" Style="{StaticResource ProfileBorder}" Cursor="Hand" Padding="10 2 10 0">
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="3"></DropShadowEffect>
                     </Border.Effect>
@@ -238,20 +244,16 @@
                     </DatePicker>
                 </Border>
             </Grid>
-            <Grid Grid.Row="7" Grid.Column="3">
+            <Grid Grid.Row="7" Grid.Column="3" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition MaxWidth="150"></ColumnDefinition>
+                    <ColumnDefinition MaxWidth="150"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Border Padding="20 20 0 20" Grid.Column="0">
-                    <Button x:Name="MaleBtn" FontWeight="Bold" IsEnabled="False" Click="MaleBtn_Click" MaxHeight="35" Cursor="Hand"  Style="{StaticResource GenderBtn}">Муж</Button>
-                </Border>
-                <Border Padding="0 20 20 20" Grid.Column="1">
-                    <Button x:Name="FemaleBtn" MaxHeight="35" IsEnabled="False" Click="FemaleBtn_Click" Cursor="Hand" Background="RosyBrown" Style="{StaticResource GenderBtn}" FontWeight="Bold">Жен</Button>
-                </Border>
+                    <Button x:Name="MaleBtn" Grid.Column="0" Margin="0 0 0 10" VerticalAlignment="Bottom" MinHeight="35" FontWeight="Bold" IsEnabled="False" Click="MaleBtn_Click" MaxHeight="35" Cursor="Hand"  Style="{StaticResource GenderBtn}">Муж</Button>
+                <Button x:Name="FemaleBtn" Grid.Column="1"  Margin="0 0 0 10" VerticalAlignment="Bottom" MinHeight="35" MaxHeight="35" IsEnabled="False" Click="FemaleBtn_Click" Cursor="Hand" Background="RosyBrown" Style="{StaticResource GenderBtn}" FontWeight="Bold">Жен</Button>
             </Grid>
             <Grid Grid.Row="7" Grid.Column="5" >
-                <Border Padding="0 15 0 15">
+                <Border Padding="0 30 0 0">
                     <Button x:Name="ButtonChangePassword" Content="Изменить пароль" IsEnabled="False" Click="ToChangePassword_Click" MaxHeight="50" Style="{StaticResource ChangePassBtn}" Cursor="Hand"></Button>
                 </Border>
             </Grid>

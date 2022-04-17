@@ -33,7 +33,7 @@ namespace Курсовая
         public MainFrame()
         {
             InitializeComponent();
-            //ChangeData();
+            ChangeData();
         }
         public MainFrame(string email)
         {

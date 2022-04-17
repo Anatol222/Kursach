@@ -67,7 +67,7 @@ namespace Курсовая
                 EditAccess(true, "../Images/ProfileIcon/EditFalse.png");
             else if (!_textBoxList[0].IsReadOnly)
             {
-                //ChangeData();
+                ChangeData();
                 if (!IsEmptyFields)
                 {
                     InfoAboutUser();
@@ -155,7 +155,7 @@ namespace Курсовая
             if (ReserveEmail.Text == "")
                 ReserveEmail.Text = "Резервная почта не указана";
             EmailUres.Content = MainFrame.user.Email;
-            FNamePatronymic.Content = MainFrame.user.Name + " " + MainFrame.user.Patronymic;
+            FNamePatronymic.Text = MainFrame.user.Name + " " + MainFrame.user.Patronymic;
             Gender gender = MainFrame.user.Gender;
             if (gender == Gender.Male)
             { GenderColor(Brushes.White, Brushes.Aqua); whatGender = 0; }

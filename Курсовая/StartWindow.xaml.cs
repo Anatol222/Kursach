@@ -37,20 +37,20 @@ namespace Курсовая
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             StartFrame.Content = new MainRoot();
-            if (File.Exists(System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows), "Fonts", "SegoeIcons.ttf")))
-            {
+            //if (File.Exists(System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows), "Fonts", "SegoeIcons.ttf")))
+            //{
 
-            }
-            else
-            {
-                MessageBox.Show("нету");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("нету");
 
-                File.Copy("Resourse dictionary/MainFrameStyle/Segoe Fluent Icons.ttf", System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows),
-                        "Fonts", "Segoe Fluent Icons.ttf"));
-                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
-                key.SetValue("Шрифт для иконок", "Segoe Fluent Icons.tff");
-                key.Close();
-            }
+            //    File.Copy("Resourse dictionary/MainFrameStyle/Segoe Fluent Icons.ttf", System.IO.Path.Combine(GetFolderPath(SpecialFolder.Windows),
+            //            "Fonts", "Segoe Fluent Icons.ttf"));
+            //    Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts");
+            //    key.SetValue("Шрифт для иконок", "Segoe Fluent Icons.tff");
+            //    key.Close();
+            //}
 
         }
 

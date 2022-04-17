@@ -1,60 +1,30 @@
-﻿using ProfileClassLibrary.BusClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ProfileClassLibrary.BusClasses;
+
 
 namespace Курсовая.MainFrameForms.SityBusPages
 {
-    /// <summary>
-    /// Логика взаимодействия для BusNumbersPage.xaml
-    /// </summary>
     public partial class BusNumbersPage : Page
     {
         private Frame BusSheduleFrame;
         private Border BorderBack;
-        public BusNumbersPage(Frame frame,Border BackBorder)
+        
+        private string _city;
+
+        public BusNumbersPage(Frame frame,Border BackBorder,string city)
         {
             InitializeComponent();
             DataContext = this;
             BusSheduleFrame = frame;
             BorderBack = BackBorder;
-        }
-        public List<Bus> BusList { get; set; } = BusItems.GetBuses();
-        public class BusItems
-        {
-            public static List<Bus> GetBuses()
-            {
-                return new List<Bus>()
-                {
-                    new Bus(){Number = "1"},
-                    new Bus(){Number = "2"},
-                    new Bus(){Number = "3"}
-                };
-            }
+            _city = city;
+            BusList = BusItems.GetBuses(_city);
         }
 
-        public class Bus
-        {
-            public string Number { get; set; }
-            public override string ToString()
-            {
-                return Number.ToString();
-            }
-        }
-        private void BusNumList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            BusSheduleFrame.Navigate(new StationsPage("1", "fwffe",BorderBack));
-        }
+        public List<Bus> BusList { get; set; } 
+       
+        private void BusNumList_SelectionChanged(object sender, SelectionChangedEventArgs e)=>
+            BusSheduleFrame.Navigate(new StationsPage(BusList[BusNaumList.SelectedIndex].Number, _city,BorderBack));
     }
 }
