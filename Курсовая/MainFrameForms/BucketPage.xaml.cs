@@ -36,20 +36,29 @@ namespace Курсовая.MainFrameForms
 
         private void StatusBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Bucket[BucketListBox.SelectedIndex]._purchaceStatus == true)
+            {
+                new NotificationWindow("Билет уже куплен. Приятной поездки!").ShowDialog();
+            }
+            else
+            {
+                new NotificationWindow("Вы успешно оплатили билет. Приятной поездки!").ShowDialog();
+            }
         }
-
-        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
+        public void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
             if (Bucket[BucketListBox.SelectedIndex]._purchaceStatus == true)
             {
                 new SaveNewUserData("Вы уверены в том, что хотите отказаться от билета и вернуть средства?", "Да").ShowDialog();
-
-                Bucket.RemoveAt(BucketListBox.SelectedIndex);
-                BucketListBox.Items.Refresh();
+                if (SaveNewUserData.CanRemoveFromBucket == true)
+                {
+                    Bucket.RemoveAt(BucketListBox.SelectedIndex);
+                    BucketListBox.Items.Refresh();
+                }
             }
             else
             {
+
                 Bucket.RemoveAt(BucketListBox.SelectedIndex);
                 BucketListBox.Items.Refresh();
             }

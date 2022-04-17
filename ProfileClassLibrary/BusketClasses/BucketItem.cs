@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace ProfileClassLibrary.BusketClasses
 {
+    public enum TransportType
+    {
+        Train,
+        Plane,
+        SityBus,
+        Bus
+    }
     public class BucketItem
     {
-        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status)
+       
+        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType)
         {
             Direction = direction;
             DepartureTime = departureTime;
@@ -16,6 +24,29 @@ namespace ProfileClassLibrary.BusketClasses
             TransportNumber = transportNumber;
             TicketNum = ticketNum;
             _purchaceStatus = status;
+            _TransportType = trType;
+        }
+        public string TransportTypeIcon
+        {
+            get
+            {
+                if (_TransportType == TransportType.Train)
+                {
+                    return "&#xe7c0";
+                }
+                else if (_TransportType == TransportType.Plane)
+                {
+                    return "&#xE709;";
+                }
+                else if (_TransportType == TransportType.Bus)
+                {
+                    return "&#xeb47;";
+                }
+                else
+                {
+                    return "&#xe806;";
+                }
+            }
         }
         public string PurchaceStatusIcon
         {
@@ -46,6 +77,7 @@ namespace ProfileClassLibrary.BusketClasses
             }
         }
         public bool _purchaceStatus;
+        public TransportType _TransportType;
         public string Direction { get; private set; }
         public DateTime DepartureTime { get; private set; }
         public DateTime DepartureDate { get; private set; }

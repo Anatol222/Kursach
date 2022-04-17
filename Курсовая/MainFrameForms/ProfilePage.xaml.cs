@@ -49,16 +49,16 @@ namespace Курсовая
             dataProcessing = new DataProcessing();
             userDataVerification = new UserDataVerification();
 
-            InfoAboutUser();
-            WorkingWithData();
+            //InfoAboutUser();
+            //WorkingWithData();
 
-            Notification += navigation.Display;
-            Warning += userDataVerification.Display;
+            //Notification += navigation.Display;
+            //Warning += userDataVerification.Display;
 
-            IsEmptyFields = true;
+            //IsEmptyFields = true;
             
-            BirthdayBox.DisplayDateEnd = DateTime.Now.AddYears(-14);
-            BirthdayBox.DisplayDateStart = new DateTime(1920, 01, 01);
+            //BirthdayBox.DisplayDateEnd = DateTime.Now.AddYears(-14);
+            //BirthdayBox.DisplayDateStart = new DateTime(1920, 01, 01);
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)

@@ -12,16 +12,16 @@ namespace ProfileClassLibrary.BusketClasses
         {
             return new List<BucketItem>()
                 {
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false)
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true, TransportType.SityBus),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Train),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Bus),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.SityBus),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Train),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Bus),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.SityBus),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Train),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Plane),
+                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Plane)
                 };
         }
     }
