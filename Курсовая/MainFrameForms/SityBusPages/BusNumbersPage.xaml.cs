@@ -26,9 +26,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             BusList = BusItems.GetBuses(_city);
         }
 
-        public List<Bus> BusList { get; set; } = new List<Bus> { new Bus() {Number = "1" },new Bus() {Number = "1" } };
-        object SelectedItem { get; set; }
-        
+        public List<Bus> BusList { get; set; }
 
         private void BusNumberNav_Click(object sender, System.Windows.RoutedEventArgs e)
         {

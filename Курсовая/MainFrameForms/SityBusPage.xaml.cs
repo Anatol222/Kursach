@@ -14,17 +14,17 @@ namespace Курсовая.MainFrameForms
         {
             InitializeComponent();
             data = new DataBase();
-            //FillInCities();
+            sities = new List<string>();
+            FillInCities();
             DataContext = this;
-            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame, BackBorder, ByTicket, GoToBucket /*SityComboBox.SelectedItem.ToString()*/, "fwef"));
 
         }
 
-        public List<string> sities { get; set; } = new List<string>();
+        public List<string> sities { get; set; }
 
         private void SityComboBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame, BackBorder, ByTicket, GoToBucket, SityComboBox.SelectedItem.ToString()));
         }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
