@@ -10,13 +10,19 @@ namespace Курсовая.MainFrameForms.SityBusPages
     {
         protected static string querySecondRoute = default;
         protected static string queryFirstRoute = default;
+        Button ByTicket;
+        Button GoToBucket;
+        Frame BusSheduleFrame;
         public StationsPage() {}
 
-        public StationsPage(string busNum, string sity, Border BackBorder)
+        public StationsPage(string busNum, string sity, Frame BusSheduleFrame,Button ByTicket,Button GoToBucket, Border BackBorder)
         {
             InitializeComponent();
 
             DataContext = this;
+            this.ByTicket = ByTicket;
+            this.GoToBucket = GoToBucket;
+            this.BusSheduleFrame = BusSheduleFrame;
             BackBorder.Visibility = Visibility.Visible;
 
             queryFirstRoute = $"SELECT FirstRoute FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City = '{sity}') AND BusName = '{busNum}'; ";
@@ -24,10 +30,17 @@ namespace Курсовая.MainFrameForms.SityBusPages
             directions = Directions.GetDirections(busNum);
         }
 
-        public List<Direction> directions { get; set; }
-        private void StationsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        public List<Direction> directions { get; set; } = new List<Direction>() { new Direction("123") { busStations = new List<Busstation>() { new Busstation() {StName = "21#4124" } } },new Direction("123") { busStations = new List<Busstation>() { new Busstation() {StName = "21#4124" } } } };
 
+        private void BusStationNav_Click(object sender, RoutedEventArgs e)
+        {
+            BusSheduleFrame.NavigationService.Navigate(new BusTimePage(BusSheduleFrame, ByTicket, GoToBucket));
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            ByTicket.Visibility = Visibility.Hidden;
+            GoToBucket.Visibility = Visibility.Hidden;
         }
     }
 

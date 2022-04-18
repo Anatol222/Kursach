@@ -15,33 +15,23 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            
+            <RowDefinition Height="1*" MinHeight="170"></RowDefinition>
             <RowDefinition Height="0.5*" MinHeight="60"></RowDefinition>
-            <RowDefinition Height="1*" MinHeight="190"></RowDefinition>
-            <RowDefinition Height="0.5*" MinHeight="50"></RowDefinition>
             <RowDefinition Height="2.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="1*" MinWidth="700"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" Background="DarkGray" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="15">
-                <TextBlock Text="Расписание автобуса 1А на остановке Газоаппарат Брест"  HorizontalAlignment="Center" VerticalAlignment="Center"
-                       FontSize="25"></TextBlock>
-            </Border>
-        </Grid>
+        
 
         <!--Дни недели-->
         <Border Grid.Row="0" Grid.RowSpan="2" Panel.ZIndex="-1" BorderThickness="0" Background="LightGray" ></Border>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="1" CornerRadius="20" Margin="0 5 0 0" Background="DarkGray" HorizontalAlignment="Center" Padding="20 20">
+            <Border Grid.Column="1" CornerRadius="20" Margin="0 5 0 0" Background="DarkGray" HorizontalAlignment="Center" Padding="20 10">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Маршрут:  " FontSize="18" FontWeight="Medium"></TextBlock>
@@ -73,23 +63,33 @@
                 </StackPanel>
             </Border>
         </Grid>
-
-        <ListBox Grid.Row="2" ItemsSource="{Binding DaysList}" Background="BlanchedAlmond">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" CanHorizontallyScroll="False" VerticalAlignment="Center"></StackPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border Cursor="Hand" Background="Orange"  CornerRadius="20" Padding="10 5" BorderThickness="0">
-                        <TextBlock Name="ListText" FontWeight="Bold" FontSize="22" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid Grid.Row="1" Background="BlanchedAlmond">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" ItemsSource="{Binding DaysList}" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0 0 0" CanHorizontallyScroll="False" VerticalAlignment="Center"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Cursor="Hand" Background="Orange"  CornerRadius="20" Padding="10 5" BorderThickness="0">
+                            <TextBlock Name="ListText" FontWeight="Bold" FontSize="22" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Border Grid.Column="1" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="15">
+                <TextBlock Text="Расписание автобуса 1А на остановке Газоаппарат Брест" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="25"></TextBlock>
+            </Border>
+        </Grid>
+        
         <!--Расписание по времени-->
-        <ScrollViewer Grid.Row="3" Background="LightGray" Visibility="Hidden">
+        <!--<ScrollViewer Grid.Row="3" Background="LightGray" Visibility="Hidden">
                 <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusTimeList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -98,7 +98,9 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate >
                         <DataTemplate>
-                            <!--Элемент listBox-->
+                            -->
+        <!--Элемент listBox-->
+        <!--
                             <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                                 <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
                                 <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
@@ -120,38 +122,41 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-        </ScrollViewer>
+        </ScrollViewer>-->
         <ScrollViewer Grid.Row="3" Background="LightGray">
-                <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel></StackPanel>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate >
-                        <DataTemplate>
-                            <!--Элемент listBox-->
-                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                                <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
-                                <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                                <ListBox ItemsSource="{Binding StopTimeList}">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border x:Name="TimeBtnBorder">
+            <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <!--Элемент listBox-->
+                        <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                            <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
+                            <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
+                            <ListBox ItemsSource="{Binding StopTimeList}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource TransparentBtnStyle}">
+                                            <Border x:Name="TimeBtnBorder" >
                                                 <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
                                             </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+
+                                        </Button>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </ScrollViewer>
     </Grid>
 

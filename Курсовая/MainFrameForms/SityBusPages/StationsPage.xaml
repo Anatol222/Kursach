@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:Курсовая.MainFrameForms.SityBusPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="StationsPage">
+      Title="StationsPage" Loaded="Page_Loaded">
     <Page.Resources>
         <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
             <ItemsPresenter></ItemsPresenter>
@@ -16,7 +16,7 @@
     <ScrollViewer>
 
         <Grid>
-            <ListBox Background="Transparent" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False " SelectionChanged="StationsList_SelectionChanged" Margin="20 20 0 20" Name="StationsList"  ItemsSource="{Binding directions}" Padding="30 20" >
+            <ListBox Background="Transparent" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False "  Margin="20 20 0 20" Name="StationsList"  ItemsSource="{Binding directions}" Padding="30 20" >
                 
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,7 +40,7 @@
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Style="{x:Null}">
+                                        <Button Style="{StaticResource TransparentBtnStyle}" Cursor="Hand" Name="BusStationNav" Click="BusStationNav_Click">
                                             <Button.Template>
                                                 <ControlTemplate>
                                                     <Border >

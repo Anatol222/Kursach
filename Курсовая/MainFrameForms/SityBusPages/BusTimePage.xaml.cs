@@ -20,57 +20,65 @@ namespace Курсовая.MainFrameForms.SityBusPages
     /// </summary>
     public partial class BusTimePage : Page
     {
-        public BusTimePage()
+        private Frame BusSheduleFrame;
+        private Button ByTicket;
+        private Button GoToBucket;
+        public BusTimePage(Frame frame, Button ByTicket, Button GoToBucket)
         {
             InitializeComponent();
+            this.ByTicket = ByTicket;
+            this.GoToBucket = GoToBucket;
+            BusSheduleFrame = frame;
+            ByTicket.Visibility = Visibility.Visible;
+            GoToBucket.Visibility = Visibility.Visible;
             DataContext = this;
-            StopTimes = GetTimeBD();
+            //StopTimes = GetTimeBD();
         }
-        //public List<Day> DaysList { get; set; } = new List<Day>() {
-        //    new Day() { _name = "Будни",
-        //                _dateTimes = new List<DateTime>() {
-        //                    new DateTime(1,1,1,12,30,00)
-        //                }
-        //    },new Day() { _name = "Выходные",
-        //                _dateTimes = new List<DateTime>() {
-        //                    new DateTime(1,1,1,12,30,0)
-        //                }
-        //    }
-        //};
+        public List<Day> DaysList { get; set; } = new List<Day>() {
+            new Day() { _name = "Будни",
+                        _dateTimes = new List<DateTime>() {
+                            new DateTime(1,1,1,12,30,00)
+                        }
+            },new Day() { _name = "Выходные",
+                        _dateTimes = new List<DateTime>() {
+                            new DateTime(1,1,1,12,30,0)
+                        }
+            }
+        };
         public List<StopTime> StopTimes { get; set; }
         public string Stroka { get; set; } = "привет";
-        public List<StopTime> GetTimeBD(/*string query*/)
+        public List<StopTime> GetTimeBD(string query)
         {
-            List<DateTime> stopTimeList = new List<DateTime>();
-            List<StopTime> timeList = new List<StopTime>() { };
-            //SqlCommand commad = new SqlCommand(query, data.GetConnection());
-            //data.OpenConnection();
-            //try
-            //{
-            //    //SqlDataReader reader = commad.ExecuteReader();
-            //    if (reader.HasRows)
+            //    List<DateTime> stopTimeList = new List<DateTime>();
+            //    List<StopTime> timeList = new List<StopTime>() { };
+            //    SqlCommand commad = new SqlCommand(query, data.GetConnection());
+            //    data.OpenConnection();
+            //    try
             //    {
-            //        string[] getTime = new string[] { };
-            //        while (reader.Read())
-            //            getTime = ((string)reader.GetValue(0)).Split(' ');
-            //        List<string> list = new List<string>();
-            //        list.AddRange(getTime);
-            //        var hour = list.GroupBy(x => x.Split(':')[0]);
-            //        foreach (var item in hour)
+            //        SqlDataReader reader = commad.ExecuteReader();
+            //        if (reader.HasRows)
             //        {
-            //            foreach (var allTimeInHour in item)
-            //                stopTimeList.Add(Convert.ToDateTime(allTimeInHour));
-            //            timeList.Add(new StopTime(item.Key, stopTimeList));
-            //            stopTimeList = new List<DateTime>();
-            //        }
+            //            string[] getTime = new string[] { };
+            //            while (reader.Read())
+            //                getTime = ((string)reader.GetValue(0)).Split(' ');
+            //            List<string> list = new List<string>();
+            //            list.AddRange(getTime);
+            //            var hour = list.GroupBy(x => x.Split(':')[0]);
+            //            foreach (var item in hour)
+            //            {
+            //                foreach (var allTimeInHour in item)
+            //                    stopTimeList.Add(Convert.ToDateTime(allTimeInHour));
+            //                timeList.Add(new StopTime(item.Key, stopTimeList));
+            //                stopTimeList = new List<DateTime>();
+            //            }
 
+            //        }
             //    }
-            //}
-            //catch { }
-            //finally
-            //{
-            //    data.CloseConnection();
-            //}
+            //    catch { }
+            //    finally
+            //    {
+            //        data.CloseConnection();
+            //    }
             return new List<StopTime>()
             {
                 new StopTime("6", new List<Times>(){new Times() { Time = new DateTime(1,1,1,7,30,0)},new Times() { Time = new DateTime(1,1,1,7,30,0)} })

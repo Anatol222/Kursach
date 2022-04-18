@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Курсовая.MainFrameForms
 {
-    
+
     public partial class SityBusPage : Page
     {
         private DataBase data;
@@ -14,25 +14,31 @@ namespace Курсовая.MainFrameForms
         {
             InitializeComponent();
             data = new DataBase();
-            FillInCities();
+            //FillInCities();
             DataContext = this;
+            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame, BackBorder, ByTicket, GoToBucket /*SityComboBox.SelectedItem.ToString()*/, "fwef"));
 
         }
 
         public List<string> sities { get; set; } = new List<string>();
 
-        private void SityComboBox_SelectionChanged(object sender, RoutedEventArgs e)=>
-            BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame,BackBorder, SityComboBox.SelectedItem.ToString()));
+        private void SityComboBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
-            BusSheduleFrame.NavigationService.GoBack();
-            BackBorder.Visibility = Visibility.Hidden;
+            if (BusSheduleFrame.NavigationService.CanGoBack)
+            {
+                BusSheduleFrame.NavigationService.GoBack();
+            }
+            
         }
         private void FillInCities()
         {
             string query = "SELECT City FROM PublicBusCities;";
-            SqlCommand command = new SqlCommand(query,data.GetConnection());
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             SqlDataReader reader = command.ExecuteReader();
             if (reader.HasRows)
