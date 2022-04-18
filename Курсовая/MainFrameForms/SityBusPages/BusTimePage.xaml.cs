@@ -102,7 +102,35 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 }
             };
         }
+        private void TimeList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (null == listBox)
+            {
+                return;
+            }
 
+            var point = e.GetPosition((UIElement)sender);
+
+            VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
+            {
+                var uiElement = hitTestResult.VisualHit as UIElement;
+
+                while (null != uiElement)
+                {
+                    var listBoxItem = uiElement as ListBoxItem;
+                    if (null != listBoxItem)
+                    {
+                        listBoxItem.IsSelected = true;
+                        return HitTestResultBehavior.Stop;
+                    }
+
+                    uiElement = VisualTreeHelper.GetParent(uiElement) as UIElement;
+                }
+
+                return HitTestResultBehavior.Continue;
+            }, new PointHitTestParameters(point));
+        }
     }
     public class StopTime
     {

@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using ProfileClassLibrary.BusClasses;
 
 
@@ -41,6 +48,35 @@ namespace Курсовая.MainFrameForms.SityBusPages
             {
                 BorderBack.Visibility = System.Windows.Visibility.Hidden;
             }
+        }
+        private void BusNaumList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var listBox = sender as ListBox;
+            if (null == listBox)
+            {
+                return;
+            }
+
+            var point = e.GetPosition((UIElement)sender);
+
+            VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
+            {
+                var uiElement = hitTestResult.VisualHit as UIElement;
+
+                while (null != uiElement)
+                {
+                    var listBoxItem = uiElement as ListBoxItem;
+                    if (null != listBoxItem)
+                    {
+                        listBoxItem.IsSelected = true;
+                        return HitTestResultBehavior.Stop;
+                    }
+
+                    uiElement = VisualTreeHelper.GetParent(uiElement) as UIElement;
+                }
+
+                return HitTestResultBehavior.Continue;
+            }, new PointHitTestParameters(point));
         }
     }
 }

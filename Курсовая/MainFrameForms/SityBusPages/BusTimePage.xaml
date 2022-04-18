@@ -136,7 +136,7 @@
                         <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                             <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
                             <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                            <ListBox ItemsSource="{Binding StopTimeList}">
+                            <ListBox ItemsSource="{Binding StopTimeList}" Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal"></WrapPanel>
