@@ -47,7 +47,7 @@
                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
                         </Button>
                         <Button Background="Black" Width="40" Height="40" Name="GoToBucket" Visibility="Hidden" Grid.Column="2" Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
                             <materialDesign:PackIcon Width="20" Height="20"  Kind="CartPlus" ></materialDesign:PackIcon>
                         </Button>
                         <Border Grid.Column="4" Name="BackBorder" Visibility="Hidden">
