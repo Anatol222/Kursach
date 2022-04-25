@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProfileClassLibrary.BusketClasses
 {
@@ -16,7 +12,7 @@ namespace ProfileClassLibrary.BusketClasses
     public class BucketItem
     {
        
-        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType)
+        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType,string typeService)
         {
             Direction = direction;
             DepartureTime = departureTime;
@@ -25,6 +21,7 @@ namespace ProfileClassLibrary.BusketClasses
             TicketNum = ticketNum;
             _purchaceStatus = status;
             _TransportType = trType;
+            TypeService = typeService;
         }
         public string TransportTypeIcon
         {
@@ -83,5 +80,7 @@ namespace ProfileClassLibrary.BusketClasses
         public DateTime DepartureDate { get; private set; }
         public string TransportNumber { get; private set; }
         public int TicketNum { get; private set; }
+
+        public string TypeService { get;private set; }
     }
 }

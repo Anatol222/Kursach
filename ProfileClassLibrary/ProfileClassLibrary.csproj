@@ -43,8 +43,13 @@
   <ItemGroup>
     <Compile Include="BusClasses\Bus.cs" />
     <Compile Include="BusClasses\BusItems.cs" />
+    <Compile Include="BusClasses\Day.cs" />
+    <Compile Include="BusClasses\InfoAboutBus.cs" />
+    <Compile Include="BusClasses\StopTime.cs" />
+    <Compile Include="BusClasses\Times.cs" />
     <Compile Include="BusketClasses\BucketItem.cs" />
     <Compile Include="BusketClasses\Buscket.cs" />
+    <Compile Include="DataBase.cs" />
     <Compile Include="UserClasses\IAccount.cs" />
     <Compile Include="UserClasses\Person.cs" />
     <Compile Include="UserClasses\User.cs" />

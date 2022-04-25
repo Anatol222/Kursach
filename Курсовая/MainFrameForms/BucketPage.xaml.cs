@@ -16,20 +16,21 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using Курсовая.Setting;
+using System.Data.SqlClient;
 
 namespace Курсовая.MainFrameForms
 {
-    /// <summary>
-    /// Логика взаимодействия для BusketPage.xaml
-    /// </summary>
     public partial class BucketPage : Page 
     {
+        private DataBase dataBase;
         public BucketPage()
         {
             InitializeComponent();
             DataContext = this;
+            dataBase = new DataBase();
+            _bucket = (new Bucket()).GetItems(MainFrame.user.Email,dataBase.GetConnection());
         }
-        public List<BucketItem> _bucket= (new Bucket()).GetItems();
+        public List<BucketItem> _bucket;
 
 
         public List<BucketItem> Bucket { get { return _bucket; } set { _bucket = value;} }
@@ -55,6 +56,7 @@ namespace Курсовая.MainFrameForms
                     Bucket.RemoveAt(BucketListBox.SelectedIndex);
                     BucketListBox.Items.Refresh();
                 }
+                
             }
             else
             {

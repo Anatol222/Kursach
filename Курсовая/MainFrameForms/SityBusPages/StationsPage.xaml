@@ -16,7 +16,7 @@
     <ScrollViewer>
 
         <Grid>
-            <ListBox Background="Transparent" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False "  Margin="20 20 0 20" Name="StationsList"  ItemsSource="{Binding directions}" Padding="30 20" >
+            <ListBox Background="Transparent" Template="{StaticResource AllowScroll}" PreviewMouseLeftButtonDown="StationsListBox_PreviewMouseLeftButtonDown" SelectionChanged="StationsList_SelectionChanged" materialDesign:ListBoxItemAssist.ShowSelection= " False "  Margin="20 20 0 20" Name="StationsList"  ItemsSource="{Binding directions}" Padding="30 20" >
                 
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -32,7 +32,7 @@
                                 <TextBlock Name="DirectionNameText" Style="{x:Null}"  FontWeight="Bold" FontSize="22" HorizontalAlignment="Center" Text="{Binding DrName}"></TextBlock>
                             </StackPanel>
                             <!--Список остановок-->
-                            <ListBox Template="{StaticResource AllowScroll}" PreviewMouseLeftButtonDown="StationsListBox_PreviewMouseLeftButtonDown" x:Name="StationsListBox" ItemsSource="{Binding busStations}" HorizontalContentAlignment="Center" Height="1000">
+                            <ListBox Template="{StaticResource AllowScroll}" SelectionChanged="StationsListBox_SelectionChanged"  x:Name="StationsListBox" ItemsSource="{Binding busStations}" HorizontalContentAlignment="Center" Height="1000">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel></StackPanel>

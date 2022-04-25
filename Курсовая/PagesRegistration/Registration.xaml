@@ -53,12 +53,12 @@
 
             <TextBlock Style="{StaticResource TextStyle}" Text="Пароль" Margin="76,288,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
             <Border Style="{DynamicResource BorderStyle}" Margin="20,307,0,0">
-                <PasswordBox x:Name="FirstPassword" ToolTip="" Style="{x:Null}"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
+                <PasswordBox x:Name="FirstPassword" ToolTip="" Style="{x:Null}" PreviewTextInput="Password_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" Width="155" Margin="0,-5,0,-5"/>
             </Border>
 
             <TextBlock Style="{StaticResource TextStyle}" Text="Повторите пароль" Margin="239,288,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
             <Border Style="{DynamicResource BorderStyle}" Margin="209,307,0,0">
-                <PasswordBox x:Name="ConfirmPassword" Style="{x:Null}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  BorderThickness="0" Background="Transparent" Width="155" Height="14" Margin="0,-5,0,-5"/>
+                <PasswordBox x:Name="ConfirmPassword" Style="{x:Null}" PreviewTextInput="Password_PreviewTextInput" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  BorderThickness="0" Background="Transparent" Width="155" Height="14" Margin="0,-5,0,-5"/>
             </Border>
 
             <TextBox x:Name="ViewPassword" Style="{DynamicResource TextNew}" PreviewTextInput="Password_PreviewTextInput" Visibility="Hidden" Foreground="Black" HorizontalAlignment="Left" Margin="28,311,0,0" VerticalAlignment="Top" TextChanged="ViewPassword_TextChanged"></TextBox>
