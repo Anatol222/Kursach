@@ -22,6 +22,25 @@ namespace Курсовая.MainFrameForms.SityBusPages
         public BusTicketOrderWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+        public int KidCounter { get; set; }
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            KidsCounter.Text = (int.Parse(KidsCounter.Text) + 1).ToString();
+        }
+
+        private void Minus_Click(object sender, RoutedEventArgs e)
+        {
+            if ((int.Parse(KidsCounter.Text) - 1)>=0)
+            {
+               KidsCounter.Text = (int.Parse(KidsCounter.Text) - 1).ToString();
+            }
+        }
+
+        private void KidsCounter_TextInput(object sender, TextCompositionEventArgs e)
+        {
+
         }
     }
 }

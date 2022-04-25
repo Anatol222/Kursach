@@ -84,6 +84,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
            DateTime s = Convert.ToDateTime(StopTimes[((ListBox)sender).SelectedIndex].StopTimeList[0]);
         }
 
+
+        private void StationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame,ByTicket,GoToBucket));
+        }
+
         public string NearestTimeBus { get; private set; }
 
         private void DaysListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -96,6 +96,9 @@
     <Compile Include="MainFrameForms\BucketPage.xaml.cs">
       <DependentUpon>BucketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml.cs">
+      <DependentUpon>BusesOnStationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml.cs">
       <DependentUpon>BusNumbersPage.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
     <Compile Include="Interface\Weather.cs" />
     <Compile Include="Setting\TextInterface.cs" />
     <Page Include="MainFrameForms\BucketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

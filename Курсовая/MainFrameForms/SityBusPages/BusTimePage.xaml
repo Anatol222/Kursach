@@ -47,8 +47,8 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Остановка:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <Button Style="{StaticResource TransparentBtnStyle}" Cursor="Hand">
-                            <TextBlock Text="{Binding BusStop}" FontSize="18" Foreground="Crimson"></TextBlock>
+                        <Button Name="StationBtn" Style="{StaticResource TransparentBtnStyle}" Click="StationBtn_Click" Cursor="Hand">
+                            <TextBlock Text="{Binding BusStop}" Name="StationName" FontSize="18" Foreground="Crimson"></TextBlock>
                         </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
