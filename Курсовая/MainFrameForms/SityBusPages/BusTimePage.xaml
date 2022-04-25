@@ -27,7 +27,7 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
                 <ColumnDefinition Width="0.8*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -35,29 +35,29 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Маршрут:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <TextBlock Text="{Binding Stroka}" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding BusName}" FontSize="18" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Направление:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <TextBlock Text="{Binding Stroka}" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding Route}" FontSize="18" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Дни:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <TextBlock Text="{Binding Stroka}" FontSize="18" ></TextBlock>
+                        <TextBlock x:Name="daysTextBlock" Text="{Binding DayOfWeekBus}" FontSize="18" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Остановка:  " FontSize="18" FontWeight="Medium"></TextBlock>
                         <Button Style="{StaticResource TransparentBtnStyle}" Cursor="Hand">
-                            <TextBlock Text="{Binding Stroka}" FontSize="18" Foreground="Crimson"></TextBlock>
+                            <TextBlock Text="{Binding BusStop}" FontSize="18" Foreground="Crimson"></TextBlock>
                         </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Предыдущий рейс:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <TextBlock Text="{Binding Stroka}" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding PastTimeBus}" FontSize="18" ></TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Следующий рейс:  " FontSize="18" FontWeight="Medium"></TextBlock>
-                        <TextBlock Text="{Binding Stroka}" FontSize="18" ></TextBlock>
+                        <TextBlock Text="{Binding NearestTimeBus}" FontSize="18" ></TextBlock>
                     </StackPanel>
 
                 </StackPanel>
@@ -68,7 +68,7 @@
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" ItemsSource="{Binding DaysList}" >
+            <ListBox Grid.Column="0" ItemsSource="{Binding DaysList}" Name="DaysListBox" SelectionChanged="DaysListBox_SelectionChanged" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0 0 0" CanHorizontallyScroll="False" VerticalAlignment="Center"></StackPanel>
@@ -76,14 +76,16 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Cursor="Hand" Background="Orange"  CornerRadius="20" Padding="10 5" BorderThickness="0">
-                            <TextBlock Name="ListText" FontWeight="Bold" FontSize="22" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <Border Cursor="Hand"  CornerRadius="20" Padding="10 5" BorderThickness="0">
+                            <Button Style="{DynamicResource TransparentBtnStyle}">
+                                <TextBlock Name="ListText" FontWeight="Bold" FontSize="22" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </Button>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
             <Border Grid.Column="1" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="15">
-                <TextBlock Text="Расписание автобуса 1А на остановке Газоаппарат Брест" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"
+                <TextBlock x:Name="InfoBus" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="25"></TextBlock>
             </Border>
         </Grid>
@@ -136,7 +138,7 @@
                         <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                             <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
                             <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                            <ListBox ItemsSource="{Binding StopTimeList}" Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
+                            <ListBox ItemsSource="{Binding StopTimeList}" x:Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal"></WrapPanel>

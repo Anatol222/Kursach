@@ -1,28 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace ProfileClassLibrary.BusketClasses
 {
     public class Bucket
     {
-        public List<BucketItem> GetItems()
+        public List<BucketItem> GetItems(string email,SqlConnection sqlConnection)
         {
-            return new List<BucketItem>()
+            List<BucketItem> items = new List<BucketItem>();
+            string query = $"SELECT TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService FROM ShoppingBasket " +
+                $"WHERE IdPersonalLoginData = (SELECT Id FROM PersonalLoginData WHERE Email = '{email}');";
+            DateTime dateTime=default, date = default;
+            bool statusTicket=default;
+            SqlCommand command = new SqlCommand(query,sqlConnection);
+            sqlConnection.Open();
+            try
+            {
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
                 {
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true, TransportType.SityBus),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Train),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Bus),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.SityBus),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Train),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Bus),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.SityBus),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Train),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,true,TransportType.Plane),
-                    new BucketItem("rqwrrewwe-erwrewrwerwe",DateTime.Now,DateTime.Now,"B232",1,false,TransportType.Plane)
-                };
+                    while(reader.Read())
+                    {
+                        
+                        try {
+                            string[] vs = (Convert.ToString(reader.GetValue(2))).Split(':');
+                            string s = $"{vs[0]}:{vs[1]}";
+                            dateTime = Convert.ToDateTime(s); 
+                        }
+                        catch { dateTime = DateTime.Now; }
+                        try { date = Convert.ToDateTime(reader.GetValue(3)); }
+                        catch { date = DateTime.Now; }
+                        if (Convert.ToInt32(reader.GetValue(4))==0)
+                            statusTicket = false;
+                        else
+                            statusTicket = true;
+                        items.Add(new BucketItem((string)reader.GetValue(1), dateTime, date,(string)reader.GetValue(6),Convert.ToInt32(reader.GetValue(5)), statusTicket, (TransportType)Convert.ToInt32(reader.GetValue(0)),(string)reader.GetValue(7)));
+                    }
+                }
+            }
+            catch { }
+            finally { sqlConnection.Close(); }
+            return items;
         }
     }
 }

@@ -86,5 +86,13 @@ namespace Курсовая.Setting
                 e.Handled = false;
             else e.Handled = true;
         }
+
+        public void NumberProcessing(object sender, TextCompositionEventArgs e)
+        {
+            ((TextBox)sender).Text = ((TextBox)sender).Text.Trim();
+            if ((Convert.ToChar(e.Text) >= (char)48 && Convert.ToChar(e.Text) <= (char)57))
+                e.Handled = false;
+            else e.Handled = true;
+        }
     }
 }

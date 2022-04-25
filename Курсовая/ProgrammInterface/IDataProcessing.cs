@@ -12,5 +12,6 @@ namespace Курсовая.ProgrammInterface
         void EmailTextInputFull(object sender, TextCompositionEventArgs e);
         void SymbolProcessing(object sender, TextCompositionEventArgs e);
         void Birthday(object sender, TextCompositionEventArgs e);
+        void NumberProcessing(object sender, TextCompositionEventArgs e);
     }
 }

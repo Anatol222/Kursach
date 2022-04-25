@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using Курсовая.MainFrameForms;
 using Курсовая.ProgrammInterface;
 
 namespace Курсовая.Setting
@@ -26,14 +27,12 @@ namespace Курсовая.Setting
                 new NotificationWindow("В ближайшее время будет оформлен возврат средств, ожидайте.").ShowDialog();
                 CanRemoveFromBucket = true;
             }
-            else
-            {
-                CanRemoveFromBucket = false;
-            }
             if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
                 ProfilePage.IsSaveNewData = true;
             if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
                 ProfilePage.IsEmptyFields = false;
+            if (NotificationBox.Text == "Вы уверены, что хотите приобрести билет?")
+                SityBusPage.ConfirmBuyTicket = true;
             navigation.Cancellation(SNUD);
 
         }
@@ -41,6 +40,7 @@ namespace Курсовая.Setting
 
         private void Cancellation_Click(object sender, RoutedEventArgs e)
         {
+            CanRemoveFromBucket = false;
             navigation.Cancellation(SNUD);
             if (NotificationBox.Text == "Вы уверены, что хотите сохранить данные изменения?")
                 ProfilePage.IsSaveNewData = false;

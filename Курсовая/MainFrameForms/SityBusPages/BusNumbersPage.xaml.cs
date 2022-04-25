@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,25 +31,19 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
         public List<Bus> BusList { get; set; }
 
-        private void BusNumberNav_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
+        private void BusNumberNav_Click(object sender, System.Windows.RoutedEventArgs e)=>
             BusSheduleFrame.Navigate(new StationsPage( BusList[BusNaumList.SelectedIndex].Number, _city, BusSheduleFrame, ByTicket,GoToBucket,BorderBack));
-        }
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             if (!BusSheduleFrame.NavigationService.CanGoBack)
-            {
                 BorderBack.Visibility = System.Windows.Visibility.Hidden;
-            }
         }
         private void BusNaumList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var listBox = sender as ListBox;
             if (null == listBox)
-            {
                 return;
-            }
 
             var point = e.GetPosition((UIElement)sender);
 

@@ -1,5 +1,4 @@
-﻿
-namespace ProfileClassLibrary
+﻿namespace ProfileClassLibrary
 {
     internal interface IAccount
     {
