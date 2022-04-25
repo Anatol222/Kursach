@@ -63,7 +63,7 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid Grid.Row="1" Background="BlanchedAlmond" Visibility="Hidden">
+        <Grid x:Name="DaysThisStop" Grid.Row="1" Background="BlanchedAlmond" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -91,7 +91,7 @@
         </Grid>
 
         <!--расписание по остановкам-->
-        <Grid Grid.Row="2" Grid.RowSpan="2" Background="LightGray">
+        <Grid x:Name="CerrentRoute" Grid.Row="2" Grid.RowSpan="2" Background="LightGray" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -129,7 +129,7 @@
 
 
         <!--расписание по времени-->
-        <ScrollViewer Grid.Row="3" Background="LightGray" Visibility="Hidden">
+        <ScrollViewer x:Name="TimeThisStop" Grid.Row="3" Background="LightGray" >
             <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -142,7 +142,7 @@
                         <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                             <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
                             <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                            <ListBox ItemsSource="{Binding StopTimeList}" x:Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
+                            <ListBox ItemsSource="{Binding StopTimeList}" SelectionChanged="TimeList_SelectionChanged" x:Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal"></WrapPanel>
@@ -154,10 +154,10 @@
                                             <Border x:Name="TimeBtnBorder" >
                                                 <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
                                             </Border>
-
                                         </Button>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
+                                
                             </ListBox>
                         </StackPanel>
                     </DataTemplate>

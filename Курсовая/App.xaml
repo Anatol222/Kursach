@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Курсовая"
-             StartupUri="StartWindow.xaml">
+             StartupUri="MainFrameForms/SityBusPages/BusThisStop.xaml">
+             <!--StartupUri="StartWindow.xaml">-->
              <!--StartupUri="MainFrameForms/ProfilePage.xaml">-->
     <Application.Resources>
         <ResourceDictionary>

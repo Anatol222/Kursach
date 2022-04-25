@@ -78,6 +78,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
         public string Route { get; private set; }
         public string DayOfWeekBus { get; private set; }
         public string PastTimeBus { get; private set; }
+
+        private void TimeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           DateTime s = Convert.ToDateTime(StopTimes[((ListBox)sender).SelectedIndex].StopTimeList[0]);
+        }
+
         public string NearestTimeBus { get; private set; }
 
         private void DaysListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -148,22 +154,56 @@ namespace Курсовая.MainFrameForms.SityBusPages
         }
         private void TimeList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            //var listBox = sender as ListBox;
+            //if (null == listBox)
+            //    return;
+
+            //var point = e.GetPosition((UIElement)sender);
+
+            //VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
+            //{
+            //    var uiElement = hitTestResult.VisualHit as UIElement;
+
+            //    while (null != uiElement)
+            //    {
+            //        var listBoxItem = uiElement as ListBoxItem;
+            //        if (null != listBoxItem)
+            //        {
+            //            listBoxItem.IsSelected = true;
+            //            return HitTestResultBehavior.Stop;
+            //        }
+
+            //        uiElement = VisualTreeHelper.GetParent(uiElement) as UIElement;
+            //    }
+
+            //    return HitTestResultBehavior.Continue;
+            //}, new PointHitTestParameters(point));
             var listBox = sender as ListBox;
             if (null == listBox)
                 return;
 
+            ListBox firstList = new ListBox();
             var point = e.GetPosition((UIElement)sender);
-
+            
             VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
             {
                 var uiElement = hitTestResult.VisualHit as UIElement;
+                ListBoxItem firstLisBoxItem = null;
+                ListBoxItem SecondtLisBoxItem = null;
 
                 while (null != uiElement)
                 {
-                    var listBoxItem = uiElement as ListBoxItem;
-                    if (null != listBoxItem)
+                    if (uiElement == uiElement as ListBoxItem)
                     {
-                        listBoxItem.IsSelected = true;
+                        if (firstLisBoxItem == null)
+                            firstLisBoxItem = uiElement as ListBoxItem;
+                        else
+                            SecondtLisBoxItem = uiElement as ListBoxItem;
+                    }
+                    if (firstLisBoxItem != null && SecondtLisBoxItem != null)
+                    {
+                        SecondtLisBoxItem.IsSelected = true;
+                        firstLisBoxItem.IsSelected = true;
                         return HitTestResultBehavior.Stop;
                     }
 
@@ -173,6 +213,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 return HitTestResultBehavior.Continue;
             }, new PointHitTestParameters(point));
         }
+        
     }
 }
 

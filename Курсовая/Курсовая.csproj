@@ -99,6 +99,9 @@
     <Compile Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml.cs">
       <DependentUpon>BusNumbersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\BusThisStop.xaml.cs">
+      <DependentUpon>BusThisStop.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusTicketOrderWindow.xaml.cs">
       <DependentUpon>BusTicketOrderWindow.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\SityBusPages\BusThisStop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
