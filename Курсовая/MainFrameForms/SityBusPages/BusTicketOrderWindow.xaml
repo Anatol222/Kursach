@@ -19,10 +19,10 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Взролые дети" FontSize="20" ></TextBlock>
-                <Button Grid.Column="1" Margin="0 0 10 0" Style="{StaticResource TransparentBtnStyle}" Padding="5" FontSize="20">-</Button>
-                <TextBlock Grid.Column="2" Margin="0 0 10 0" Text="1" FontSize="20"></TextBlock>
-                <Button Grid.Column="3" Style="{StaticResource TransparentBtnStyle}" FontSize="20">+</Button>
+                <TextBlock Text="Взролые дети" FontSize="20" Margin="0 0 20 0"></TextBlock>
+                <Button Grid.Column="1" Name="Minus" Margin="0 0 10 0" Click="Minus_Click" Style="{StaticResource TransparentBtnStyle}" Padding="5" FontSize="20">-</Button>
+                <TextBlock Grid.Column="2" x:Name="KidsCounter" Margin="0 0 10 0" Text="{Binding KidCounter}" TextInput="KidsCounter_TextInput" FontSize="20"></TextBlock>
+                <Button Grid.Column="3" Name="Plus" Click="Plus_Click" Style="{StaticResource TransparentBtnStyle}" FontSize="20">+</Button>
             </Grid>
         </Border>
     </Grid>

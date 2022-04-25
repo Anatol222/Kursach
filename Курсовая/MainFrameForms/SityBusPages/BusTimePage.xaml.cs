@@ -78,6 +78,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
         public string Route { get; private set; }
         public string DayOfWeekBus { get; private set; }
         public string PastTimeBus { get; private set; }
+
+        private void StationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame,ByTicket,GoToBucket));
+        }
+
         public string NearestTimeBus { get; private set; }
 
         private void DaysListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
