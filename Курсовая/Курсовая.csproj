@@ -96,6 +96,9 @@
     <Compile Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml.cs">
       <DependentUpon>BusNumbersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\BusTicketOrderWindow.xaml.cs">
+      <DependentUpon>BusTicketOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusTimePage.xaml.cs">
       <DependentUpon>BusTimePage.xaml</DependentUpon>
     </Compile>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\SityBusPages\BusTicketOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -423,6 +430,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BucketPageIcons\вернуть-покупку.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MainFrameForms\PurchasePages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Автобусная остановка.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />

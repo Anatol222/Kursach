@@ -15,12 +15,12 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            
+
             <RowDefinition Height="1*" MinHeight="170"></RowDefinition>
             <RowDefinition Height="0.5*" MinHeight="60"></RowDefinition>
             <RowDefinition Height="2.5*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
 
         <!--Дни недели-->
         <Border Grid.Row="0" Grid.RowSpan="2" Panel.ZIndex="-1" BorderThickness="0" Background="LightGray" ></Border>
@@ -63,7 +63,7 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <Grid Grid.Row="1" Background="BlanchedAlmond">
+        <Grid Grid.Row="1" Background="BlanchedAlmond" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -87,9 +87,23 @@
                        FontSize="25"></TextBlock>
             </Border>
         </Grid>
-        
-        <!--Расписание по времени-->
-        <!--<ScrollViewer Grid.Row="3" Background="LightGray" Visibility="Hidden">
+
+        <!--расписание по остановкам-->
+        <Grid Grid.Row="2" Grid.RowSpan="2" Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="16" Grid.Column="0" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">Остановки</TextBlock>
+                <TextBlock FontSize="16" Grid.Column="1" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">Время</TextBlock>
+            </Grid>
+            <ScrollViewer Grid.Row="1">
                 <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusTimeList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -98,32 +112,22 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate >
                         <DataTemplate>
-                            -->
-        <!--Элемент listBox-->
-        <!--
                             <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                                <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
-                                <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                                <ListBox ItemsSource="{Binding StopTimeList}">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Border x:Name="TimeBtnBorder">
-                                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
-                                            </Border>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                <Border Margin="0 0 15 0" VerticalAlignment="Center">
+                                    <Image Source="/Images/Автобусная остановка"></Image>
+                                </Border>
+                                <TextBlock FontSize="16" Width="250"></TextBlock>
+                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-        </ScrollViewer>-->
-        <ScrollViewer Grid.Row="3" Background="LightGray">
+            </ScrollViewer>
+        </Grid>
+
+
+        <!--расписание по времени-->
+        <ScrollViewer Grid.Row="3" Background="LightGray" Visibility="Hidden">
             <ListBox Template="{StaticResource AllowScroll}"  materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>

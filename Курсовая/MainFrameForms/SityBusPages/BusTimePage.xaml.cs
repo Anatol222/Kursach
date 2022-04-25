@@ -23,6 +23,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
         private Frame BusSheduleFrame;
         private Button ByTicket;
         private Button GoToBucket;
+        public BusTimePage()
+        {
+            InitializeComponent();
+            DataContext = this;
+
+        }
         public BusTimePage(Frame frame, Button ByTicket, Button GoToBucket)
         {
             InitializeComponent();
