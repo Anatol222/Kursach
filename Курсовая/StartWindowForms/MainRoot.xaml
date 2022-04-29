@@ -74,7 +74,7 @@
     <Grid>
         
         <Grid.Background>
-            <ImageBrush Opacity="1" ImageSource="/Images/Самолёт.jpg"></ImageBrush>
+            <ImageBrush Opacity="1" ImageSource="/Images/фон.jpg"></ImageBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
@@ -94,7 +94,7 @@
                         <RowDefinition Height="Auto" MinHeight="45"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" MaxWidth="250" MinHeight="100" Margin="10" Source="/Images/Самолёт.jpg"/>
+                    <Image Grid.Row="0" MaxWidth="300" MinHeight="100" Margin="10" Source="/Images/Logo.png"/>
                     <Border Grid.Row="1"  >
                         <Button Style="{DynamicResource ButtonStyle}" MaxWidth="250" Height="50" Margin="10,0,10,10" Click="Login_Click" VerticalAlignment="Bottom" Content="Войти">
                             
@@ -117,12 +117,12 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0" Name="LangBox" VerticalContentAlignment="Center"  >
+                        <!--<ComboBox Grid.Column="0" Name="LangBox" VerticalContentAlignment="Center"  >
                             <TextBlock Width="35" Text="RU" FontSize="16"></TextBlock>
                         </ComboBox>
                         <Border BorderBrush="Azure" VerticalAlignment="Center" MaxWidth="50" BorderThickness="2" Grid.Column="2">
                             <Image  Source="\Images\Русский флаг.png" ></Image>
-                        </Border>
+                        </Border>-->
                         <Button Grid.Column="3" Width="30" Height="30" Margin="15 0 0  0" Style="{StaticResource InfoBtn}" Click="InfoAboutProgramm_Click" Cursor="Hand"></Button>
                     </Grid>
                 </Border>

@@ -1,0 +1,199 @@
+﻿<Window x:Class="Курсовая.MainFrameForms.SityBusPages.FlightSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовая.MainFrameForms.SityBusPages"
+        mc:Ignorable="d"
+        Title="BusTicketOrderWindow" Height="500" Width="500" ResizeMode="NoResize" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Border CornerRadius="20" Background="{StaticResource PrimaryBackgroundColor}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.4*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border>
+
+                <StackPanel Margin="30 30 30 0" >
+                    <TextBlock Text="Пассажиры" FontSize="20" FontWeight="Bold" Margin="0 0 0 10"></TextBlock>
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Column="0">
+                            <Image Source="\Images\PlaneIcons\User.png" Width="25" Height="25"></Image>
+                        </Border>
+                        
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="16" FontWeight="Medium">Взрослые</TextBlock>
+                            <TextBlock Grid.Row="1" FontSize="14" Foreground="DarkSlateGray">Дети старше 11 лет</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Column="0">
+                            <Image Source="\Images\PlaneIcons\kid.png" Width="25" Height="25"></Image>
+                        </Border>
+                        
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="16" FontWeight="Medium">Дети</TextBlock>
+                            <TextBlock Grid.Row="1" FontSize="14" Foreground="DarkSlateGray">2 - 11 лет</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border Grid.Column="0">
+                            <Image Source="\Images\PlaneIcons\baby-boy.png" Width="25" Height="25"></Image>
+                        </Border>
+                        
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" FontSize="16" FontWeight="Medium">Младенцы</TextBlock>
+                            <TextBlock Grid.Row="1" FontSize="14" Foreground="DarkSlateGray">не старше 2 лет</TextBlock>
+                        </Grid>
+
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                        </Grid>
+                    </Grid>
+                    
+                    <TextBlock Text="Багаж" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"></TextBlock>
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0">
+                            <Image Source="\Images\PlaneIcons\hand-luggage.png" Width="25" Height="25"></Image>
+                        </Border>
+                        <TextBlock FontSize="16" Grid.Column="2" FontWeight="Medium" VerticalAlignment="Center">Ручная кладь</TextBlock>
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
+                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0">
+                            <Image Source="\Images\PlaneIcons\luggage.png" Width="25" Height="25"></Image>
+                        </Border>
+
+
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" FontSize="16" FontWeight="Medium" TextWrapping="WrapWithOverflow">Зарегистрированный багаж</TextBlock>
+
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition ></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
+                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" FontSize="16" Name="CancelBtn" Click="CancelBtn_Click" Cursor="Hand">Отмена</Button>
+                <Button Grid.Column="3" FontSize="16" Name="IsReadyBtn" Click="IsReadyBtn_Click">Готово</Button>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

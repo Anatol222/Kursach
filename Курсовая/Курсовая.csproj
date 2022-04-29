@@ -96,14 +96,20 @@
     <Compile Include="MainFrameForms\BucketPage.xaml.cs">
       <DependentUpon>BucketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\PlanePage.xaml.cs">
+      <DependentUpon>PlanePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrameForms\PlanePages\ClassChoiceWindow.xaml.cs">
+      <DependentUpon>ClassChoiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml.cs">
       <DependentUpon>BusesOnStationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusNumbersPage.xaml.cs">
       <DependentUpon>BusNumbersPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainFrameForms\SityBusPages\BusTicketOrderWindow.xaml.cs">
-      <DependentUpon>BusTicketOrderWindow.xaml</DependentUpon>
+    <Compile Include="MainFrameForms\PlanePages\FlightSettingsWindow.xaml.cs">
+      <DependentUpon>FlightSettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusTimePage.xaml.cs">
       <DependentUpon>BusTimePage.xaml</DependentUpon>
@@ -185,6 +191,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainFrameForms\PlanePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\PlanePages\ClassChoiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,7 +207,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainFrameForms\SityBusPages\BusTicketOrderWindow.xaml">
+    <Page Include="MainFrameForms\PlanePages\FlightSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -337,12 +351,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Самолёт.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Русский флаг.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\email.png" />
     <Resource Include="Images\instagram.png" />
     <Resource Include="Images\telegram.png" />
@@ -453,6 +461,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Автобусная остановка.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\arrow-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\luggage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\people.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\kid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\baby-boy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\фон.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PlaneIcons\hand-luggage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
