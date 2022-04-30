@@ -31,7 +31,7 @@ namespace Курсовая.MainFrameForms
     public partial class PlanePage : Page
     {
         public static string FlightClassString;
-        
+
         private DataBase data;
         public PlanePage()
         {
@@ -41,7 +41,7 @@ namespace Курсовая.MainFrameForms
 
             DataContext = this;
         }
-        public List<Plane> planes { get; set; } = new List<Plane>() { 
+        public List<Plane> planes { get; set; } = new List<Plane>() {
             new Plane() {
                 ImagePath= "https://airport.by/upload/images/4e3bdc6556844bde1c84c53fc65a8cc6.png",
                 DepartureTime = "06:20",
@@ -57,9 +57,12 @@ namespace Курсовая.MainFrameForms
                 Gate="12",
                 Status = "Регистрация"  } };
 
-        
+
 
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BuyButtons.Visibility = Visibility.Visible;
+        }
         private List<Flight> ReadingPlaneFromNet()
         {
             List<Flight> flights = new List<Flight>();
@@ -83,7 +86,17 @@ namespace Курсовая.MainFrameForms
             }
             catch (Exception) { }
             return flights;
-            BuyButtons.Visibility = Visibility.Visible; 
+        }
+        private void FlightClass_Click(object sender, RoutedEventArgs e)
+        {
+            FlightClassString = (string)FlightClass.Content;
+            ClassChoiceWindow classChoiceWindow = new ClassChoiceWindow();
+            classChoiceWindow.Left = PointToScreen(Mouse.GetPosition(this)).X - Mouse.GetPosition(this).X;
+            classChoiceWindow.Top = PointToScreen(Mouse.GetPosition(this)).Y - Mouse.GetPosition(this).Y;
+
+            classChoiceWindow.ShowDialog();
+
+            FlightClass.Content = FlightClassString;
         }
         private void InsertDataInBD(List<Flight> flights)
         {
@@ -98,14 +111,14 @@ namespace Курсовая.MainFrameForms
                 DataTable dataTable = new DataTable();
                 try
                 {
-                    try 
+                    try
 
-        private void FlightClass_Click(object sender, RoutedEventArgs e)
-                    { 
-                        if(command.ExecuteNonQuery() > 0)
+                    {
+                        if (command.ExecuteNonQuery() > 0)
                             access = true;
                     }
-                    catch {
+                    catch
+                    {
                         query = $"SELECT * FROM Airline WHERE Company ='{item.airline.title}';";
                         command = new SqlCommand(query, data.GetConnection());
                         adapter.SelectCommand = command;
@@ -131,11 +144,11 @@ namespace Курсовая.MainFrameForms
                                        $"VALUES((SELECT ID FROM Airline WHERE Company = '{item.airline.title}'),'{item.flight}','{item.airport.title}'," +
                                        $"'{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}','{item.status.title}'," +
                                        $"'{DateTime.Now.Month}-{DateTime.Now.AddDays(1).Day}-{DateTime.Now.Year}'); ";
-                            command = new SqlCommand(query, data.GetConnection());
-                            if (command.ExecuteNonQuery() > 0 && access)
+                        command = new SqlCommand(query, data.GetConnection());
+                        if (command.ExecuteNonQuery() > 0 && access)
+                        {
+                            try
                             {
-                                try
-                                {
                                 //query = $"INSERT INTO NumberSeats(PlaneId,BusinessClass,EconomyClass,PremiumEconomyClass,FirstClass) " +
                                 //    $"VALUES((SELECT ID FROM Plane WHERE Flight = '{item.flight}' AND StatusPlane='{item.status.title}' " +
                                 //    $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' AND Landing='{item.numbers_gate[0]}' " +
@@ -144,35 +157,28 @@ namespace Курсовая.MainFrameForms
                                     $"VALUES((SELECT ID FROM Plane WHERE Flight = '{item.flight}' AND StatusPlane='{item.status.title}' " +
                                     $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' AND Landing IS NULL AND Direction='{item.airport.title}')," +
                                     $"{rnd.Next(0, 30)},{rnd.Next(0, 80)},{rnd.Next(0, 20)},{rnd.Next(0, 50)}); ";
-                                }
-                                catch (Exception)
-                                {
-                                    query = $"INSERT INTO NumberSeats(PlaneId,BusinessClass,EconomyClass,PremiumEconomyClass,FirstClass) " +
-                                        $"VALUES((SELECT ID FROM Plane WHERE Flight = '{item.flight}' AND StatusPlane='{item.status.title}' " +
-                                        $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' AND Landing IS NULL AND Direction='{item.airport.title}')," +
-                                        $"{rnd.Next(0, 30)},{rnd.Next(0, 80)},{rnd.Next(0, 20)},{rnd.Next(0, 50)}); ";
-                                }
-                                command = new SqlCommand(query, data.GetConnection());
-                                command.ExecuteNonQuery();
-            FlightClassString = (string)FlightClass.Content;
-            ClassChoiceWindow classChoiceWindow = new ClassChoiceWindow();
-            classChoiceWindow.Left = PointToScreen(Mouse.GetPosition(this)).X-Mouse.GetPosition(this).X;
-            classChoiceWindow.Top = PointToScreen(Mouse.GetPosition(this)).Y - Mouse.GetPosition(this).Y;
-            
-            classChoiceWindow.ShowDialog();
-
-            FlightClass.Content = FlightClassString;
                             }
+                            catch (Exception)
+                            {
+                                query = $"INSERT INTO NumberSeats(PlaneId,BusinessClass,EconomyClass,PremiumEconomyClass,FirstClass) " +
+                                    $"VALUES((SELECT ID FROM Plane WHERE Flight = '{item.flight}' AND StatusPlane='{item.status.title}' " +
+                                    $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' AND Landing IS NULL AND Direction='{item.airport.title}')," +
+                                    $"{rnd.Next(0, 30)},{rnd.Next(0, 80)},{rnd.Next(0, 20)},{rnd.Next(0, 50)}); ";
+                            }
+                            command = new SqlCommand(query, data.GetConnection());
+                            command.ExecuteNonQuery();
+                            
+                        }
                     }
                 }
-                catch (Exception) {
+                catch (Exception)
+                {
                 }
             }
             data.CloseConnection();
-            
+
         }
         private void ChangingDatePlane()
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             QueryBD($"DELETE FROM Plane WHERE DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND Landing IS NOT NULL  " +
                 $"AND DepartureDate <= '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';");
@@ -181,7 +187,8 @@ namespace Курсовая.MainFrameForms
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataTable dataTable = new DataTable();
             data.OpenConnection();
-            try {
+            try
+            {
                 adapter.SelectCommand = command;
                 adapter.Fill(dataTable);
                 if (dataTable.Rows.Count > 0)
@@ -191,16 +198,19 @@ namespace Курсовая.MainFrameForms
                     QueryBD($"UPDATE Plane SET StatusPlane = 'Посадка' WHERE DepartureTime < '{DateTime.Now.AddMinutes(45).ToString(@"HH\:mm")}' AND Landing IS NOT NULL;");
                 }
                 else
-                    InsertDataInBD(ReadingPlaneFromNet()); 
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.Show();
+                    InsertDataInBD(ReadingPlaneFromNet());
+               
             }
             catch (Exception) { }
-            finally{data.CloseConnection(); }
+            finally { data.CloseConnection(); }
 
         }
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.Show();
+        }
         private void QueryBD(string query)
-    public class Plane
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
@@ -208,11 +218,15 @@ namespace Курсовая.MainFrameForms
             catch (Exception) { }
             finally { data.CloseConnection(); }
         }
-        public string ImagePath { get; set; }
-        public string FlightName { get; set; }
-        public string Direction { get; set; }
-        public string Gate { get; set; }
-        public string DepartureTime { get; set; }
-        public string Status { get; set; }
+        public class Plane
+        {
+            public string ImagePath { get; set; }
+            public string FlightName { get; set; }
+            public string Direction { get; set; }
+            public string Gate { get; set; }
+            public string DepartureTime { get; set; }
+            public string Status { get; set; }
+
+        }
     }
 }

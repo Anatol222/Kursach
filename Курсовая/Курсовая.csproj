@@ -96,9 +96,6 @@
     <Compile Include="MainFrameForms\BucketPage.xaml.cs">
       <DependentUpon>BucketPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainFrameForms\PlanePage.xaml.cs">
-      <DependentUpon>PlanePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainFrameForms\PlanePages\ClassChoiceWindow.xaml.cs">
       <DependentUpon>ClassChoiceWindow.xaml</DependentUpon>
     </Compile>
@@ -204,10 +201,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\BusPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainFrameForms\PlanePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -90,7 +90,7 @@
 
                 <!-- Start: Button Close | Restore | Minimize -->
                 <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Button x:Name="Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="Close_Click" Tag="IsCloseButton"/>
+                    <Button x:Name="Close" Style="{StaticResource IconButtonsStyle}" Content="{StaticResource close}" Click="Close_Click" Tag="IsCloseButton" Cursor="Hand"/>
                     <Button x:Name="Restore" Margin="5,0" Click="Restore_Click" Cursor="Hand">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
