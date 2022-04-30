@@ -48,7 +48,6 @@ namespace Курсовая.MainFrameForms
 
             data = new DataBase();
             ChangingDatePlane();
-            DataContext = this;
 
             Notification += navigation.Display;
             
@@ -149,11 +148,7 @@ namespace Курсовая.MainFrameForms
 
             FlightClass.Content = FlightClassString;
         }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.Show();
-        }
+        
         private void InsertDataInBD(List<Flight> flights)
         {
             data.OpenConnection();
