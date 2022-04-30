@@ -94,5 +94,32 @@ namespace Курсовая.Setting
                 e.Handled = false;
             else e.Handled = true;
         }
+
+        public void NameProcessing(object sender, TextCompositionEventArgs e)
+        {
+            if ((Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90) || (Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122) || (Convert.ToChar(e.Text) >= (char)1072 && Convert.ToChar(e.Text) <= (char)1103) || (Convert.ToChar(e.Text) >= (char)1040 && Convert.ToChar(e.Text) <= (char)1071)
+                ||(Convert.ToChar(e.Text) >= (char)48 && Convert.ToChar(e.Text) <= (char)57)
+                || Convert.ToChar(e.Text) == (char)46 || Convert.ToChar(e.Text) == (char)47 || Convert.ToChar(e.Text) == (char)41 || Convert.ToChar(e.Text) == (char)40)
+                e.Handled = false;
+            else
+            e.Handled = true;
+        }
+
+        public void CompanyProcessing(object sender, TextCompositionEventArgs e)
+        {
+            if ((Convert.ToChar(e.Text) >= (char)65 && Convert.ToChar(e.Text) <= (char)90) || (Convert.ToChar(e.Text) >= (char)97 && Convert.ToChar(e.Text) <= (char)122) || (Convert.ToChar(e.Text) >= (char)1072 && Convert.ToChar(e.Text) <= (char)1103) || (Convert.ToChar(e.Text) >= (char)1040 && Convert.ToChar(e.Text) <= (char)1071)
+                || Convert.ToChar(e.Text) == (char)46 || Convert.ToChar(e.Text) == (char)47 || Convert.ToChar(e.Text) == (char)41 || Convert.ToChar(e.Text) == (char)40)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        public void TimeProcessing(object sender, TextCompositionEventArgs e)
+        {
+            if (Convert.ToChar(e.Text) >= (char)48 && Convert.ToChar(e.Text) <= (char)58)
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
     }
 }

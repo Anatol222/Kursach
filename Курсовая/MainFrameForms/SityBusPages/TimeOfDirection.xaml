@@ -76,7 +76,7 @@
                                     <Image Source="/Images/Автобусная остановка"></Image>
                                 </Border>
                                 <TextBlock FontSize="16" Foreground="Black"  Width="250" Text="{Binding BusStop.BusStopName}"></TextBlock>
-                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
+                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:HH:mm}}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
