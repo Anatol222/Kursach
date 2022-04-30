@@ -13,13 +13,14 @@
             <ItemsPresenter></ItemsPresenter>
         </ControlTemplate>
     </Page.Resources>
+    <ScrollViewer>
     <Grid Background="Gray">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Name="InfoBus" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Medium"></TextBlock>
-        <ListBox Grid.Row="1" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding StopTimes}" Padding="30 20" >
+        <TextBlock Name="InfoBus" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="20" FontWeight="Bold"></TextBlock>
+        <ListBox Grid.Row="1" Template="{StaticResource AllowScroll}" materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusNaumList"  ItemsSource="{Binding BusList}" Padding="30 20" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel></StackPanel>
@@ -29,12 +30,13 @@
                 <DataTemplate>
                     <!--Элемент listBox-->
                     <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                        <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
+                        <TextBlock FontSize="24" FontWeight="Bold"  Margin="0 0 15 0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding NameBus}"></TextBlock>
                         <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                        <TextBox Text="{Binding }"></TextBox>
+                        <TextBlock FontWeight="Bold" FontSize="24" Text="{Binding Route}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
+    </ScrollViewer>
 </Page>

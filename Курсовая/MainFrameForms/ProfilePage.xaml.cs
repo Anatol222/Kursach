@@ -39,6 +39,7 @@ namespace Курсовая
         private int _switchIcon = 0, whatGender=0;
         public static bool IsSaveNewData { get; set; }
         public static bool IsEmptyFields { get; set; }
+        public bool IEmptyFields { get; private set; }
 
         public ProfilePage()
         {
@@ -59,6 +60,8 @@ namespace Курсовая
 
             BirthdayBox.DisplayDateEnd = DateTime.Now.AddYears(-14);
             BirthdayBox.DisplayDateStart = new DateTime(1920, 01, 01);
+            if (Convert.ToDateTime(BirthdayBox.Text) > DateTime.Now.AddYears(-14))
+                BirthdayBox.Text = DateTime.Now.AddYears(-14).ToShortDateString();
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
@@ -186,7 +189,7 @@ namespace Курсовая
                 if (IsSaveNewData)
                 {
                     ChangeData();
-                    if (!IsEmptyFields)
+                    if (!IEmptyFields)
                     {
                         InfoAboutUser();
                         EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
@@ -194,15 +197,15 @@ namespace Курсовая
                 }
                 else
                 {
-                    EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
                     InfoAboutUser();
+                    EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
                 }
 
             }
             return !_buttonList[0].IsEnabled;
         }
 
-        private void ChangeData()
+        private async void ChangeData()
         {
             bool allFieldsFill = true;
             foreach (TextBox item in _textBoxList)
@@ -222,13 +225,13 @@ namespace Курсовая
                                     $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).ToString(@"MM/dd/yyyy")}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
                                 SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
                                 dataBase.OpenConnection();
-                                if (sqlCommand.ExecuteNonQuery() == 1)
+                                if (await sqlCommand.ExecuteNonQueryAsync() == 1)
                                 {
                                     if (ReserveEmail.Text.Trim() != "Резервная почта не указана" && ReserveEmail.Text.Trim() != "" && ReserveEmail.Text.Trim() != MainFrame.user.ReserveEmail)
                                     {
                                         query = $"UPDATE PersonalLoginData SET ReserveEmail = '{ReserveEmail.Text.Trim()}' WHERE Email = '{MainFrame.user.Email}'; ";
                                         sqlCommand = new SqlCommand(query, dataBase.GetConnection());
-                                        if (sqlCommand.ExecuteNonQuery() != 1)
+                                        if (await sqlCommand.ExecuteNonQueryAsync() != 1)
                                             Notification?.Invoke("Не удается обновить резервную почту");
                                     }
                                     if (EmailBox.Text.Trim() != MainFrame.user.Email && EmailBox.Text.Trim() != "")
@@ -242,17 +245,14 @@ namespace Курсовая
                                     IsEmptyFields = true;
                                     EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
                                     MainFrame.user = new User(EmailBox.Text);
-                                    dataBase.CloseConnection();
                                     InfoAboutUser();
 
                                 }
                                 else
                                     Notification?.Invoke("Не удается обновить личные данные");
                             }
-                            catch
-                            {
-                                Notification?.Invoke("Ошибка при обновлении данных");
-                            }
+                            catch { Notification?.Invoke("Ошибка при обновлении данных"); }
+                            finally { dataBase.CloseConnection(); }
                         }
                         else
                             Notification?.Invoke("Пользователь с такой почтой уже существует. Вы не можете изменить резервную почту");

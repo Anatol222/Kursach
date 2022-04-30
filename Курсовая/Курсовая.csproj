@@ -102,6 +102,12 @@
     <Compile Include="MainFrameForms\PlanePages\ClassChoiceWindow.xaml.cs">
       <DependentUpon>ClassChoiceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\BusPage.xaml.cs">
+      <DependentUpon>BusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrameForms\PlanePage.xaml.cs">
+      <DependentUpon>PlanePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml.cs">
       <DependentUpon>BusesOnStationPage.xaml</DependentUpon>
     </Compile>
@@ -117,11 +123,15 @@
     <Compile Include="MainFrameForms\SityBusPages\CountOfBusTickets.xaml.cs">
       <DependentUpon>CountOfBusTickets.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\Directions.cs" />
     <Compile Include="MainFrameForms\SityBusPages\StationsPage.xaml.cs">
       <DependentUpon>StationsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainFrameForms\HotkeysPage.xaml.cs">
       <DependentUpon>HotkeysPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrameForms\SityBusPages\TimeOfDirection.xaml.cs">
+      <DependentUpon>TimeOfDirection.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainFrameForms\TrainPage.xaml.cs">
       <DependentUpon>TrainPage.xaml</DependentUpon>
@@ -147,6 +157,7 @@
     <Compile Include="ProgrammInterface\IDataProcessing.cs" />
     <Compile Include="ProgrammInterface\INavigation.cs" />
     <Compile Include="ProgrammInterface\IRegComeIn.cs" />
+    <Compile Include="ProgrammInterface\IWorkWithBusList.cs" />
     <Compile Include="Setting\CipherPassword.cs" />
     <Compile Include="Setting\ConfirmEmailWinow.xaml.cs">
       <DependentUpon>ConfirmEmailWinow.xaml</DependentUpon>
@@ -162,6 +173,7 @@
       <DependentUpon>SaveNewUserData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Setting\UserDataVerification.cs" />
+    <Compile Include="Setting\WorkWithBusList.cs" />
     <Compile Include="StartWindowForms\InfoAboutProgramm.xaml.cs">
       <DependentUpon>InfoAboutProgramm.xaml</DependentUpon>
     </Compile>
@@ -188,6 +200,14 @@
     <Compile Include="Interface\Weather.cs" />
     <Compile Include="Setting\TextInterface.cs" />
     <Page Include="MainFrameForms\BucketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\BusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\PlanePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,6 +244,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\HotkeysPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\SityBusPages\TimeOfDirection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

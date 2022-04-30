@@ -25,13 +25,17 @@ namespace Курсовая.MainFrameForms.SityBusPages
         }
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToInt32(CountTicket.Text)>0)
+            try
             {
-                SityBusPage.CountOfTickets = Convert.ToInt32(CountTicket.Text);
-                navigation.Cancellation(this);
+                if (Convert.ToInt32(CountTicket.Text) > 0)
+                {
+                    SityBusPage.CountOfTickets = Convert.ToInt32(CountTicket.Text);
+                    navigation.Cancellation(this);
+                }
+                else
+                    NotificationBox.Text = "Количество билет должно быть больше чем - 0";
             }
-            else
-                NotificationBox.Text = "Количество билет должно быть больше чем - 0";
+            catch (Exception) { NotificationBox.Text = "Укажите количество билет"; }
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => this.DragMove();
 

@@ -14,6 +14,5 @@ namespace ProfileClassLibrary.BusClasses
 
         private List<Times> _stopTimeList;
         public List<Times> StopTimeList { get => _stopTimeList; }
-
     }
 }

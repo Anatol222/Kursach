@@ -41,15 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusClasses\AllBusStop.cs" />
+    <Compile Include="BusClasses\AllInfoAboutLocationBus.cs" />
     <Compile Include="BusClasses\Bus.cs" />
     <Compile Include="BusClasses\BusItems.cs" />
+    <Compile Include="BusClasses\Busstation.cs" />
+    <Compile Include="BusClasses\BusTimeTable.cs" />
     <Compile Include="BusClasses\Day.cs" />
+    <Compile Include="BusClasses\Direction.cs" />
     <Compile Include="BusClasses\InfoAboutBus.cs" />
+    <Compile Include="BusClasses\StopDateTime.cs" />
     <Compile Include="BusClasses\StopTime.cs" />
     <Compile Include="BusClasses\Times.cs" />
     <Compile Include="BusketClasses\BucketItem.cs" />
     <Compile Include="BusketClasses\Buscket.cs" />
     <Compile Include="DataBase.cs" />
+    <Compile Include="PlaneClass\DataContractAttribute.cs" />
+    <Compile Include="PlaneClass\DataMemberAttribute.cs" />
+    <Compile Include="PlaneClass\Flight.cs" />
     <Compile Include="UserClasses\IAccount.cs" />
     <Compile Include="UserClasses\Person.cs" />
     <Compile Include="UserClasses\User.cs" />

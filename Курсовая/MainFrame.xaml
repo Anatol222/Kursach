@@ -34,7 +34,7 @@
                     </StackPanel>
 
                     <!-- Menu -->
-                    <ToggleButton x:Name="btnMenu" Click="UpateInfoUser_Click" Grid.Row="0" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" VerticalAlignment="Center" Style="{StaticResource MenuIconStyle}" Margin="0 0 15 0">
+                    <ToggleButton x:Name="Menu" Click="Menu_Click" Grid.Row="0" HorizontalAlignment="Right" BorderThickness="0" Background="Transparent" VerticalAlignment="Center" Style="{StaticResource MenuIconStyle}" Margin="0 0 15 0">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                 <BeginStoryboard>
@@ -56,11 +56,11 @@
                     </ToggleButton>
 
                     <StackPanel Grid.Row="3">
-                        <RadioButton x:Name="rdHome" IsChecked="True" Content="Авиарейсы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xE709;" Click="rdHome_Click" Cursor="Hand"/>
-                        <RadioButton x:Name="rdSounds" Content="Поезда" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7c0;"  Margin="0 5 0 5" Cursor="Hand" />
-                        <RadioButton x:Name="rdNotes" Content="Городские автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe806;" Click="rdNotes_Click" Cursor="Hand" />
-                        <RadioButton x:Name="rdPayment" Content="Междугородние автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xeb47;" Margin="0 5 0 5" Cursor="Hand" />
-                        <RadioButton x:Name="rdBucket" Content="Корзина" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7bf;" Margin="0 5 0 5" Cursor="Hand" Click="rdBucket_Click"/>
+                        <RadioButton x:Name="Plane" IsChecked="True" Content="Авиарейсы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xE709;" Click="Plane_Click" Cursor="Hand"/>
+                        <RadioButton x:Name="Train" Content="Поезда" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7c0;"  Margin="0 5 0 5" Click="Train_Click" Cursor="Hand" />
+                        <RadioButton x:Name="SityBus" Content="Городские автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe806;" Click="SityBus_Click" Cursor="Hand" />
+                        <RadioButton x:Name="Bus" Content="Междугородние автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xeb47;" Margin="0 5 0 5" Click="Bus_Click" Cursor="Hand" />
+                        <RadioButton x:Name="Bucket" Content="Корзина" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7bf;" Margin="0 5 0 5" Cursor="Hand" Click="Bucket_Click"/>
                     </StackPanel>
                     <!--UserPanel-->
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
@@ -90,8 +90,8 @@
 
                 <!-- Start: Button Close | Restore | Minimize -->
                 <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
-                    <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click" Cursor="Hand">
+                    <Button x:Name="Close" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="Close_Click" Tag="IsCloseButton"/>
+                    <Button x:Name="Restore" Margin="5,0" Click="Restore_Click" Cursor="Hand">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
                                 <Setter Property="Content" Value="{DynamicResource maximize}"/>
@@ -103,12 +103,17 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                    <Button x:Name="Minimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="Minimize_Click"/>
+                    <TextBlock Name="WeatherShow" FontSize="14" FontStyle="Normal" FontFamily="Bold"  Foreground="Black" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Left" Background="Transparent"></TextBlock>
+                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" MaxHeight="60" MaxWidth="60" Name="IconWeatherShow">
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    </Button>
+                    <TextBlock Name="RealTime" FontSize="16" FontStyle="Normal" FontFamily="Bold" Foreground="Black" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Left"></TextBlock>
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 
                 <Border Grid.Row="1" Margin="10">
-                    <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden" Navigated="PagesNavigation_Navigated">
+                    <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden" >
                         <!-- Page Content -->
                     </Frame>
                 </Border>
