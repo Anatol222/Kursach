@@ -119,7 +119,7 @@
                                     <Image Source="/Images/Автобусная остановка"></Image>
                                 </Border>
                                 <TextBlock FontSize="16" Width="250"></TextBlock>
-                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
+                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:HH:mm}}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -151,7 +151,7 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Button  Style="{StaticResource TransparentBtnStyle}" x:Name="StopTime" Click="StopTime_Click">
-                                            <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
+                                            <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:HH:mm}}"></TextBlock>
                                         </Button>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

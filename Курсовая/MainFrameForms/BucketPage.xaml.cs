@@ -42,7 +42,7 @@ namespace Курсовая.MainFrameForms
             {
                 if (Bucket[i].DepartureDate <= DateTime.Now && Bucket[i].DepartureTime.Hour<=DateTime.Now.Hour && Bucket[i].DepartureTime.Minute <= DateTime.Now.Minute
                     && Bucket[i].DepartureDate.Day <= DateTime.Now.Day && Bucket[i].DepartureDate.Month <= DateTime.Now.Month && Bucket[i].DepartureDate.Year <= DateTime.Now.Year
-                    || (Bucket[i].DepartureDate.Day <= DateTime.Now.Day && Bucket[i].DepartureDate.Month <= DateTime.Now.Month&& Bucket[i].DepartureDate.Year <= DateTime.Now.Year))
+                    || (Bucket[i].DepartureDate.Day < DateTime.Now.Day && Bucket[i].DepartureDate.Month < DateTime.Now.Month&& Bucket[i].DepartureDate.Year < DateTime.Now.Year))
                 {
                     string query = $"DELETE FROM ShoppingBasket WHERE IdPersonalLoginData = (SELECT Id FROM PersonalLoginData WHERE Email ='{MainFrame.user.Email}') " +
                         $"AND RouteTicket = '{Bucket[i].Direction}' AND TransportName ='{Bucket[i].TransportNumber}'" +

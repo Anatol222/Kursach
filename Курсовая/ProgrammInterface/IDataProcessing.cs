@@ -13,5 +13,8 @@ namespace Курсовая.ProgrammInterface
         void SymbolProcessing(object sender, TextCompositionEventArgs e);
         void Birthday(object sender, TextCompositionEventArgs e);
         void NumberProcessing(object sender, TextCompositionEventArgs e);
+        void NameProcessing(object sender, TextCompositionEventArgs e);
+        void CompanyProcessing(object sender, TextCompositionEventArgs e);
+        void TimeProcessing(object sender, TextCompositionEventArgs e);
     }
 }

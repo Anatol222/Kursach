@@ -99,7 +99,6 @@ namespace Курсовая.MainFrameForms
                         Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
                     else
                         Notification?.Invoke("Возникла ошибка при покупке билета");
-
                 }
                 ConfirmBuyTicket = false;
             }
