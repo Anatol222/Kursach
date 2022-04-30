@@ -46,14 +46,14 @@ namespace Курсовая.PagesRegistration
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
             navigation.Cancellation(agreementPolicy);
 
-        private void Confirm_Click(object sender, RoutedEventArgs e)
+        private async void Confirm_Click(object sender, RoutedEventArgs e)
         {
             string querystring = $"insert into UserPersonalData(FirstName, LastName, Patronymic, Number) values('{_firstName}','{_lastName}','{_patronymic}','{_number}'); ";
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
             dataBase.OpenConnection();
             try
             {
-                if (command.ExecuteNonQuery() == 1)
+                if (await command.ExecuteNonQueryAsync() == 1)
                 {
                     querystring = $"INSERT INTO PersonalPassword(UserPersonalDataId,Password) VALUES((SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}'),'{_password}');";
                     command = new SqlCommand(querystring, dataBase.GetConnection());
@@ -64,7 +64,7 @@ namespace Курсовая.PagesRegistration
                         else
                             querystring = $"  INSERT INTO PersonalLoginData(PersonalPasswordId, Email, UserPersonalDataId) VALUES((SELECT PP.Id FROM PersonalPassword AS PP, UserPersonalData AS USD WHERE Password = '{_password}' AND PP.UserPersonalDataId = USD.Id AND USD.Number = '{_number}'),'{_email}',(SELECT Id FROM UserPersonalData WHERE Number = '{_number}' AND FirstName = '{_firstName}' AND LastName = '{_lastName}' AND Patronymic = '{_patronymic}')); ";
                         command = new SqlCommand(querystring, dataBase.GetConnection());
-                        if (command.ExecuteNonQuery() == 1)
+                        if (await command.ExecuteNonQueryAsync() == 1)
                         {
                             navigation.SwitchAnotherWindon(agreementPolicy, new MainFrame(_email));
                             StartWindow.startWindow.Close();

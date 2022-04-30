@@ -54,10 +54,9 @@ namespace Курсовая.PagesComeIn
             _reservePassword = email.CreatingPassword();
             email.SendMessageNewPassword(_reservePassword, _reserveEmail);
             Notification?.Invoke("Мы отпраили повторный код");
-
         }
 
-        private void Confirm_Click(object sender, RoutedEventArgs e)
+        private async void Confirm_Click(object sender, RoutedEventArgs e)
         {
             string code = FirstSymbol.Text;
             code += SecondSymbol.Text;
@@ -75,11 +74,11 @@ namespace Курсовая.PagesComeIn
                     string querystring = $"UPDATE PersonalPassword SET Password='{cipherPassword.encode(_reservePassword)}' WHERE PersonalPassword.Id= (SELECT PP.Id FROM PersonalPassword AS PP,PersonalLoginData AS PLD WHERE PLD.Email='{_email}' AND PLD.PersonalPasswordId=PP.Id); ";
                     SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                     dataBase.OpenConnection();
-                    if (command.ExecuteNonQuery() == 1)
+                    if (await command.ExecuteNonQueryAsync() == 1)
                     {
                         querystring = $"UPDATE PersonalLoginData SET Email = '{_reserveEmail}' WHERE Email = '{_email}'; ";
                         command = new SqlCommand(querystring, dataBase.GetConnection());
-                        if (command.ExecuteNonQuery() == 1)
+                        if (await command.ExecuteNonQueryAsync() == 1)
                             navigation.SwitchAnotherWindon(inCome, new MainFrame());
                         else
                             Notification?.Invoke("Не удается обновить резервную почту");
@@ -87,11 +86,8 @@ namespace Курсовая.PagesComeIn
                     else
                         Notification?.Invoke("Не удается обновить пароль");
                 }
-                catch (System.Exception)
-                {
-                    Notification?.Invoke("Не удается обновить пароль");
-                }
-                dataBase.CloseConnection();
+                catch (System.Exception) { Notification?.Invoke("Не удается обновить пароль"); }
+                finally { dataBase.CloseConnection(); }
             }
             else
                 Notification?.Invoke("Код не совпадает");

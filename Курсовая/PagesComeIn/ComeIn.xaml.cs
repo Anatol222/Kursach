@@ -56,7 +56,7 @@ namespace Курсовая.PagesComeIn
             Button_log.Foreground = Brushes.Blue;
         }
 
-        private  void InComeWithoutPassword()
+        private void InComeWithoutPassword()
         {
             if (File.Exists("saveUser.json"))
             {
@@ -92,7 +92,7 @@ namespace Курсовая.PagesComeIn
         private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
            regComeIn.ViewChangingPassword(FirstPassword,ViewPassword);
 
-        private void UseReserveEmail_Click(object sender, RoutedEventArgs e)
+        private async void UseReserveEmail_Click(object sender, RoutedEventArgs e)
         {
             if (ExaminationEmail())
             {
@@ -100,9 +100,9 @@ namespace Курсовая.PagesComeIn
                 string querystring = $"SELECT ReserveEmail FROM PersonalLoginData WHERE Email ='{_email}'; ";
                 SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
                 dataBase.OpenConnection();
-                SqlDataReader reader = command.ExecuteReader();
                 try
                 {
+                    SqlDataReader reader =await command.ExecuteReaderAsync();
                     if (reader.HasRows)
                     while (reader.Read())
                         reserveEmail = reader.GetString(0);
@@ -116,7 +116,6 @@ namespace Курсовая.PagesComeIn
                 }
                 finally
                 {
-                    reader.Close();
                     dataBase.CloseConnection();
                     if (!_reserveEmailExist)
                     {
@@ -130,7 +129,7 @@ namespace Курсовая.PagesComeIn
                 Notification?.Invoke("Такого аккаунта не существует");
         }
 
-        private void NewPassword_Click(object sender, RoutedEventArgs e)
+        private async void NewPassword_Click(object sender, RoutedEventArgs e)
         {
             if (ExaminationEmail())
             {
@@ -140,7 +139,7 @@ namespace Курсовая.PagesComeIn
                 dataBase.OpenConnection();
                 try
                 {
-                    if (command.ExecuteNonQuery() == 1)
+                    if (await command.ExecuteNonQueryAsync() == 1)
                     {
                         email.SendMessageNewPassword(newPassword, _email);
                         Notification?.Invoke("Новый пароль у вас на почте");
@@ -159,7 +158,7 @@ namespace Курсовая.PagesComeIn
 
         }
 
-        private void InCome_Click(object sender, RoutedEventArgs e)
+        private async void InCome_Click(object sender, RoutedEventArgs e)
         {
             _email = Email.Text;
             _password = FirstPassword.Password;
@@ -171,40 +170,42 @@ namespace Курсовая.PagesComeIn
             string querystring = $" SELECT Password FROM PersonalPassword WHERE Id = (SELECT PersonalPasswordId FROM PersonalLoginData WHERE Email ='{_email}'); ";
 
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-
             dataBase.OpenConnection();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-                extractPasswordFromBasaData = reader.GetString(0);
-
-            if (table.Rows.Count == 1)
+            try
             {
-                if (cipherPassword.decode(_password) == extractPasswordFromBasaData)
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                while (reader.Read())
+                    extractPasswordFromBasaData = reader.GetString(0);
+
+                if (table.Rows.Count == 1)
                 {
-                    if (_saveUser)
+                    if (cipherPassword.decode(_password) == extractPasswordFromBasaData)
                     {
-                        List<SaveUser> list = new List<SaveUser>()
+                        if (_saveUser)
                         {
+                            List<SaveUser> list = new List<SaveUser>()
+                            {
                             new SaveUser(_email,_password,_saveUser)
-                        };
-                        File.WriteAllText("saveUser.json", JsonConvert.SerializeObject(list));
+                            };
+                            File.WriteAllText("saveUser.json", JsonConvert.SerializeObject(list));
+                        }
+                        else
+                            File.Delete("saveUser.json");
+                        navigation.SwitchAnotherWindon(comeIn, new MainFrame(_email));
+                        StartWindow.startWindow.Close();
                     }
                     else
-                        File.Delete("saveUser.json");
-                    navigation.SwitchAnotherWindon(comeIn, new MainFrame(_email));
-                    StartWindow.startWindow.Close();
+                        Notification?.Invoke("Неверный пароль");
                 }
                 else
-                    Notification?.Invoke("Неверный пароль");
+                    Notification?.Invoke("Такого аккаунта не существует");
             }
-            else
-                Notification?.Invoke("Такого аккаунта не существует");
-            dataBase.CloseConnection();
-
+            catch (Exception) { }
+            finally { dataBase.CloseConnection(); }
         }
 
         private bool ExaminationEmail()
@@ -215,10 +216,16 @@ namespace Курсовая.PagesComeIn
             DataTable table = new DataTable();
             string querystring = $"select * from PersonalLoginData where Email = '{_email}'";
             SqlCommand command = new SqlCommand(querystring, dataBase.GetConnection());
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-            if (table.Rows.Count > 0)
-                return true;
+            dataBase.OpenConnection();
+            try
+            {
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                if (table.Rows.Count > 0)
+                    return true;
+            }
+            catch (Exception) { }
+            finally { dataBase.CloseConnection(); }
             return false;
         }
 

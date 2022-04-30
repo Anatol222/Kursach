@@ -9,7 +9,7 @@ namespace ProfileClassLibrary.BusketClasses
         public List<BucketItem> GetItems(string email,SqlConnection sqlConnection)
         {
             List<BucketItem> items = new List<BucketItem>();
-            string query = $"SELECT TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService FROM ShoppingBasket " +
+            string query = $"SELECT TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService, Id FROM ShoppingBasket " +
                 $"WHERE IdPersonalLoginData = (SELECT Id FROM PersonalLoginData WHERE Email = '{email}');";
             DateTime dateTime=default, date = default;
             bool statusTicket=default;
@@ -35,11 +35,11 @@ namespace ProfileClassLibrary.BusketClasses
                             statusTicket = false;
                         else
                             statusTicket = true;
-                        items.Add(new BucketItem((string)reader.GetValue(1), dateTime, date,(string)reader.GetValue(6),Convert.ToInt32(reader.GetValue(5)), statusTicket, (TransportType)Convert.ToInt32(reader.GetValue(0)),(string)reader.GetValue(7)));
+                        items.Add(new BucketItem((string)reader.GetValue(1), dateTime, date,(string)reader.GetValue(6),Convert.ToInt32(reader.GetValue(5)), statusTicket, (TransportType)Convert.ToInt32(reader.GetValue(0)),(string)reader.GetValue(7),Convert.ToInt32(reader.GetValue(8))));
                     }
                 }
             }
-            catch { }
+            catch (Exception) { }
             finally { sqlConnection.Close(); }
             return items;
         }

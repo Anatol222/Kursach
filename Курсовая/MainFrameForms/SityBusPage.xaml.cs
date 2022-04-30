@@ -5,10 +5,10 @@ using Курсовая.MainFrameForms.SityBusPages;
 using System.Data.SqlClient;
 using Курсовая.ProgrammInterface;
 using Курсовая.Setting;
+using System;
 
 namespace Курсовая.MainFrameForms
 {
-
     public partial class SityBusPage : Page
     {
         private DataBase data;
@@ -52,19 +52,22 @@ namespace Курсовая.MainFrameForms
         {
             if (BusSheduleFrame.NavigationService.CanGoBack)
                 BusSheduleFrame.NavigationService.GoBack();
-            
         }
-        private void FillInCities()
+        private async void FillInCities()
         {
             string query = "SELECT City FROM PublicBusCities;";
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows)
-                while (reader.Read())
-                    sities.Add((string)reader.GetValue(0));
-            reader.Close();
-            data.CloseConnection();
+            try
+            {
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+                if (reader.HasRows)
+                    while (reader.Read())
+                        sities.Add((string)reader.GetValue(0));
+                reader.Close();
+            }
+            catch (Exception) { }
+            finally { data.CloseConnection(); }
         }
 
         private void GoToBucket_Click(object sender, RoutedEventArgs e)

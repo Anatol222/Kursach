@@ -11,8 +11,7 @@ namespace ProfileClassLibrary.BusketClasses
     }
     public class BucketItem
     {
-       
-        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType,string typeService)
+        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType,string typeService,int id)
         {
             Direction = direction;
             DepartureTime = departureTime;
@@ -22,27 +21,20 @@ namespace ProfileClassLibrary.BusketClasses
             _purchaceStatus = status;
             _TransportType = trType;
             TypeService = typeService;
+            Id = id;
         }
         public string TransportTypeIcon
         {
             get
             {
                 if (_TransportType == TransportType.Train)
-                {
                     return "&#xe7c0";
-                }
                 else if (_TransportType == TransportType.Plane)
-                {
                     return "&#xE709;";
-                }
                 else if (_TransportType == TransportType.Bus)
-                {
                     return "&#xeb47;";
-                }
                 else
-                {
                     return "&#xe806;";
-                }
             }
         }
         public string PurchaceStatusIcon
@@ -50,13 +42,9 @@ namespace ProfileClassLibrary.BusketClasses
             get
             {
                 if (_purchaceStatus == true)
-                {
                     return "/./Images/BucketPageIcons/icons8-оплачено-100.png";
-                }
                 else
-                {
                     return "/./Images/BucketPageIcons/Оплатить.png";
-                }
             }
         }
         public string CanReturnMoneyIcon
@@ -64,15 +52,12 @@ namespace ProfileClassLibrary.BusketClasses
             get
             {
                 if (_purchaceStatus == true)
-                {
                     return "/./Images/BucketPageIcons/вернуть-покупку.png";
-                }
                 else
-                {
                     return "/./Images/BucketPageIcons/Удалить из корзыны.png";
-                }
             }
         }
+
         public bool _purchaceStatus;
         public TransportType _TransportType;
         public string Direction { get; private set; }
@@ -80,7 +65,7 @@ namespace ProfileClassLibrary.BusketClasses
         public DateTime DepartureDate { get; private set; }
         public string TransportNumber { get; private set; }
         public int TicketNum { get; private set; }
-
+        public int Id { get; private set; }
         public string TypeService { get;private set; }
     }
 }

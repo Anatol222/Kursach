@@ -25,6 +25,5 @@
 
         private string _busMovement;
         public string BusMovement { get => _busMovement; }
-
     }
 }

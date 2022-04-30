@@ -1,33 +1,31 @@
-﻿using ProfileClassLibrary;
+﻿using Newtonsoft.Json;
+using ProfileClassLibrary;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Курсовая.MainFrameForms;
+using System.Windows.Threading;
 using Курсовая.Setting;
 
 namespace Курсовая
 {
-    /// <summary>
-    /// Логика взаимодействия для MainFrame.xaml
-    /// </summary>
     public partial class MainFrame : Window
     {
-        Uri BusketPage = new Uri("MainFrameForms/BucketPage.xaml", UriKind.RelativeOrAbsolute);
-        Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
         public static MainFrame mainFrame;
         public static User user;
+
+        Uri BusketPage = new Uri("MainFrameForms/BucketPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri BusPage = new Uri("MainFrameForms/BusPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri PlanePage = new Uri("MainFrameForms/PlanePage.xaml", UriKind.RelativeOrAbsolute);
+        Uri TrainPage = new Uri("MainFrameForms/TrainPage.xaml", UriKind.RelativeOrAbsolute);
+        Uri ProfilePage = new Uri("MainFrameForms/ProfilePage.xaml", UriKind.RelativeOrAbsolute);
+       
         private string _email { get; }
         private bool ALTtrue;
         public MainFrame()
@@ -41,11 +39,11 @@ namespace Курсовая
             _email = email;
             user = new User(_email);
             ChangeData();
-            
-            
         }
         public void ChangeData()
         {
+            WeatherInfo();
+            StartClock();
             mainFrame = this;
             FNamePatronymic.Content = user.Name + " " + user.Patronymic;
             EmailUres.Content = user.Email;
@@ -64,57 +62,42 @@ namespace Курсовая
                 OpenSetting.Content = image;
             }
         }
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
+            this.DragMove();
+
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            Close();
+            PagesNavigation.Navigate(PlanePage);
         }
-        
-        private void btnRestore_Click(object sender, RoutedEventArgs e)
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)=>
+            WindowState = WindowState.Minimized;
+        private void Restore_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
                 WindowState = WindowState.Maximized;
             else
                 WindowState = WindowState.Normal;
         }
+        private void Close_Click(object sender, RoutedEventArgs e) =>
+            Close();
 
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void rdHome_Click(object sender, RoutedEventArgs e)
-        {
-            // PagesNavigation.Navigate(new HomePage());
-
-            //PagesNavigation.Navigate(TrainPage);
-        }
-        private void rdSounds_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void PagesNavigation_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
-        {
-            PagesNavigation.Navigate(SityBusPage);
-        }
-
-        private void OpenSetting_Click(object sender, RoutedEventArgs e)
-        {
-            PagesNavigation.Navigate(new ProfilePage());
-        }
-
-        private void UpateInfoUser_Click(object sender, RoutedEventArgs e)
-        {
+        private void Menu_Click(object sender, RoutedEventArgs e) =>
             ChangeData();
-        }
+        private void Plane_Click(object sender, RoutedEventArgs e)=>
+            PagesNavigation.Navigate(PlanePage);
+        private void Train_Click(object sender, RoutedEventArgs e)=>
+            PagesNavigation.Navigate(TrainPage);
+        private void SityBus_Click(object sender, RoutedEventArgs e) =>
+           PagesNavigation.Navigate(SityBusPage);
+        private void Bus_Click(object sender, RoutedEventArgs e)=>
+            PagesNavigation.Navigate(BusPage);
+        private void Bucket_Click(object sender, RoutedEventArgs e) =>
+            PagesNavigation.Navigate(BusketPage);
+        private void OpenSetting_Click(object sender, RoutedEventArgs e) =>
+            PagesNavigation.Navigate(ProfilePage);
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -124,53 +107,54 @@ namespace Курсовая
                 else
                     WindowState = WindowState.Normal;
             }
-            if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl|| ALTtrue == true)
+            if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl || ALTtrue == true)
             {
                 if (e.Key == Key.Q)
                     Close();
                 else if (e.Key == Key.M)
                     WindowState = WindowState.Minimized;
+                else if (e.Key == Key.D1)
+                    PagesNavigation.Navigate(PlanePage);
+                else if (e.Key == Key.D2)
+                    PagesNavigation.Navigate(TrainPage);
+                else if (e.Key == Key.D3)
+                    PagesNavigation.Navigate(SityBusPage);
+                else if (e.Key == Key.D4)
+                    PagesNavigation.Navigate(BusPage);
+                else if (e.Key == Key.D5)
+                    PagesNavigation.Navigate(BusketPage);
                 else if (e.Key == Key.D6)
-                    PagesNavigation.Navigate(new ProfilePage());
-                //else if (e.Key == Key.D1)
-                //    PagesNavigation.Navigate();
-                //else if (e.Key == Key.D2)
-                //    PagesNavigation.Navigate();
-                //else if (e.Key == Key.D3)
-                //    PagesNavigation.Navigate());
-                //else if (e.Key == Key.D4)
-                //    PagesNavigation.Navigate();
-                //else if (e.Key == Key.D5)
-                //    PagesNavigation.Navigate();
+                    PagesNavigation.Navigate(ProfilePage);
                 ALTtrue = !ALTtrue;
             }
         }
-
-        private void rdNotes_Click(object sender, RoutedEventArgs e)
+        private void WeatherInfo()
         {
-            PagesNavigation.Navigate(SityBusPage);
+            string url = $"https://api.openweathermap.org/data/2.5/weather?q=Pinsk&units=metric&appid=5aeecb8f638755cf1590123b55b8a2bc";
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            string response;
+            using (StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream()))
+                response = streamReader.ReadToEnd();
+            Weather weather = JsonConvert.DeserializeObject<Weather>(response);
+            WeatherShow.Text = Math.Round(weather.Main.Temp) + " °C " + weather.Name+" ";
+            Image image = new Image();
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri($"Images/ImagesWeather/{weather.weather[0].Icon}.png", UriKind.Relative);
+            bitmap.EndInit();
+            image.Source = bitmap;
+            IconWeatherShow.Content = image;
+        }
+        private void StartClock()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Clock_Tick;
+            timer.Start();
         }
 
-        private void rdBucket_Click(object sender, RoutedEventArgs e)
-        {
-            PagesNavigation.Navigate(BusketPage);
-
-        }
-
-
-        //private void rdSounds_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PagesNavigation.Navigate(new System.Uri("Pages/SoundsPage.xaml", UriKind.RelativeOrAbsolute));
-        //}
-
-        //private void rdNotes_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PagesNavigation.Navigate(new System.Uri("Pages/NotesPage.xaml", UriKind.RelativeOrAbsolute));
-        //}
-
-        //private void rdPayment_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PagesNavigation.Navigate(new System.Uri("Pages/PaymentPage.xaml", UriKind.RelativeOrAbsolute));
-        //}
+        private void Clock_Tick(object sender, EventArgs e) =>
+            RealTime.Text = DateTime.Now.ToString(@"HH\:mm\:ss");
     }
 }

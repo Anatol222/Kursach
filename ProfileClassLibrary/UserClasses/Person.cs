@@ -17,7 +17,6 @@ namespace ProfileClassLibrary
         protected string _lastName, _firstName, _patronymic, _phoneNumber, _reserveEmail, _password;
 
         public Person(string email)=> GetAllDataAboutPerson(email);
-
         public int Id { get;set; }
         public string LastName { get => _lastName;}
         public string Patronymic { get => _patronymic;}
@@ -27,10 +26,10 @@ namespace ProfileClassLibrary
 
         private void GetAllDataAboutPerson(string email)
         {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-HOHELQO;Initial Catalog=allData;Integrated Security=True");
+            DataBase data = new DataBase();
             string querystring = $"SELECT UPD.FirstName,UPD.LastName,UPD.Patronymic,UPD.Number,UPD.Birthday,UPD.Gender,PLD.ReserveEmail,PP.Password FROM UserPersonalData AS UPD,PersonalLoginData AS PLD,PersonalPassword AS PP WHERE UPD.Id=PP.UserPersonalDataId AND UPD.Id = PLD.UserPersonalDataId AND PLD.Email='{email}'; ";
-            SqlCommand sqlCommand = new SqlCommand(querystring, sqlConnection);
-            sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(querystring, data.GetConnection());
+            data.OpenConnection();
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             try
             {
@@ -62,9 +61,8 @@ namespace ProfileClassLibrary
             }
             catch (Exception)
             {
-                throw;
+                data.CloseConnection();
             }
-            sqlConnection.Close();
         }
     }
 }

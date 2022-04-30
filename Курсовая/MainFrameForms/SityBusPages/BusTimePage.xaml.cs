@@ -6,7 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+using Курсовая.ProgrammInterface;
+using Курсовая.Setting;
 
 namespace Курсовая.MainFrameForms.SityBusPages
 {
@@ -15,27 +16,32 @@ namespace Курсовая.MainFrameForms.SityBusPages
         private Frame BusSheduleFrame;
         private Button ByTicket;
         private Button GoToBucket;
+
         private DataBase data;
         public static InfoAboutBus aboutBus;
-        const string _weekdayTime = "WeekdayTime", _weekendTime=  "WeekendTime",_sundayTime="Sunday",_saturday="Saturday";
+        private IWorkWithBusList workWithBusList;
+
+        const string _weekdayTime = "WeekdayTime", _weekendTime = "WeekendTime", _sundayTime = "Sunday", _saturday = "Saturday";
         readonly List<StopTime> _weekdayList, _weekendList, _sundayList, _saturdayList;
-
+        public List<Day> DaysList { get; set; }
+        public List<StopTime> StopTimes { get; private set; }
+        public string BusStop { get; private set; }
+        public string BusName { get; private set; }
+        public string Route { get; private set; }
+        public string DayOfWeekBus { get; private set; }
+        public string PastTimeBus { get; private set; }
+        public string City { get; private set; }
         private string BusRoute { get; set; }
+        public string NearestTimeBus { get; private set; }
         
-        private void SwitchDay(List<StopTime> stopTimes,string day)
-        {
-            InitializeComponent();
-            BusNaumList.ItemsSource = stopTimes;
-            StopTimes = stopTimes;
-            daysTextBlock.Text = day;
-        }
-
         public BusTimePage(Frame frame, Button ByTicket, Button GoToBucket, string bStop, string route, string busName, string busRoute, string city)
         {
             InitializeComponent();
 
             DaysList = new List<Day>();
             aboutBus = new InfoAboutBus(route, busName, bStop,city,busRoute);
+            data = new DataBase();
+            workWithBusList = new WorkWithBusList();
 
             this.ByTicket = ByTicket;
             this.GoToBucket = GoToBucket;
@@ -48,8 +54,8 @@ namespace Курсовая.MainFrameForms.SityBusPages
             Route = route;
             BusStop = bStop;
             BusRoute = busRoute;
+            City = city;
 
-            data = new DataBase();
             _weekdayList = GetTimeBD(_weekdayTime, "Будни");
             _weekendList = GetTimeBD(_weekendTime, "Выходные");
             _saturdayList = GetTimeBD(_saturday, "Суббота");
@@ -70,27 +76,21 @@ namespace Курсовая.MainFrameForms.SityBusPages
             InfoBus.Text = $"Расписание автобуса {busName} на остановке {bStop} - {city}";
             
         }
-
-        public List<Day> DaysList { get; set; }
-        public List<StopTime> StopTimes { get; private set; }
-        public string BusStop { get; private set; }
-        public string BusName { get; private set; }
-        public string Route { get; private set; }
-        public string DayOfWeekBus { get; private set; }
-        public string PastTimeBus { get; private set; }
-
-        private void TimeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SwitchDay(List<StopTime> stopTimes, string day)
         {
-           DateTime s = Convert.ToDateTime(StopTimes[((ListBox)sender).SelectedIndex].StopTimeList[0]);
+            InitializeComponent();
+            BusNaumList.ItemsSource = stopTimes;
+            StopTimes = stopTimes;
+            daysTextBlock.Text = day;
         }
+        private void StationBtn_Click(object sender, RoutedEventArgs e)=>
+            BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame,ByTicket,GoToBucket,BusStop,City));
 
-
-        private void StationBtn_Click(object sender, RoutedEventArgs e)
+        private void StopTime_Click(object sender, RoutedEventArgs e)
         {
-            BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame,ByTicket,GoToBucket));
+            DateTime s =Convert.ToDateTime( ((TextBlock)((Button)sender).Content).Text);
+            BusSheduleFrame.NavigationService.Navigate(new TimeOfDirection(BusSheduleFrame, ByTicket, GoToBucket,City, s, BusName, daysTextBlock.Text, BusStop,Route,BusRoute));
         }
-
-        public string NearestTimeBus { get; private set; }
 
         private void DaysListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -158,68 +158,8 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 DaysList.Add(new Day(dayOf));
             return timeList;
         }
-        private void TimeList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //var listBox = sender as ListBox;
-            //if (null == listBox)
-            //    return;
-
-            //var point = e.GetPosition((UIElement)sender);
-
-            //VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
-            //{
-            //    var uiElement = hitTestResult.VisualHit as UIElement;
-
-            //    while (null != uiElement)
-            //    {
-            //        var listBoxItem = uiElement as ListBoxItem;
-            //        if (null != listBoxItem)
-            //        {
-            //            listBoxItem.IsSelected = true;
-            //            return HitTestResultBehavior.Stop;
-            //        }
-
-            //        uiElement = VisualTreeHelper.GetParent(uiElement) as UIElement;
-            //    }
-
-            //    return HitTestResultBehavior.Continue;
-            //}, new PointHitTestParameters(point));
-            var listBox = sender as ListBox;
-            if (null == listBox)
-                return;
-
-            ListBox firstList = new ListBox();
-            var point = e.GetPosition((UIElement)sender);
-            
-            VisualTreeHelper.HitTest(listBox, null, (hitTestResult) =>
-            {
-                var uiElement = hitTestResult.VisualHit as UIElement;
-                ListBoxItem firstLisBoxItem = null;
-                ListBoxItem SecondtLisBoxItem = null;
-
-                while (null != uiElement)
-                {
-                    if (uiElement == uiElement as ListBoxItem)
-                    {
-                        if (firstLisBoxItem == null)
-                            firstLisBoxItem = uiElement as ListBoxItem;
-                        else
-                            SecondtLisBoxItem = uiElement as ListBoxItem;
-                    }
-                    if (firstLisBoxItem != null && SecondtLisBoxItem != null)
-                    {
-                        SecondtLisBoxItem.IsSelected = true;
-                        firstLisBoxItem.IsSelected = true;
-                        return HitTestResultBehavior.Stop;
-                    }
-
-                    uiElement = VisualTreeHelper.GetParent(uiElement) as UIElement;
-                }
-
-                return HitTestResultBehavior.Continue;
-            }, new PointHitTestParameters(point));
-        }
-        
+        private void TimeList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
+            workWithBusList.BucketListBoxSecond(sender, e);
     }
 }
 

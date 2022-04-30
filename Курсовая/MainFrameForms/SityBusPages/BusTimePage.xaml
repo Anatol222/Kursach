@@ -142,7 +142,7 @@
                         <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                             <TextBlock FontSize="16" FontWeight="Bold" Margin="0 0 15 0" VerticalAlignment="Center" Text="{Binding IndexTime}"></TextBlock>
                             <Border BorderThickness="2" BorderBrush="Gray" Margin="0 0 15 0"></Border>
-                            <ListBox ItemsSource="{Binding StopTimeList}" SelectionChanged="TimeList_SelectionChanged" x:Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
+                            <ListBox ItemsSource="{Binding StopTimeList}" x:Name="TimeList" PreviewMouseLeftButtonDown="TimeList_PreviewMouseLeftButtonDown">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel Orientation="Horizontal"></WrapPanel>
@@ -150,10 +150,8 @@
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Style="{StaticResource TransparentBtnStyle}">
-                                            <Border x:Name="TimeBtnBorder" >
-                                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
-                                            </Border>
+                                        <Button  Style="{StaticResource TransparentBtnStyle}" x:Name="StopTime" Click="StopTime_Click">
+                                            <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:hh:mm}}"></TextBlock>
                                         </Button>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

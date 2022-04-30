@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <TextBlock Name="RealTime" FontSize="24" FontStyle="Normal" FontFamily="Bold" Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Background="Gray"  Margin="400,400,0,0" />
-        <TextBlock Name="WeatherShow" FontSize="24" FontStyle="Normal" FontFamily="Bold"  Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Background="Gray" Margin="554,346,0,0" Width="206" Height="104" />
+        <TextBlock Name="WeatherShow" FontSize="24" FontStyle="Normal" FontFamily="Bold"  Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Background="Transparent" Margin="554,346,0,0" Width="206" Height="104" />
         <!--<TextBlock Name="TimerCode" FontSize="24" FontStyle="Normal" FontFamily="Bold" Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Background="Gray"  Margin="100,400,0,0" />-->
         <Button Background="LightBlue" BorderBrush="Transparent" BorderThickness="0" MaxHeight="60" MaxWidth="60" Name="IconWeatherShow" Margin="458,253,281,138">
             <Image />

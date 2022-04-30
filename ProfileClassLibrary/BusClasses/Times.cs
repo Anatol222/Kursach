@@ -4,7 +4,6 @@ namespace ProfileClassLibrary.BusClasses
 {
     public class Times
     {
-
         public Times(DateTime time)
         {
             _time = time;
