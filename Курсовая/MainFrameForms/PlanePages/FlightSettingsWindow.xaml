@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Курсовая.MainFrameForms.SityBusPages"
         mc:Ignorable="d"
         Title="BusTicketOrderWindow" Height="500" Width="500" ResizeMode="NoResize" AllowsTransparency="True"
-        Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Cursor="Arrow">
     <Border CornerRadius="20" Background="{StaticResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
@@ -47,9 +47,9 @@
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
-                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <Button Grid.Column="0" Name="OlderBtnMinus" IsEnabled="False" Content="-" Padding="0" Click="OlderBtnMinus_Click" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" x:Name="OlderTb" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Name="OlderBtnPlus" Click="OlderBtnPlus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 10">
@@ -82,9 +82,9 @@
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
-                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <Button Grid.Column="0" Name="KidBtnMinus" Click="KidBtnMinus_Click" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Name="KidTb" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Name="KidBtnPlus" Click="KidBtnPlus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 10">
@@ -117,9 +117,9 @@
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
-                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <Button Grid.Column="0" Name="BabyBtnMinus" Click="BabyBtnMinus_Click" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Name="BabyTb" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18"></TextBlock>
+                            <Button Grid.Column="4" Name="BabyBtnPlus" Click="BabyBtnPlus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
                     
@@ -145,9 +145,9 @@
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
-                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <Button Grid.Column="0" Name="HandLugBtnMinus" Click="HandLugBtnMinus_Click" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" Name="HandLugTb" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
+                            <Button Grid.Column="4" Name="HandLugBtnPlus" Click="HandLugBtnPlus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
                     <Grid Margin="0 0 0 10">
@@ -174,9 +174,9 @@
                                 <ColumnDefinition Width="0.2*"></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
-                            <TextBlock Grid.Column="2" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
-                            <Button Grid.Column="4" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <Button Grid.Column="0" Name="LugBtnMinus" Click="LugBtnMinus_Click" IsEnabled="False" Content="-" Padding="0"  Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
+                            <TextBlock Grid.Column="2" x:Name="LugTb" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16"></TextBlock>
+                            <Button Grid.Column="4" Name="LugBtnplus" Click="LugBtnplus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
                 </StackPanel>

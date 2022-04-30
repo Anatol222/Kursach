@@ -31,11 +31,15 @@ namespace Курсовая.MainFrameForms
     public partial class PlanePage : Page
     {
         public static string FlightClassString;
-
+        public static int PeopleCount { get; set; }
+        public static int AllLuggageCount { get; set; }
         private DataBase data;
         public PlanePage()
         {
             InitializeComponent();
+            DataContext = this;
+            DayComboBox.SelectedIndex = 3;
+
             data = new DataBase();
             ChangingDatePlane();
 
@@ -208,7 +212,11 @@ namespace Курсовая.MainFrameForms
         private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.Show();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
         private void QueryBD(string query)
         {

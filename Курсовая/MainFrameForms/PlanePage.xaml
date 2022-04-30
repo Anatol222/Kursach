@@ -8,7 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PlanePage">
-
+    <Page.Resources>
+        <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
+    </Page.Resources>
     <Border CornerRadius="20" Background="LightGray">
         <Grid>
             <Grid.RowDefinitions>
@@ -34,8 +38,8 @@
                     <Grid Grid.Row="1" Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.8*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.4*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="0.1*"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -120,7 +124,7 @@
                                 Style="{StaticResource MaterialDesignRaisedButton}"
                                 materialDesign:ButtonAssist.CornerRadius="10"
                                      BorderBrush="Gray"
-                                Content="Купить билет"
+                                Content="Купить"
                                 FontSize="16"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
                             </Button>
@@ -134,12 +138,14 @@
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            <ColumnDefinition MaxWidth="10"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition MaxWidth="10"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition MaxWidth="10"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*" MinWidth="220"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Border Grid.Column="0" BorderThickness="1" BorderBrush="Gray" Margin="10" Padding="5">
                             <StackPanel Orientation="Horizontal">
@@ -172,7 +178,14 @@
                             </Grid>
                         </Border>
 
-                        
+                        <Border Grid.Column="6">
+                            <ComboBox FontSize="18" Name="DayComboBox">
+                                <TextBlock>Заврта</TextBlock>
+                                <TextBlock>Вчера</TextBlock>
+                                <TextBlock>Сегодня</TextBlock>
+                                <TextBlock>Все</TextBlock>
+                            </ComboBox>
+                        </Border>
                         <Button Grid.Column="8" VerticalAlignment="Center" Margin="20 0 20 0" Height="30" FontSize="16" Name="FlightSettingsBtn" Click="FlightSettingsBtn_Click">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -193,13 +206,13 @@
                                                             <Border Padding="4">
                                                                 <Image Source="\Images\PlaneIcons\people.png"></Image>
                                                             </Border>
-                                                            <TextBlock Name="People" Text="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Medium" Margin="5 0 0 0"></TextBlock>
+                                                            <TextBlock Name="People" Text="{Binding PeopleCount, UpdateSourceTrigger = PropertyChanged, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Medium" Margin="5 0 0 0"></TextBlock>
                                                         </StackPanel>
                                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
                                                             <Border Padding="4">
                                                                 <Image Source="\Images\PlaneIcons\luggage.png"></Image>
                                                             </Border>
-                                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Medium" Margin="5 0 0 0">6</TextBlock>
+                                                            <TextBlock HorizontalAlignment="Center" Name="Luggage" Text="{Binding AllLuggageCount, UpdateSourceTrigger = PropertyChanged, Mode=OneWay}" VerticalAlignment="Center" FontWeight="Medium" Margin="5 0 0 0"></TextBlock>
                                                         </StackPanel>
                                                         <Border Grid.Column="4" Padding="6">
                                                             <Image Source="\Images\PlaneIcons\arrow-down.png"></Image>
