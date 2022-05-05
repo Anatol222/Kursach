@@ -74,7 +74,8 @@ namespace Курсовая.MainFrameForms.SityBusPages
             PastTimeBus = GetPastTime(_weekdayList).ToShortTimeString() + " ( " + Math.Truncate((DateTime.Now - GetPastTime(_weekdayList)).TotalMinutes) + " мин. назад )";
             NearestTimeBus = GetNearestTime(_weekdayList).ToShortTimeString() + " (Через: " + Math.Ceiling((GetNearestTime(_weekdayList) - DateTime.Now).TotalMinutes) + " мин.)";
             InfoBus.Text = $"Расписание автобуса {busName} на остановке {bStop} - {city}";
-            
+            if(SityBusPage.BusType != default)
+                StationBtn.IsEnabled = false;
         }
         private void SwitchDay(List<StopTime> stopTimes, string day)
         {
@@ -124,7 +125,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
         }
         private List<StopTime> GetTimeBD(string dayOfWeek, string dayOf)
         {
-            string query = $"SELECT {dayOfWeek} FROM BusStop  WHERE BStop = '{BusStop}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
+            string query = default;
+            if(SityBusPage.BusType == default)
+               query = $"SELECT {dayOfWeek} FROM BusStop  WHERE BStop = '{BusStop}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
+            else
+                query = $"SELECT {dayOfWeek} FROM RegionalBusStop  WHERE BStop = '{BusStop}' AND RegionalBusId = (SELECT Id FROM RegionalBus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}';";
             List<Times> listTimes = new List<Times>();
             List<StopTime> timeList = new List<StopTime>() { };
             SqlCommand commad = new SqlCommand(query, data.GetConnection());

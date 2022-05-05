@@ -49,7 +49,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!--Первая кнопка-->
-                        <Button Grid.Column="0" Name="FlightClass" VerticalAlignment="Center" Margin="20 0 20 0" Height="30" Content="Бизнес" FontSize="16" Click="FlightClass_Click">
+                        <Button Grid.Column="0" Name="FlightClass" VerticalAlignment="Center" Margin="10 0" Height="30" Content="Бизнес" FontSize="16" Click="FlightClass_Click">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Template">
@@ -177,9 +177,8 @@
                         </Border>
 
                         <Border Grid.Column="6">
-                            <ComboBox FontSize="18" Name="DayComboBox">
-                                <TextBlock>Заврта</TextBlock>
-                                <TextBlock>Вчера</TextBlock>
+                            <ComboBox FontSize="18" SelectionChanged="DayComboBox_SelectionChanged" Name="DayComboBox">
+                                <TextBlock>Завтра</TextBlock>
                                 <TextBlock>Сегодня</TextBlock>
                                 <TextBlock>Все</TextBlock>
                             </ComboBox>
@@ -272,9 +271,9 @@
                     </Grid>
                 </Grid>
                 <ScrollViewer Grid.Row="1">
-                    <ListBox ItemsSource="{Binding Planes}" Name="FlightsListBox" SelectionChanged="FlightsListBox_SelectionChanged">
+                    <ListBox ItemsSource="{Binding Planes}" Template="{StaticResource AllowScroll}" ToolTip="kek" Name="FlightsListBox" SelectionChanged="FlightsListBox_SelectionChanged">
                         <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
+                            <Style TargetType="ListBoxItem" >
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                             </Style>
         
@@ -286,7 +285,7 @@
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid >
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>

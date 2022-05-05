@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace ProfileClassLibrary.BusketClasses
 {
@@ -11,7 +12,7 @@ namespace ProfileClassLibrary.BusketClasses
     }
     public class BucketItem
     {
-        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType,string typeService,int id)
+        public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType, string typeService, int id)
         {
             Direction = direction;
             DepartureTime = departureTime;
@@ -22,19 +23,28 @@ namespace ProfileClassLibrary.BusketClasses
             _TransportType = trType;
             TypeService = typeService;
             Id = id;
+            TicketWhichTransport = (int)trType;
+        }
+        string Encode(string s)
+        {
+            Encoding encoding = new UTF8Encoding();
+            byte[] bytes = Encoding.UTF8.GetBytes(s);
+            string str = encoding.GetString(bytes);
+            return str;
+
         }
         public string TransportTypeIcon
         {
             get
             {
                 if (_TransportType == TransportType.Train)
-                    return "&#xe7c0";
+                    return "Train";
                 else if (_TransportType == TransportType.Plane)
-                    return "&#xE709;";
+                    return "Plane";
                 else if (_TransportType == TransportType.Bus)
-                    return "&#xeb47;";
+                    return "Bus";
                 else
-                    return "&#xe806;";
+                    return "Bus";
             }
         }
         public string PurchaceStatusIcon
@@ -66,6 +76,7 @@ namespace ProfileClassLibrary.BusketClasses
         public string TransportNumber { get; private set; }
         public int TicketNum { get; private set; }
         public int Id { get; private set; }
-        public string TypeService { get;private set; }
+        public string TypeService { get; private set; }
+        public int TicketWhichTransport { get; private set; }
     }
 }

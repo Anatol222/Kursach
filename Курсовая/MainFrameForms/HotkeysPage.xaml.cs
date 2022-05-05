@@ -11,5 +11,10 @@ namespace Курсовая.MainFrameForms
             textInterface = new TextInterface();
             HotKeysnBox.Text = textInterface.HotkeysInfo;
         }
+
+        private void BackRtn_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

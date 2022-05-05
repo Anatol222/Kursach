@@ -12,12 +12,21 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
         public static List<Direction> GetDirections(string busNumber)
         {
+            string query = default;
             string drName = GetDirectionFromBD(queryFirstRoute);
-            firstDirections = new Direction(drName) { busStations = Direction.GetStations(drName, "First", busNumber) };
+            if (SityBusPage.BusType == default)
+                query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE FirstRoute = '{drName}' AND BusName='{busNumber}') AND BusRoute = 'First'; ";
+            else
+                query = $"SELECT BStop FROM RegionalBusStop  WHERE RegionalBusId = (SELECT Id FROM RegionalBus WHERE FirstRoute = '{drName}' AND BusName='{busNumber}') AND BusRoute = 'First';"; 
+            firstDirections = new Direction(drName) { busStations = Direction.GetStations(query) };
             drName = GetDirectionFromBD(querySecondRoute);
             if (drName != null)
             {
-                secondDirections = new Direction(drName) { busStations = Direction.GetStations(drName, "Second", busNumber) };
+                if (SityBusPage.BusType == default)
+                    query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE SecondRoute = '{drName}' AND BusName='{busNumber}') AND BusRoute = 'Second'; ";
+                else
+                    query = $"SELECT BStop FROM RegionalBusStop  WHERE RegionalBusId = (SELECT Id FROM RegionalBus WHERE SecondRoute = '{drName}' AND BusName='{busNumber}') AND BusRoute = 'Second';";
+                secondDirections = new Direction(drName) { busStations = Direction.GetStations(query) };
                 return new List<Direction>() { firstDirections, secondDirections };
             }
             return new List<Direction>() { firstDirections };

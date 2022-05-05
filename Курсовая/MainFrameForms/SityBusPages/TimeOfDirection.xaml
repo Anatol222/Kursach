@@ -8,6 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TimeOfDirection">
+    <Page.Resources>
+        <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" MaxHeight="170"></RowDefinition>
@@ -50,20 +55,20 @@
         </Grid>
         <Grid x:Name="CerrentRoute" Grid.Row="2" Grid.RowSpan="2" Background="LightGray">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition Height="0.2*" MaxHeight="60"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*" MinWidth="240"></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*" MinWidth="230"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock FontSize="16" Grid.Column="0" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">Остановки</TextBlock>
                 <TextBlock FontSize="16" Grid.Column="1" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center">Время</TextBlock>
             </Grid>
             <ScrollViewer Grid.Row="1">
-                <ListBox materialDesign:ListBoxItemAssist.ShowSelection= " False " Margin="20 20 0 20" Name="BusTimeList"  ItemsSource="{Binding AllInfoAbouts}" Padding="30 20" >
+                <ListBox materialDesign:ListBoxItemAssist.ShowSelection= " False " Template="{StaticResource AllowScroll}" Margin="20 0 0 20" Name="BusTimeList"  ItemsSource="{Binding AllInfoAbouts}" Padding="30 20" >
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel></StackPanel>
@@ -71,13 +76,18 @@
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate >
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                                <Border Margin="0 0 15 0" VerticalAlignment="Center">
-                                    <Image Source="/Images/Автобусная остановка"></Image>
+                            <Grid Margin="20 0 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" VerticalAlignment="Center" Width="30" Height="30" Margin="0 0 15 0">
+                                    <Image Source="/Images/Автобусная остановка.png"></Image>
                                 </Border>
-                                <TextBlock FontSize="16" Foreground="Black"  Width="250" Text="{Binding BusStop.BusStopName}"></TextBlock>
-                                <TextBlock FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:HH:mm}}"></TextBlock>
-                            </StackPanel>
+                                <TextBlock Grid.Column="1" FontSize="16" Foreground="Black"  Width="250" Text="{Binding BusStop.BusStopName}"></TextBlock>
+                                <TextBlock Grid.Column="2" FontSize="16" Foreground="Black" Text="{Binding Time,StringFormat={}{0:HH:mm}}"></TextBlock>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

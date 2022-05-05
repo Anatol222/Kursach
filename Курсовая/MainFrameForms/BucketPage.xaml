@@ -22,7 +22,7 @@
     </Page.Resources>
     <Border CornerRadius="10">
         <Border.Background >
-            <SolidColorBrush Color="Gray" Opacity="0.3"></SolidColorBrush>
+            <SolidColorBrush Color="#a1b2c4"></SolidColorBrush>
         </Border.Background>
         <Grid Style="{x:Null}">
             <Grid.ColumnDefinitions>
@@ -60,8 +60,8 @@
                                     <Border.Background>
 
                                         <RadialGradientBrush Opacity="0.8">
-                                            <GradientStop Color="#757573" Offset="0"></GradientStop>
-                                            <GradientStop Color="#91908d" Offset="1.5"></GradientStop>
+                                            <GradientStop Color="#ccd7e3" Offset="0"></GradientStop>
+                                            <GradientStop Color="#d3d9e0" Offset="1.5"></GradientStop>
                                         </RadialGradientBrush>
                                     </Border.Background>
                                     <Grid>
@@ -73,7 +73,9 @@
 
                                         <!--Картинка-->
                                         <Border Grid.Column="0" Padding="10 10 20 10">
-                                            <TextBlock FontFamily="Segoe Fluent Icons" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TransportTypeIcon}"></TextBlock>
+                                            <materialDesign:PackIcon Height="50" Width="50" VerticalAlignment="Center" Kind="{Binding TransportTypeIcon}">
+                                            </materialDesign:PackIcon>
+                                            <!--<TextBlock FontFamily="Segoe Fluent Icons"  Text="{Binding TransportTypeIcon}"></TextBlock>-->
                                         </Border>
 
                                         <!--Описание заказа-->
@@ -86,8 +88,8 @@
                                             <TextBlock Grid.Row="0" Name="DirectionTb" FontSize="18" Text="{Binding Direction}"></TextBlock>
                                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                                 <TextBlock Text="Время отправления: " FontSize="14"></TextBlock>
-                                                <TextBlock Name="TimeTb" FontSize="14" FontWeight="Medium" Text="{Binding DepartureTime,StringFormat='{}{0:hh:mm}'}" Margin="0 0 10 0" ></TextBlock>
-                                                <TextBlock x:Name="DateTb" FontSize="14" FontWeight="Medium" Text="{Binding DepartureDate,StringFormat='{}{0:dd.mm.yyyy}'}" Margin="0 0 10 0"></TextBlock>
+                                                <TextBlock Name="TimeTb" FontSize="14" FontWeight="Medium" Text="{Binding DepartureTime,StringFormat='{}{0:HH:mm}'}" Margin="0 0 10 0" ></TextBlock>
+                                                <TextBlock x:Name="DateTb" FontSize="14" FontWeight="Medium" Text="{Binding DepartureDate,StringFormat='{}{0:dd.MM.yyyy}'}" Margin="0 0 10 0"></TextBlock>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal" Grid.Row="2">
                                                 <TextBlock Name="TransportName" FontSize="14" FontWeight="Medium" Text="{Binding TransportNumber}"></TextBlock>
@@ -104,7 +106,7 @@
                                                 <Image Style="{x:Null}" Source="{Binding PurchaceStatusIcon}"></Image>
                                             </Button>
                                             <Button Grid.Row="1" Name="RemoveBtn" Style="{StaticResource TransparentBtnStyle}" Height="30" Width="30" Cursor="Hand" Click="RemoveBtn_Click">
-                                                <Image Name="RemoveBtnImage" Source="{Binding CanReturnMoneyIcon}"></Image>
+                                                <Image Name="RemoveBtnImage" Source="{Binding CanReturnMoneyIcon, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></Image>
                                             </Button>
                                         </Grid>
                                     </Grid>

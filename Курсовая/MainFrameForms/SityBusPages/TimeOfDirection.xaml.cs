@@ -47,8 +47,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 DayOfWeekBus = "Saturday";
             else if (dayOfWeekBus == "Воскресенье")
                 DayOfWeekBus = "Sunday";
-            string query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
-
+            string query = default;
+            if (SityBusPage.BusType == default)
+                query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
+            else
+                query = $"SELECT BStop FROM RegionalBusStop  WHERE RegionalBusId = (SELECT Id FROM RegionalBus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
             data = new DataBase();
             this.ByTicket = ByTicket;
             this.GoToBucket = GoToBucket;
@@ -116,7 +119,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
             AllInfoAboutLocationBus busList = new AllInfoAboutLocationBus();
             List<DateTime> stopTimeList = new List<DateTime>();
             List<StopDateTime> timeList = new List<StopDateTime>() { };
-            string query = $"SELECT {DayOfWeekBus} FROM BusStop  WHERE BStop = '{allBusStops.BusStopName}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
+            string query = default;
+            if (SityBusPage.BusType == default)
+                query = $"SELECT {DayOfWeekBus} FROM BusStop  WHERE BStop = '{allBusStops.BusStopName}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
+            else
+                query = $"SELECT {DayOfWeekBus} FROM RegionalBusStop  WHERE BStop = '{allBusStops.BusStopName}' AND RegionalBusId = (SELECT Id FROM RegionalBus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}';";
             SqlCommand commad = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try
@@ -125,7 +132,10 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 if (reader.HasRows) { }
                 else
                 {
-                    commad = new SqlCommand($"SELECT WeekendTime FROM BusStop  WHERE BStop = '{allBusStops.BusStopName}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ", data.GetConnection());
+                    if (SityBusPage.BusType == default)
+                        commad = new SqlCommand($"SELECT WeekendTime FROM BusStop  WHERE BStop = '{allBusStops.BusStopName}' AND BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ", data.GetConnection());
+                    else
+                        commad = new SqlCommand($"SELECT WeekendTime FROM RegionalBusStop  WHERE BStop = '{allBusStops.BusStopName}' AND RegionalBusId = (SELECT Id FROM RegionalBus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ", data.GetConnection());
                     reader = commad.ExecuteReader();
                 }
                 if (reader.HasRows)

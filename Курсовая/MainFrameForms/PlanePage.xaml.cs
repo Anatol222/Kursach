@@ -23,6 +23,7 @@ using Newtonsoft.Json;
 using Курсовая.MainFrameForms.PlanePages;
 using Курсовая.MainFrameForms.SityBusPages;
 using Курсовая.ProgrammInterface;
+using MaterialDesignThemes.Wpf;
 
 namespace Курсовая.MainFrameForms
 {
@@ -54,7 +55,12 @@ namespace Курсовая.MainFrameForms
             Planes = GetDateFromBD();
             FillingChoiceCountry();
 
+            PeopleCount = 1;
             ChoiceCountry.SelectedIndex = 0;
+            DayComboBox.SelectedIndex = 2;
+
+            userDataVerification = new UserDataVerification();
+            Warning = userDataVerification.Display;
         }
         public List<Plane> Planes { get; set; }
         private void FillingChoiceCountry()
@@ -81,7 +87,7 @@ namespace Курсовая.MainFrameForms
         private List<Plane> GetDateFromBD()
         {
             List<Plane> planes = new List<Plane>();
-            string query = "SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
+            string query = "SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate,Id FROM Plane;";
             SqlCommand command = new SqlCommand(query,data.GetConnection());
             data.OpenConnection();
             try
@@ -182,9 +188,26 @@ namespace Курсовая.MainFrameForms
                     {
                         if (item.numbers_gate.Length != 0)
                         {
-                            query = $"UPDATE Plane SET Landing = '{item.numbers_gate[0]}' WHERE Flight = '{item.flight}'" +
+                            query = $"SELECT Id FROM Plane WHERE Flight ='{item.flight}' AND Direction ='{item.airport.title}' AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' " +
+                                $"AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';";
+                            command = new SqlCommand(query,data.GetConnection());
+                            try
+                            {
+                                if (command.ExecuteNonQuery() > 0)
+                                {
+                                    query = $"UPDATE Plane SET Landing = '{item.numbers_gate[0]}' WHERE Flight = '{item.flight}'" +
                                   $" AND Direction ='{item.airport.title}' AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' " +
                                   $"AND DepartureDate ='{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';";
+                                }
+                                else
+                                    query = $"INSERT INTO Plane(AirlineId,Flight,Direction,DepartureTime,StatusPlane,DepartureDate,Landing) " +
+                                         $"VALUES((SELECT ID FROM Airline WHERE Company = '{item.airline.title}'),'{item.flight}','{item.airport.title}'," +
+                                         $"'{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}','{item.status.title}'," +
+                                         $"'{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}', '{item.numbers_gate[0]}'); ";
+                            }
+                            catch (Exception) {
+                            }
+                            
                             access = false;
                         }
                         else if (item.numbers_gate.Length == 0)
@@ -194,6 +217,7 @@ namespace Курсовая.MainFrameForms
                                          $"VALUES((SELECT ID FROM Airline WHERE Company = '{item.airline.title}'),'{item.flight}','{item.airport.title}'," +
                                          $"'{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}','{item.status.title}'," +
                                          $"'{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}'); ";
+                            access = true;
                         }
                         command = new SqlCommand(query, data.GetConnection());
                         if (command.ExecuteNonQuery() > 0 && access)
@@ -202,12 +226,12 @@ namespace Курсовая.MainFrameForms
                             {
                                 query = $"INSERT INTO NumberSeats(PlaneId,BusinessClass,EconomyClass,PremiumEconomyClass,FirstClass) " +
                                     $"VALUES((SELECT ID FROM Plane WHERE Flight = '{item.flight}' AND StatusPlane='{item.status.title}' " +
-                                    $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' AND Landing IS NULL AND Direction='{item.airport.title}')," +
+                                    $"AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}'  AND Landing IS NULL AND Direction='{item.airport.title}')," +
                                     $"{rnd.Next(0, 30)},{rnd.Next(0, 80)},{rnd.Next(0, 20)},{rnd.Next(0, 50)}); ";
+                                    command = new SqlCommand(query, data.GetConnection());
+                                    command.ExecuteNonQuery();
                             }
                             catch (Exception) { }
-                            command = new SqlCommand(query, data.GetConnection());
-                            command.ExecuteNonQuery();
                         }
                     }
                 }
@@ -222,8 +246,7 @@ namespace Курсовая.MainFrameForms
         }
         private void ChangingDatePlane()
         {
-            QueryBD($"DELETE FROM Plane WHERE (DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' OR DepartureDate < '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}')" +
-                $" AND Landing IS NOT NULL ;");
+            QueryBD($"DELETE FROM Plane WHERE (DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND DepartureDate <= '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}');");
             string query = $"SELECT * FROM Plane WHERE Landing IS NOT NULL;";
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -238,7 +261,6 @@ namespace Курсовая.MainFrameForms
                 QueryBD($"UPDATE Plane SET StatusPlane = 'Регистрация' WHERE DepartureTime < '{DateTime.Now.AddHours(1).AddMinutes(30).ToString(@"HH\:mm")}' " +
                         $"AND Landing IS NOT NULL;");
                 QueryBD($"UPDATE Plane SET StatusPlane = 'Посадка' WHERE DepartureTime < '{DateTime.Now.AddMinutes(45).ToString(@"HH\:mm")}' AND Landing IS NOT NULL;");
-
             }
             catch (Exception) { }
             finally { data.CloseConnection(); }
@@ -251,23 +273,7 @@ namespace Курсовая.MainFrameForms
             catch (Exception) { }
             finally { data.CloseConnection(); }
         }
-
-        private void ChoiceCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
-            if (AirlineBox.Text != "")
-            {
-                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-                  $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
-                  $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
-            }
-            if (ChoiceCountry.SelectedItem.ToString() == "Любая")
-                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
-            InvokeBD(query);
-            if (ChoiceCountry.SelectedItem.ToString() != "Любая")
-                DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
-        }
+       
         private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
@@ -317,10 +323,10 @@ namespace Курсовая.MainFrameForms
         private void Box_TextChanged(object sender, TextChangedEventArgs e)
         {
             string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()};";
             if (AirlineBox.Text!="")
                 query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()} ;" +
                 $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
             InvokeBD(query);
         }
@@ -329,10 +335,10 @@ namespace Курсовая.MainFrameForms
             if (DirectionBox.Text!=ChoiceCountry.SelectedItem.ToString())
             {
                 string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()};";
                 if (AirlineBox.Text != "")
                     query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                    $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
+                    $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()}" +
                     $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
                 InvokeBD(query);
                 ChoiceCountry.SelectedIndex = 0;
@@ -341,39 +347,78 @@ namespace Курсовая.MainFrameForms
         private void AirlineBox_TextChanged(object sender, TextChangedEventArgs e)
         {
            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()} " +
                 $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
             InvokeBD(query);
         }
-
+        private void ChoiceCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()};";
+            if (AirlineBox.Text != "")
+            {
+                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
+                  $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()} " +
+                  $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
+            }
+            if (ChoiceCountry.SelectedItem.ToString() == "Любая")
+            {
+                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE " +
+                $" Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()};";
+                if (AirlineBox.Text != "")
+                {
+                    query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE " +
+                    $" Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {DayCombo()} " +
+                    $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
+                }
+                DirectionBox.Text = default;
+            }
+            InvokeBD(query);
+            if (ChoiceCountry.SelectedItem.ToString() != "Любая")
+                DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
+        }
 
         private void GoToBucket_Click(object sender, RoutedEventArgs e)
         {
             string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService)" +
                 $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), '1', '{Planes[FlightsListBox.SelectedIndex].Direction}'," +
                 $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
-                $"0, 2, '{Planes[FlightsListBox.SelectedIndex].FlightName}', '{(string)FlightClass.Content}'); ";
+                $"0, {PeopleCount}, '{Planes[FlightsListBox.SelectedIndex].FlightName}', '{(string)FlightClass.Content}'); ";
             if (AddTicketIntoBD(query))
+            {
                 Notification?.Invoke("Билет добавлен в корзину, не забудьте оплатить");
+                MainFrame.BasketItemsCount += 1;
+                MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+                Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
+                badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+            }
             else
                 Notification?.Invoke("Билетов в таком количестве нет");
         }
-
+        private IDataBaseUserDataVerification userDataVerification;
+        private delegate void InvoceWarningBox(string content, string buttonText);
+        private event InvoceWarningBox Warning;
         private void ByTicket_Click(object sender, RoutedEventArgs e)
         {
-            //TicketEvent?.Invoke("Купить");
-            //Warning?.Invoke("Вы уверены, что хотите приобрести билет?", "Купить");
-            //if (ConfirmBuyTicket)
-            //{
-            //    string query = "INSERT INTO ShoppingBasket (IdPersonalLoginData,TicketWhichTransport,RouteTicket,TicketStatus,CountTickets,TransportName) " +
-            //     $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'),2,'{BusTimePage.aboutBus.Route}',1,{CountOfTickets},'{BusTimePage.aboutBus.BusName}');";
-            //    if (AddTicketIntoBD(query))
-            //        Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
-            //    else
-            //        Notification?.Invoke("Возникла ошибка при покупке билета");
-            //}
-            //ConfirmBuyTicket = false;
-            //CountOfTickets = 0;
+            Warning?.Invoke("Вы уверены, что хотите приобрести билет?", "Купить");
+            if (SityBusPage.ConfirmBuyTicket)
+            {
+                string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService)" +
+                $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), '1', '{Planes[FlightsListBox.SelectedIndex].Direction}'," +
+                $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
+                $"1, {PeopleCount}, '{Planes[FlightsListBox.SelectedIndex].FlightName}', '{(string)FlightClass.Content}'); ";
+                if (AddTicketIntoBD(query))
+                {
+                    Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
+                    MainFrame.BasketItemsCount += 1;
+                    MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+                    Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
+                    badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+                }
+                else
+                    Notification?.Invoke("Билетов в таком количестве нет");
+            }
+            SityBusPage.ConfirmBuyTicket = false;
         }
         private bool AddTicketIntoBD(string query)
         {
@@ -383,6 +428,38 @@ namespace Курсовая.MainFrameForms
             catch(Exception) { return false; }
             finally { data.CloseConnection(); }
             return true;
+        }
+
+        private string DayCombo()
+        {
+            DateTime date = DateTime.Now.AddDays(1);
+            string s = DayComboBox.Text.ToString();
+            if (DayComboBox.Text.ToString() == "Завтра")
+                return $" AND DepartureDate = '{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}' ";
+            else if (DayComboBox.Text.ToString() == "Сегодня")
+                return $" AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}' ";
+            else
+                return "";
+        }
+        private void DayComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string dateSelect = default;
+            DateTime date = DateTime.Now.AddDays(1);
+            if (DayComboBox.SelectedIndex == 0)
+                dateSelect = $"AND DepartureDate = '{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}' ";
+            else if (DayComboBox.SelectedIndex == 1)
+                dateSelect = $" AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}' ";
+            else
+                dateSelect = "";
+            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {dateSelect};";
+            if (AirlineBox.Text != "")
+                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
+                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {dateSelect}'" +
+                $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
+            InvokeBD(query);
+
+
         }
     }
 }

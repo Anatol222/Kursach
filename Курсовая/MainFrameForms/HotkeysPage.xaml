@@ -7,9 +7,17 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1200"
       Title="HotkeysPage">
-    <Border CornerRadius="10" Background="#3a3b3b" >
+    <Border CornerRadius="10" Background="Gray" Padding="50">
+        
         <Grid>
-            <TextBlock FontSize="32" Foreground="Snow" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Left" x:Name="HotKeysnBox" Width="Auto"/>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="24" Grid.Row="0" Foreground="Snow" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Left" x:Name="HotKeysnBox" Width="Auto"/>
+            <Border Grid.Row="1" Width="150" Height="50" Margin="20 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button Content="Назад" Click="BackRtn_Click" Style="{StaticResource ButtonStyle}" Name="BackRtn" Cursor="Hand"></Button>
+            </Border>
         </Grid>
     </Border>
 </Page>

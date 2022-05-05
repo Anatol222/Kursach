@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая"
         mc:Ignorable="d"
-        Title="StartWindow" Height="450" Width="800" WindowStyle="None" WindowState="Maximized" MinHeight="450" MinWidth="750"
+        Title="StartWindow" Height="600" Width="1000" WindowStyle="None" WindowState="Maximized" MinHeight="450" MinWidth="750"
         MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="Window_Loaded" KeyDown="Window_KeyDown"> 
     <Grid>
         <Frame Name="StartFrame"></Frame>

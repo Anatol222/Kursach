@@ -258,15 +258,7 @@
                 </Border>
             </Grid>
             <Border Background="Gray" Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="7" Panel.ZIndex="-1"></Border>
-            <Grid Grid.Row="9" Grid.Column="1">
-                <Button ></Button>
-            </Grid>
-            <Grid Grid.Row="9" Grid.Column="3">
-                <Button></Button>
-            </Grid>
-            <Grid Grid.Row="9" Grid.Column="5">
-                <Button></Button>
-            </Grid>
+            
         </Grid>
     </Border>
 

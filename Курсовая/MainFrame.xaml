@@ -4,12 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainFrame" Height="600" Width="1200" MinHeight="550" MinWidth="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True" ResizeMode="NoResize"
         WindowState="Normal" MouseLeftButtonDown="Window_MouseLeftButtonDown" KeyDown="Window_KeyDown" Loaded="MainFrame_Loaded">
-    <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
+    <Border CornerRadius="8" >
+        <Border.Background>
+            <ImageBrush ImageSource="\Images\фон.jpg"></ImageBrush>
+        </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -60,7 +64,8 @@
                         <RadioButton x:Name="Train" Content="Поезда" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7c0;"  Margin="0 5 0 5" Click="Train_Click" Cursor="Hand" />
                         <RadioButton x:Name="SityBus" Content="Городские автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe806;" Click="SityBus_Click" Cursor="Hand" />
                         <RadioButton x:Name="Bus" Content="Междугородние автобусы" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xeb47;" Margin="0 5 0 5" Click="Bus_Click" Cursor="Hand" />
-                        <RadioButton x:Name="Bucket" Content="Корзина" Style="{DynamicResource MenuRadioButtonStyle}" Tag="&#xe7bf;" Margin="0 5 0 5" Cursor="Hand" Click="Bucket_Click"/>
+                        <RadioButton x:Name="Bucket" Content="Корзина" Style="{DynamicResource MenuBucketButtonStyle}" Tag="{Binding BasketItemsCount}" Cursor="Hand" Click="Bucket_Click">
+                        </RadioButton>
                     </StackPanel>
                     <!--UserPanel-->
                     <StackPanel Grid.Row="3" VerticalAlignment="Bottom" Orientation="Horizontal" Width="200" Margin="0 0 0 20">
@@ -87,29 +92,40 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*" MinWidth="240"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="White" CornerRadius="15" Height="25" Margin="10 0" VerticalAlignment="Bottom" Opacity="0.5" Panel.ZIndex="-1"></Border>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0"  Margin="10 5 0 0" >
 
-                <!-- Start: Button Close | Restore | Minimize -->
-                <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Button x:Name="Close" Style="{StaticResource IconButtonsStyle}" Content="{StaticResource close}" Click="Close_Click" Tag="IsCloseButton" Cursor="Hand"/>
-                    <Button x:Name="Restore" Margin="5,0" Click="Restore_Click" Cursor="Hand">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
-                                <Setter Property="Content" Value="{DynamicResource maximize}"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
-                                        <Setter Property="Content" Value="{DynamicResource restore}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button x:Name="Minimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="Minimize_Click"/>
-                    <TextBlock Name="WeatherShow" FontSize="14" FontStyle="Normal" FontFamily="Bold"  Foreground="Black" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Left" Background="Transparent"></TextBlock>
-                    <Button Background="Transparent" BorderBrush="Transparent" BorderThickness="0" MaxHeight="60" MaxWidth="60" Name="IconWeatherShow">
-                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    </Button>
-                    <TextBlock Name="RealTime" FontSize="16" FontStyle="Normal" FontFamily="Bold" Foreground="Black" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Left"></TextBlock>
-                </StackPanel>
+                        <TextBlock Name="WeatherShow" FontSize="16" Margin="10 8 0 0" FontStyle="Normal" FontWeight="Bold"  Foreground="Black" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" ></TextBlock>
+                        <Button Background="Transparent" Padding="0 5 0 0" BorderBrush="Transparent" BorderThickness="0" Name="IconWeatherShow" Cursor="Hand">
+                            <Image/>
+                        </Button>
+                        <TextBlock Name="RealTime" Margin="20 8 10 0" FontSize="16" FontStyle="Normal" FontWeight="Bold" Foreground="Black" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
+                    </StackPanel>
+                    <!-- Start: Button Close | Restore | Minimize -->
+                    <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                        <Button x:Name="Close" Style="{StaticResource IconButtonsStyle}" Content="{StaticResource close}" Click="Close_Click" Tag="IsCloseButton" Cursor="Hand"/>
+                        <Button x:Name="Restore" Margin="5,0" Click="Restore_Click" Cursor="Hand">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                                    <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                            <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="Minimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="Minimize_Click"/>
+
+                    </StackPanel>
+                </Grid>
                 <!-- End: Button Close | Restore | Minimize -->
 
                 <Border Grid.Row="1" Margin="10">

@@ -6,11 +6,11 @@ namespace ProfileClassLibrary.BusClasses
 {
     public class BusItems
     {
-        public static List<Bus> GetBuses(string city)
+        public static List<Bus> GetBuses(string query)
         {
             DataBase data = new DataBase();
             List<Bus> busList = new List<Bus>();
-            SqlCommand command = new SqlCommand($"SELECT BusName FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City='{city}');", data.GetConnection());
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try
             {

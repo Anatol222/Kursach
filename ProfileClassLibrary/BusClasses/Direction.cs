@@ -12,11 +12,10 @@ namespace ProfileClassLibrary.BusClasses
 
         public List<Busstation> _busStations;
         public List<Busstation> busStations { get { return _busStations; } set { _busStations = value; } }
-        public static List<Busstation> GetStations(string _drName, string busRoute, string busNumber)
+        public static List<Busstation> GetStations(string query)
         {
             DataBase data = new DataBase();
             List<Busstation> station = new List<Busstation>();
-            string query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE {busRoute}Route = '{_drName}' AND BusName='{busNumber}') AND BusRoute = '{busRoute}'; ";
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try

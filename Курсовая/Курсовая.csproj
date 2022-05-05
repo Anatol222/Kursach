@@ -477,9 +477,6 @@
     <Folder Include="MainFrameForms\PurchasePages\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Автобусная остановка.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\PlaneIcons\arrow-down.png" />
   </ItemGroup>
   <ItemGroup>
@@ -505,6 +502,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\PlaneIcons\hand-luggage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Автобусная остановка.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />

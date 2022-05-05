@@ -14,14 +14,14 @@
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="InfoAboutProgramm" Height="450" Width="400">
-    <Border CornerRadius="50" Background="Gray" BorderBrush="LightGreen" BorderThickness="2">
+    <Border CornerRadius="50" Background="#4a59ea" BorderBrush="#053c96" BorderThickness="2">
         <Grid >
             <TextBlock  Margin="38,39,47,81"></TextBlock>
             
             <ScrollViewer Margin="21,25,20,26">
                 <StackPanel>
-                    <TextBlock x:Name="InfoProg" Text="" FontSize="16" Foreground="White" TextWrapping="Wrap" Margin="10,10,10,34"></TextBlock>
-                    <Button Content="Close" Style="{DynamicResource ButtonStyle}" Background="LightGray" Foreground="Black" Click="CloseWindow_Click" Width="87" Height="36"/>
+                    <TextBlock x:Name="InfoProg" Text="" FontSize="16" Foreground="#bee9f9" TextWrapping="Wrap" Margin="10,10,10,34"></TextBlock>
+                    <Button Content="Закрыть"  Style="{DynamicResource ButtonStyle}" Background="LightGray" Foreground="Black" Click="CloseWindow_Click" Width="95" Height="40"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

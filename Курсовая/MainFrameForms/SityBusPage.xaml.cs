@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Курсовая.ProgrammInterface;
 using Курсовая.Setting;
 using System;
+using MaterialDesignThemes.Wpf;
 
 namespace Курсовая.MainFrameForms
 {
@@ -28,7 +29,22 @@ namespace Курсовая.MainFrameForms
 
         public static bool ConfirmBuyTicket {get;set;}
         public static int CountOfTickets { get;set;}
+        public static string BusType { get; set; }
+
         public SityBusPage()
+        {
+            Constructor();
+            FillInCities();
+            BusType = default;
+        }
+        public SityBusPage(string query, string locationText)
+        {
+            Constructor();
+            FillInCities(query);
+            LocationTextBlock.Text = "Выберите " + locationText;
+            BusType = LocationTextBlock.Text;
+        }
+        private void Constructor()
         {
             InitializeComponent();
             data = new DataBase();
@@ -38,9 +54,7 @@ namespace Курсовая.MainFrameForms
             Warning = userDataVerification.Display;
             TicketEvent = Display;
             sities = new List<string>();
-            FillInCities();
             DataContext = this;
-
         }
 
         public List<string> sities { get; set; }
@@ -69,6 +83,21 @@ namespace Курсовая.MainFrameForms
             catch (Exception) { }
             finally { data.CloseConnection(); }
         }
+        private async void FillInCities(string query)
+        {
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
+            data.OpenConnection();
+            try
+            {
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+                if (reader.HasRows)
+                    while (reader.Read())
+                        sities.Add((string)reader.GetValue(0));
+                reader.Close();
+            }
+            catch (Exception) { }
+            finally { data.CloseConnection(); }
+        }
 
         private void GoToBucket_Click(object sender, RoutedEventArgs e)
         {
@@ -76,12 +105,16 @@ namespace Курсовая.MainFrameForms
             if (CountOfTickets>0)
             {
                 string query = "INSERT INTO ShoppingBasket (IdPersonalLoginData,TicketWhichTransport,RouteTicket,TicketStatus,CountTickets,TransportName) " +
-                $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'),2,'{BusTimePage.aboutBus.Route}',0,{CountOfTickets},'{BusTimePage.aboutBus.BusName}');";
+                $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), '2','{BusTimePage.aboutBus.Route}',0,{CountOfTickets},'{BusTimePage.aboutBus.BusName}');";
                 if (AddTicketIntoBD(query))
                     Notification?.Invoke("Билет добавлен в корзину, не забудьте оплатить");
                 else
                     Notification?.Invoke("Возникла ошибка при добавлении билета");
             }
+            MainFrame.BasketItemsCount += 1;
+            MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+            Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount",MainFrame.basketButton);
+            badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
             CountOfTickets = 0;
         }
 
@@ -96,13 +129,20 @@ namespace Курсовая.MainFrameForms
                     string query = "INSERT INTO ShoppingBasket (IdPersonalLoginData,TicketWhichTransport,RouteTicket,TicketStatus,CountTickets,TransportName) " +
                      $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'),2,'{BusTimePage.aboutBus.Route}',1,{CountOfTickets},'{BusTimePage.aboutBus.BusName}');";
                     if (AddTicketIntoBD(query))
+                    {
                         Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
+                        MainFrame.BasketItemsCount += 1;
+                        MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+                        Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
+                        badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+                    }
                     else
                         Notification?.Invoke("Возникла ошибка при покупке билета");
                 }
                 ConfirmBuyTicket = false;
             }
             CountOfTickets = 0;
+
         }
         private bool AddTicketIntoBD(string query)
         {

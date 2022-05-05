@@ -28,7 +28,10 @@ namespace Курсовая.MainFrameForms.SityBusPages
             this.ByTicket = ByTicket;
             this.GoToBucket = GoToBucket;
             _city = city;
-            BusList = BusItems.GetBuses(_city);
+            if (SityBusPage.BusType == default)
+                BusList = BusItems.GetBuses($"SELECT BusName FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City='{_city}');");
+            else
+                BusList = BusItems.GetBuses($"SELECT BusName FROM RegionalBus WHERE RegionalBusDistrictId = (SELECT Id FROM RegionalBusDistrict WHERE District ='{_city}');");
         }
 
         public List<Bus> BusList { get; set; }

@@ -2,6 +2,8 @@
 using ProfileClassLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -10,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Курсовая.MainFrameForms;
 using Курсовая.Setting;
 
 namespace Курсовая
@@ -18,7 +21,7 @@ namespace Курсовая
     {
         public static MainFrame mainFrame;
         public static User user;
-
+        public static RadioButton basketButton;
         Uri BusketPage = new Uri("MainFrameForms/BucketPage.xaml", UriKind.RelativeOrAbsolute);
         Uri SityBusPage = new Uri("MainFrameForms/SityBusPage.xaml", UriKind.RelativeOrAbsolute);
         Uri BusPage = new Uri("MainFrameForms/BusPage.xaml", UriKind.RelativeOrAbsolute);
@@ -30,14 +33,23 @@ namespace Курсовая
         private bool ALTtrue;
         public MainFrame()
         {
+
             InitializeComponent();
+            DataContext = this;
             ChangeData();
+            BasketItemsCount = CountTicketsInBasket();
         }
+        public static int BasketItemsCount { get; set; }
         public MainFrame(string email)
         {
             InitializeComponent();
+            DataContext = this;
             _email = email;
             user = new User(_email);
+
+            basketButton = Bucket;
+
+            BasketItemsCount = CountTicketsInBasket();
             ChangeData();
         }
         public void ChangeData()
@@ -68,7 +80,7 @@ namespace Курсовая
 
         private void MainFrame_Loaded(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(PlanePage);
+            PagesNavigation.Navigate(SityBusPage);
         }
 
         private void Minimize_Click(object sender, RoutedEventArgs e)=>
@@ -156,5 +168,25 @@ namespace Курсовая
 
         private void Clock_Tick(object sender, EventArgs e) =>
             RealTime.Text = DateTime.Now.ToString(@"HH\:mm\:ss");
+
+        private int CountTicketsInBasket()
+        {
+            int countTickets = default;
+            DataBase data = new DataBase();
+            string query = $"SELECT TicketWhichTransport FROM ShoppingBasket WHERE IdPersonalLoginData = (SELECT Id FROM PersonalLoginData WHERE Email = '{user.Email}');";
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
+            SqlDataAdapter adapter= new SqlDataAdapter();
+            DataTable table = new DataTable();
+            data.OpenConnection();
+            try
+            {
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+                countTickets = table.Rows.Count;
+            }
+            catch (Exception) {}
+            finally { data.CloseConnection(); }
+            return countTickets;
+        }
     }
 }

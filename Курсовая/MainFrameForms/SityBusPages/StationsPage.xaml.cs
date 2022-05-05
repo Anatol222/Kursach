@@ -43,8 +43,16 @@ namespace Курсовая.MainFrameForms.SityBusPages
             this.BusSheduleFrame = BusSheduleFrame;
             BackBorder.Visibility = Visibility.Visible;
 
-            queryFirstRoute = $"SELECT FirstRoute FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City = '{city}') AND BusName = '{busNum}'; ";
-            querySecondRoute = $"SELECT SecondRoute FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City = '{city}') AND BusName = '{busNum}'; ";
+            if (SityBusPage.BusType == default)
+            {
+                queryFirstRoute = $"SELECT FirstRoute FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City = '{city}') AND BusName = '{busNum}'; ";
+                querySecondRoute = $"SELECT SecondRoute FROM Bus WHERE PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City = '{city}') AND BusName = '{busNum}'; ";
+            }
+            else
+            {
+                queryFirstRoute = $"SELECT FirstRoute FROM RegionalBus WHERE RegionalBusDistrictId = (SELECT Id FROM RegionalBusDistrict WHERE District = '{city}') AND BusName = '{busNum}'; ";
+                querySecondRoute = $"SELECT SecondRoute FROM RegionalBus WHERE RegionalBusDistrictId = (SELECT Id FROM RegionalBusDistrict WHERE District = '{city}') AND BusName = '{busNum}'; ";
+            }
             directions = Directions.GetDirections(busNum);
             _busName = busNum;
             _city = city;
@@ -54,8 +62,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
         
         private string BusRoute()
         {
-            string busRoute = default;
-            string query = $"SELECT FirstRoute FROM Bus WHERE BusName = '{_busName}' AND PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City ='{_city}');";
+            string busRoute = default; string query = default;
+            if (SityBusPage.BusType == default)
+                query = $"SELECT FirstRoute FROM Bus WHERE BusName = '{_busName}' AND PublicBusCitiesId = (SELECT Id FROM PublicBusCities WHERE City ='{_city}');";
+            else
+                query = $"SELECT FirstRoute FROM RegionalBus WHERE BusName = '{_busName}' AND RegionalBusDistrictId = (SELECT Id FROM RegionalBusDistrict WHERE District ='{_city}');";
             SqlCommand command = new SqlCommand(query,dataBase.GetConnection());
             dataBase.OpenConnection();
             try

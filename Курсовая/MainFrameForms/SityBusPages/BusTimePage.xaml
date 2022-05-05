@@ -77,9 +77,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border Cursor="Hand"  CornerRadius="20" Padding="10 5" BorderThickness="0">
-                            <Button Style="{DynamicResource TransparentBtnStyle}">
                                 <TextBlock Name="ListText" FontWeight="Bold" FontSize="22" Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                            </Button>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
