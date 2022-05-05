@@ -40,12 +40,12 @@ namespace Курсовая.MainFrameForms
         public PlanePage()
         {
             InitializeComponent();
-
-            navigation = new ProgrammNavigation();
-            dataProcessing = new DataProcessing();
             DataContext = this;
             DayComboBox.SelectedIndex = 3;
 
+
+            navigation = new ProgrammNavigation();
+            dataProcessing = new DataProcessing();
             data = new DataBase();
             ChangingDatePlane();
 
@@ -148,7 +148,11 @@ namespace Курсовая.MainFrameForms
 
             FlightClass.Content = FlightClassString;
         }
-        
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.Show();
+        }
         private void InsertDataInBD(List<Flight> flights)
         {
             data.OpenConnection();
@@ -242,6 +246,45 @@ namespace Курсовая.MainFrameForms
             }
             catch (Exception) { }
             finally { data.CloseConnection(); }
+        }
+
+        }
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+=========
+>>>>>>>>> Temporary merge branch 2
+        }
+
+        }
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+=========
+>>>>>>>>> Temporary merge branch 2
+        }
+
+        }
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+=========
+>>>>>>>>> Temporary merge branch 2
         }
         private void QueryBD(string query)
         {
