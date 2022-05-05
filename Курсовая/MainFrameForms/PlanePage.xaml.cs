@@ -282,31 +282,23 @@ namespace Курсовая.MainFrameForms
             finally { data.CloseConnection(); }
         }
 
-        private void ChoiceCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
-            if (AirlineBox.Text != "")
-            {
-                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-                  $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
-                  $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
-            }
-            if (ChoiceCountry.SelectedItem.ToString() == "Любая")
-                query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
-            InvokeBD(query);
-            if (ChoiceCountry.SelectedItem.ToString() != "Любая")
-                DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
-        }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.ShowDialog();
-            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
-            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
-            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-        }
+        //private void ChoiceCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
+        //        $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
+        //    if (AirlineBox.Text != "")
+        //    {
+        //        query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
+        //          $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
+        //          $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
+        //    }
+        //    if (ChoiceCountry.SelectedItem.ToString() == "Любая")
+        //        query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
+        //    InvokeBD(query);
+        //    if (ChoiceCountry.SelectedItem.ToString() != "Любая")
+        //        DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
+        //}
+        
         private void InvokeBD(string query)
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
