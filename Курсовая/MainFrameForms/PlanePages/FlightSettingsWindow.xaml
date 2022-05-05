@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовая.MainFrameForms.SityBusPages"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="BusTicketOrderWindow" Height="500" Width="500" ResizeMode="NoResize" AllowsTransparency="True"
         Background="Transparent" WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown" Cursor="Arrow">
@@ -26,11 +25,11 @@
                             <ColumnDefinition Width="0.15*"></ColumnDefinition>
                             <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
+                        
                         <Border Grid.Column="0">
                             <Image Source="\Images\PlaneIcons\User.png" Width="25" Height="25"></Image>
                         </Border>
-
+                        
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -61,11 +60,11 @@
                             <ColumnDefinition Width="0.15*"></ColumnDefinition>
                             <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
+                        
                         <Border Grid.Column="0">
                             <Image Source="\Images\PlaneIcons\kid.png" Width="25" Height="25"></Image>
                         </Border>
-
+                        
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -96,11 +95,11 @@
                             <ColumnDefinition Width="0.15*"></ColumnDefinition>
                             <ColumnDefinition Width="0.8*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
+                        
                         <Border Grid.Column="0">
                             <Image Source="\Images\PlaneIcons\baby-boy.png" Width="25" Height="25"></Image>
                         </Border>
-
+                        
                         <Grid Grid.Column="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -123,7 +122,7 @@
                             <Button Grid.Column="4" Name="BabyBtnPlus" Click="BabyBtnPlus_Click" Content="+" Padding="0" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Button>
                         </Grid>
                     </Grid>
-
+                    
                     <TextBlock Text="Багаж" FontSize="18" FontWeight="Bold" Margin="0 0 0 10"></TextBlock>
                     <Grid Margin="0 0 0 10">
                         <Grid.ColumnDefinitions>
@@ -181,7 +180,6 @@
                         </Grid>
                     </Grid>
                 </StackPanel>
-
             </Border>
 
             <Grid Grid.Row="1" VerticalAlignment="Center">
