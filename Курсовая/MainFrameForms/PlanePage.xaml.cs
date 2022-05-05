@@ -50,7 +50,7 @@ namespace Курсовая.MainFrameForms
             ChangingDatePlane();
 
             Notification += navigation.Display;
-            
+
             Planes = GetDateFromBD();
             FillingChoiceCountry();
 
@@ -60,7 +60,7 @@ namespace Курсовая.MainFrameForms
         private void FillingChoiceCountry()
         {
             string query = "SELECT DISTINCT Direction FROM Plane";
-            SqlCommand command = new SqlCommand(query,data.GetConnection());
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try
             {
@@ -73,7 +73,7 @@ namespace Курсовая.MainFrameForms
                     reader.Close();
                 }
             }
-            catch (Exception) {}
+            catch (Exception) { }
             finally { data.CloseConnection(); }
 
         }
@@ -82,7 +82,7 @@ namespace Курсовая.MainFrameForms
         {
             List<Plane> planes = new List<Plane>();
             string query = "SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
-            SqlCommand command = new SqlCommand(query,data.GetConnection());
+            SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try
             {
@@ -96,7 +96,7 @@ namespace Курсовая.MainFrameForms
                             FlightName = (string)reader.GetValue(1),
                             Direction = (string)reader.GetValue(2),
                             Gate = Convert.ToString(reader.GetValue(3)),
-                            DepartureTime = Convert.ToDateTime(Convert.ToString(reader.GetValue(4)).Substring(0,5)),
+                            DepartureTime = Convert.ToDateTime(Convert.ToString(reader.GetValue(4)).Substring(0, 5)),
                             Status = (string)reader.GetValue(5),
                             DepartureDate = Convert.ToDateTime(reader.GetValue(6)),
                         });
@@ -151,7 +151,11 @@ namespace Курсовая.MainFrameForms
         private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.Show();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People", FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
         private void InsertDataInBD(List<Flight> flights)
         {
@@ -221,9 +225,10 @@ namespace Курсовая.MainFrameForms
             command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try { command.ExecuteNonQuery(); }
-            catch (Exception){ }
+            catch (Exception) { }
             data.CloseConnection();
         }
+
         private void ChangingDatePlane()
         {
             QueryBD($"DELETE FROM Plane WHERE (DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' OR DepartureDate < '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}')" +
@@ -246,45 +251,6 @@ namespace Курсовая.MainFrameForms
             }
             catch (Exception) { }
             finally { data.CloseConnection(); }
-        }
-
-        }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.ShowDialog();
-            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
-            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
-            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-=========
->>>>>>>>> Temporary merge branch 2
-        }
-
-        }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.ShowDialog();
-            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
-            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
-            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-=========
->>>>>>>>> Temporary merge branch 2
-        }
-
-        }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.ShowDialog();
-            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
-            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
-            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-=========
->>>>>>>>> Temporary merge branch 2
         }
         private void QueryBD(string query)
         {
@@ -311,15 +277,7 @@ namespace Курсовая.MainFrameForms
             if (ChoiceCountry.SelectedItem.ToString() != "Любая")
                 DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
         }
-        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
-            flightSettingsWindow.ShowDialog();
-            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
-            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
-            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
-        }
+
         private void InvokeBD(string query)
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
@@ -350,18 +308,18 @@ namespace Курсовая.MainFrameForms
             FlightsListBox.ItemsSource = Planes;
         }
 
-        private void DirectionBox_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
+        private void DirectionBox_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.CompanyProcessing(sender, e);
-        private void FlightBox_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
+        private void FlightBox_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.NameProcessing(sender, e);
-        private void TimeDeparture_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
+        private void TimeDeparture_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.TimeProcessing(sender, e);
 
         private void Box_TextChanged(object sender, TextChangedEventArgs e)
         {
             string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
                 $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
-            if (AirlineBox.Text!="")
+            if (AirlineBox.Text != "")
                 query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
                 $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
                 $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
@@ -369,7 +327,7 @@ namespace Курсовая.MainFrameForms
         }
         private void DirectionBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (DirectionBox.Text!=ChoiceCountry.SelectedItem.ToString())
+            if (DirectionBox.Text != ChoiceCountry.SelectedItem.ToString())
             {
                 string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
                 $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
@@ -383,9 +341,9 @@ namespace Курсовая.MainFrameForms
         }
         private void AirlineBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-           string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
-                $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
-                $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
+            string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +
+                 $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
+                 $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
             InvokeBD(query);
         }
 
@@ -423,9 +381,11 @@ namespace Курсовая.MainFrameForms
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try { command.ExecuteNonQuery(); }
-            catch(Exception) { return false; }
+            catch (Exception) { return false; }
             finally { data.CloseConnection(); }
             return true;
         }
     }
 }
+
+
