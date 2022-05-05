@@ -29,7 +29,8 @@ namespace Курсовая.MainFrameForms
     public partial class PlanePage : Page
     {
         public static string FlightClassString;
-
+        public static int PeopleCount { get; set; }
+        public static int AllLuggageCount { get; set; }
         private DataBase data;
         private IDataProcessing dataProcessing;
         private INavigation navigation;
@@ -39,6 +40,9 @@ namespace Курсовая.MainFrameForms
         public PlanePage()
         {
             InitializeComponent();
+            DataContext = this;
+            DayComboBox.SelectedIndex = 3;
+
 
             navigation = new ProgrammNavigation();
             dataProcessing = new DataProcessing();
@@ -268,6 +272,15 @@ namespace Курсовая.MainFrameForms
             InvokeBD(query);
             if (ChoiceCountry.SelectedItem.ToString() != "Любая")
                 DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
+        }
+        private void FlightSettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FlightSettingsWindow flightSettingsWindow = new FlightSettingsWindow();
+            flightSettingsWindow.ShowDialog();
+            TextBlock PeopleTb = (TextBlock)FlightSettingsBtn.Template.FindName("People",FlightSettingsBtn);
+            PeopleTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
+            TextBlock LuggageTb = (TextBlock)FlightSettingsBtn.Template.FindName("Luggage", FlightSettingsBtn);
+            LuggageTb.GetBindingExpression(TextBlock.TextProperty).UpdateTarget();
         }
         private void InvokeBD(string query)
         {
