@@ -14,7 +14,7 @@
         </ControlTemplate>
     </Page.Resources>
     <ScrollViewer>
-    <Grid Background="Gray">
+    <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition></RowDefinition>

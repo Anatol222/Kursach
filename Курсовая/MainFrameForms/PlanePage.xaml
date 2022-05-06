@@ -271,7 +271,7 @@
                     </Grid>
                 </Grid>
                 <ScrollViewer Grid.Row="1">
-                    <ListBox ItemsSource="{Binding Planes}" Template="{StaticResource AllowScroll}" ToolTip="kek" Name="FlightsListBox" SelectionChanged="FlightsListBox_SelectionChanged">
+                    <ListBox ItemsSource="{Binding Planes}" Template="{StaticResource AllowScroll}" Name="FlightsListBox" SelectionChanged="FlightsListBox_SelectionChanged">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem" >
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

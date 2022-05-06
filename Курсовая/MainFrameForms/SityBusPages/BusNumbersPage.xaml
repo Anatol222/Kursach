@@ -23,7 +23,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Button Name="BusNumberNav" Cursor="Hand" Height="50" Width="50" Click="BusNumberNav_Click" Style="{StaticResource TransparentBtnStyle}">
-                            <Border CornerRadius="20" Background="Orange" Height="50" Width="50">
+                            <Border CornerRadius="20" Background="Azure" Height="50" Width="50">
                                 <TextBlock Name="ListText" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Number}"></TextBlock>
                             </Border>
                         </Button>

@@ -22,7 +22,7 @@
     </Page.Resources>
     <Border CornerRadius="10">
         <Border.Background >
-            <SolidColorBrush Color="#a1b2c4"></SolidColorBrush>
+            <SolidColorBrush Color="LightGray"></SolidColorBrush>
         </Border.Background>
         <Grid Style="{x:Null}">
             <Grid.ColumnDefinitions>
@@ -60,8 +60,8 @@
                                     <Border.Background>
 
                                         <RadialGradientBrush Opacity="0.8">
-                                            <GradientStop Color="#ccd7e3" Offset="0"></GradientStop>
-                                            <GradientStop Color="#d3d9e0" Offset="1.5"></GradientStop>
+                                            <GradientStop Color="Azure" Offset="0"></GradientStop>
+                                            <GradientStop Color="Azure" Offset="1.5"></GradientStop>
                                         </RadialGradientBrush>
                                     </Border.Background>
                                     <Grid>
