@@ -107,6 +107,9 @@
     <Compile Include="MainFrameForms\PlanePage.xaml.cs">
       <DependentUpon>PlanePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainFrameForms\PlanePages\TrainStationsPage.xaml.cs">
+      <DependentUpon>TrainStationsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainFrameForms\SityBusPages\BusesOnStationPage.xaml.cs">
       <DependentUpon>BusesOnStationPage.xaml</DependentUpon>
     </Compile>
@@ -211,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\PlanePages\ClassChoiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainFrameForms\PlanePages\TrainStationsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -360,6 +367,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

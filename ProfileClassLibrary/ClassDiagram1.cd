@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProfileClassLibrary.User">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <InheritanceLine Type="ProfileClassLibrary.Person" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="2" Y="3.313" />
+        <Point X="2.5" Y="3.313" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAgAAAAAAACAAAAAAAABECAAAAIEggAAE=</HashCode>
+      <FileName>UserClasses\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.692" />
+  </Class>
+  <Class Name="ProfileClassLibrary.Person">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABUDFCAAAAAAAACAAAEAAEQAAAAAAgAAAAAAAAAAAAg=</HashCode>
+      <FileName>UserClasses\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProfileClassLibrary.BusketClasses.BucketItem">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAACAAJAAAIAASBAABAAAAAAAAQAQBAAAgAAAAA=</HashCode>
+      <FileName>BusketClasses\BucketItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProfileClassLibrary.BusketClasses.Bucket">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusketClasses\Buscket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProfileClassLibrary.DataBase">
+    <Position X="6.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAQAAEAAAAAAAABAAAAA=</HashCode>
+      <FileName>DataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ProfileClassLibrary.IAccount">
+    <Position X="4.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAgAAAAAAACAAAAAAAABEAAAAAIEggAAA=</HashCode>
+      <FileName>UserClasses\IAccount.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ProfileClassLibrary.Gender">
+    <Position X="4.5" Y="4.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQA=</HashCode>
+      <FileName>UserClasses\Person.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ProfileClassLibrary.BusketClasses.TransportType">
+    <Position X="6.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIgAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>BusketClasses\BucketItem.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9.6" />
+</ClassDiagram>

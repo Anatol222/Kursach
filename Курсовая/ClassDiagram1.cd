@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Курсовая.StartWindow" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAIAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StartWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrame" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAA4AAIEJAQAAAEACAAQIShAAAAIAAACEAYhQBRE=</HashCode>
+      <FileName>MainFrame.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainRoot" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgASAAAAAAAAIGEBAgAEAAgAAAAAAAgCAAAAABAA=</HashCode>
+      <FileName>StartWindowForms\MainRoot.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.PagesComeIn.ReserveInCome" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QhAEAAAAAAAcAAggAAAAAAAAAAAAQAAAAgBAgCAAAAE=</HashCode>
+      <FileName>PagesComeIn\ReserveInCome.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.PagesComeIn.ComeIn" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="Курсовая.PagesComeIn.ComeIn.InvoceMessageBox" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PagesComeIn\ComeIn.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QiZAAACACAAMIAQgEABAAQACAAAAQEAAAgBAAAAAAAk=</HashCode>
+      <FileName>PagesComeIn\ComeIn.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.PagesRegistration.Registration" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GgEAJESIKAAsIIAgEAFAEQBAAAgEQEAQAgZAAABAAIk=</HashCode>
+      <FileName>PagesRegistration\Registration.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.PagesRegistration.ConfirmEmail" Collapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QiUERASAIAAIAAhgAAkAEAAAAAUAMAAAAgDAggBAAAk=</HashCode>
+      <FileName>PagesRegistration\ConfirmEmail.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrameForms.BucketPage" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAABEAAAACAHAAAgAAAAAQAAEAABAAABIAAA=</HashCode>
+      <FileName>MainFrameForms\BucketPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrameForms.BusPage" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainFrameForms\BusPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrameForms.PlanePage" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AZAgIAGYAEAAAAAEAIIAABAAAAoAQCAIIgJSEAACAIQ=</HashCode>
+      <FileName>MainFrameForms\PlanePage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.ProfilePage" Collapsed="true">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>lCBAAAiYCAAEAAQCABQAAxAASBBIQAIAEyBABAAEQAg=</HashCode>
+      <FileName>MainFrameForms\ProfilePage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrameForms.SityBusPage" Collapsed="true">
+    <Position X="10" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAEAIAEAAAAAEQAAAARAgAAIAQAAgAABUAAABAAA=</HashCode>
+      <FileName>MainFrameForms\SityBusPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Курсовая.MainFrameForms.TrainPage" Collapsed="true">
+    <Position X="1.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAACAAEAAAAAAAAAIAAAACAAA=</HashCode>
+      <FileName>MainFrameForms\TrainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9.6" />
+</ClassDiagram>
