@@ -32,8 +32,8 @@
                         <ColumnDefinition Width="0.2*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="0.2*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="0.4*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="FirstStation" PreviewTextInput="Station_PreviewTextInput" Grid.Column="1" FontSize="20" materialDesign:HintAssist.Hint="Откуда" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         VerticalAlignment="Center" Margin="0"/>
@@ -62,6 +62,7 @@
                             <Button x:Name="Search" Height="35" Style="{StaticResource MaterialDesignRaisedButton}" Width="Auto" Content="Найти" Click="Search_Click" Background="LightGray" Foreground="Black" Cursor="Hand"></Button>
                         </Border>
                     </Grid>
+                    <DatePicker Grid.Column="6" FontSize="16" FontFamily="Bold" HorizontalAlignment="Left" x:Name="DepartureTrain" PreviewTextInput="DepartureTrain_PreviewTextInput"></DatePicker>
                 </Grid>
             </Border>
 
@@ -179,15 +180,15 @@
             <Grid Grid.Column="3" Grid.Row="1">
                 <materialDesign:Card Margin="0 15" MaxHeight="600" VerticalAlignment="Top">
                     <StackPanel>
-                        <Expander HorizontalAlignment="Stretch" Header="Тип сообщения">
+                        <Expander x:Name="SelectTypeTrein" HorizontalAlignment="Stretch" Header="Тип сообщения">
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                                <RadioButton GroupName="trainTypeRB" >
+                                <RadioButton GroupName="trainTypeRB" Name="Regional" Click="AllType_Click">
                                     <TextBlock Text="Региональные линии экономкласса" FontSize="16" TextWrapping="Wrap"></TextBlock>
                                 </RadioButton>
-                                <RadioButton GroupName="trainTypeRB">
+                                <RadioButton GroupName="trainTypeRB" Name="Interregional" Click="AllType_Click">
                                     <TextBlock Text="Межрегиональные линии экономкласса" FontSize="16" TextWrapping="Wrap"></TextBlock>
                                 </RadioButton>
-                                <RadioButton GroupName="trainTypeRB">
+                                <RadioButton GroupName="trainTypeRB" Name="AllType" Click="AllType_Click">
                                     <TextBlock Text="Все" FontSize="16" TextWrapping="Wrap"></TextBlock>
                                 </RadioButton>
                             </StackPanel>
@@ -196,14 +197,14 @@
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}" Padding="0" BorderBrush="{DynamicResource PrimaryHueMidBrush}" 
-                                                 Margin="4" IsChecked="True" Content="Отправление" />
+                                                 Margin="4" IsChecked="True" Content="Прибытие" />
                                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}" Padding="0" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-                                                 Margin="4" IsChecked="False" Content="Прибытие" />
+                                                 Margin="4" IsChecked="False" Content="Отправление" Click="DepArrival_Click"/>
                                 </StackPanel>
-                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="Утро (с 06.00 - 11.59)" FontSize="14"></RadioButton>
-                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="День (с 12.00 - 17.59)" FontSize="14"></RadioButton>
-                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="Вечер (с 18.00 - 23.59)" FontSize="14"></RadioButton>
-                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="Ночь (с 00.00 - 05.59)" FontSize="14"></RadioButton>
+                                <RadioButton GroupName="TimeRB" Name="TimeArrival" Margin="0 0 0 10" Content="Утро (с 06.00 - 11.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>
+                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="День (с 12.00 - 17.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>
+                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="Вечер (с 18.00 - 23.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>
+                                <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="Ночь (с 00.00 - 05.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>
                             </StackPanel>
                         </Expander>
 

@@ -150,9 +150,6 @@
     <Compile Include="MainFrameForms\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeleteAfter.xaml.cs">
-      <DependentUpon>DeleteAfter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PagesComeIn\ComeIn.xaml.cs" />
     <Compile Include="MainFrameForms\SityBusPage.xaml.cs">
       <DependentUpon>SityBusPage.xaml</DependentUpon>
@@ -263,10 +260,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainFrameForms\ChangePassword.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeleteAfter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

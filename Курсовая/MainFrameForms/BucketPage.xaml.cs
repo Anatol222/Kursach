@@ -45,7 +45,7 @@ namespace Курсовая.MainFrameForms
             bool overueTicket = default;
             for (int i = 0; i < Bucket.Count; i++)
             {
-                if (Bucket[i].TicketWhichTransport == 1)
+                if (Bucket[i].TicketWhichTransport == 1 || Bucket[i].TicketWhichTransport == 0)
                     if ((Bucket[i].DepartureDate <= DateTime.Now 
                         && ((Bucket[i].DepartureTime.Hour <= DateTime.Now.Hour && Bucket[i].DepartureTime.Minute <= DateTime.Now.Minute) || Bucket[i].DepartureTime.Hour < DateTime.Now.Hour)
                         && Bucket[i].DepartureDate.Day <= DateTime.Now.Day && Bucket[i].DepartureDate.Month <= DateTime.Now.Month && Bucket[i].DepartureDate.Year <= DateTime.Now.Year)
