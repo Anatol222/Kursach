@@ -70,7 +70,7 @@
         </Style>
 
     </Page.Resources>
-    <Border CornerRadius="10" Background="#3a3b3b" >
+    <Border CornerRadius="10" Background="Gray" >
 
         <Grid >
             <Grid.ColumnDefinitions>
@@ -254,10 +254,10 @@
             </Grid>
             <Grid Grid.Row="7" Grid.Column="5" >
                 <Border Padding="0 30 0 0">
-                    <Button x:Name="ButtonChangePassword" Content="Изменить пароль" IsEnabled="False" Click="ToChangePassword_Click" MaxHeight="50" Style="{StaticResource ChangePassBtn}" Cursor="Hand"></Button>
+                    <Button x:Name="ButtonChangePassword" Content="Изменить пароль" Background="Azure" IsEnabled="False" Click="ToChangePassword_Click" MaxHeight="50" Style="{StaticResource ChangePassBtn}" Cursor="Hand"></Button>
                 </Border>
             </Grid>
-            <Border Background="Gray" Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="7" Panel.ZIndex="-1"></Border>
+            <Border Background="LightGray" Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="7" Panel.ZIndex="-1"></Border>
             
         </Grid>
     </Border>

@@ -142,7 +142,6 @@ namespace Курсовая.MainFrameForms
                 ConfirmBuyTicket = false;
             }
             CountOfTickets = 0;
-
         }
         private bool AddTicketIntoBD(string query)
         {

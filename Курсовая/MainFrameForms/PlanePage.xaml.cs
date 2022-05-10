@@ -2,24 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using Курсовая.Setting;
-using Newtonsoft.Json;
 using Курсовая.MainFrameForms.PlanePages;
 using Курсовая.MainFrameForms.SityBusPages;
 using Курсовая.ProgrammInterface;
@@ -35,6 +25,10 @@ namespace Курсовая.MainFrameForms
         private DataBase data;
         private IDataProcessing dataProcessing;
         private INavigation navigation;
+        private IDataBaseUserDataVerification userDataVerification;
+
+        private delegate void InvoceWarningBox(string content, string buttonText);
+        private event InvoceWarningBox Warning;
 
         private delegate void InvoceMessageBox(string messange);
         private event InvoceMessageBox Notification;
@@ -192,7 +186,7 @@ namespace Курсовая.MainFrameForms
                         if (dataTable.Rows.Count > 0)
                             access = true;
                     }
-                    if (access && item.status.title != "Вылетел")
+                    if (access && item.status.title != "Вылетел" && item.status.title != "Отменен")
                     {
                         if (item.numbers_gate.Length != 0)
                         {
@@ -254,7 +248,7 @@ namespace Курсовая.MainFrameForms
         }
         private void ChangingDatePlane()
         {
-            QueryBD($"DELETE FROM Plane WHERE (DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND DepartureDate <= '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}');");
+            QueryBD($"DELETE FROM Plane WHERE ((DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND DepartureDate <= '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}') OR DepartureDate < '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}');");
             string query = $"SELECT * FROM Plane WHERE Landing IS NOT NULL;";
             SqlCommand command = new SqlCommand(query, data.GetConnection());
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -281,23 +275,6 @@ namespace Курсовая.MainFrameForms
             catch (Exception) { }
             finally { data.CloseConnection(); }
         }
-
-        //private void ChoiceCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-        //        $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%';";
-        //    if (AirlineBox.Text != "")
-        //    {
-        //        query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{ChoiceCountry.SelectedItem.ToString()}%'" +
-        //          $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' " +
-        //          $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
-        //    }
-        //    if (ChoiceCountry.SelectedItem.ToString() == "Любая")
-        //        query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate FROM Plane;";
-        //    InvokeBD(query);
-        //    if (ChoiceCountry.SelectedItem.ToString() != "Любая")
-        //        DirectionBox.Text = ChoiceCountry.SelectedItem.ToString();
-        //}
         
         private void InvokeBD(string query)
         {
@@ -411,9 +388,7 @@ namespace Курсовая.MainFrameForms
             else
                 Notification?.Invoke("Билетов в таком количестве нет");
         }
-        private IDataBaseUserDataVerification userDataVerification;
-        private delegate void InvoceWarningBox(string content, string buttonText);
-        private event InvoceWarningBox Warning;
+        
         private void ByTicket_Click(object sender, RoutedEventArgs e)
         {
             Warning?.Invoke("Вы уверены, что хотите приобрести билет?", "Купить");
@@ -474,8 +449,6 @@ namespace Курсовая.MainFrameForms
                 $"AND Flight LIKE '%{FlightBox.Text}%' AND DepartureTime LIKE '%{TimeDeparture.Text}%' {dateSelect}'" +
                 $"AND (AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%') OR AirlineId = (SELECT TOP 1 Id FROM Airline WHERE Company LIKE '%{AirlineBox.Text}%' ORDER BY Id DESC));";
             InvokeBD(query);
-
-
         }
     }
 }

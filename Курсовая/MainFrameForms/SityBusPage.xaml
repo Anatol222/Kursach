@@ -17,7 +17,7 @@
                 <RowDefinition Height="0.15*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Background="Beige" CornerRadius="10" BorderThickness="1" BorderBrush="Black">
+            <Border Grid.Row="0" Background="Azure" CornerRadius="10" BorderThickness="1" BorderBrush="Black">
                 <Grid Margin="10 0 10 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -36,7 +36,7 @@
                             <ColumnDefinition Width="15"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Height="40" Name="ByTicket" Click="ByTicket_Click" Background="#eef090" Visibility="Hidden" Foreground="Black"
+                        <Button Grid.Column="0" Height="40" Name="ByTicket" Click="ByTicket_Click" Background="LightGray" Visibility="Hidden" Foreground="Black"
                              Style="{StaticResource MaterialDesignRaisedButton}"
                              materialDesign:ButtonAssist.CornerRadius="10"
                              Content="Купить билет"
@@ -47,12 +47,12 @@
                             <materialDesign:PackIcon Width="20" Height="20"  Kind="CartPlus" ></materialDesign:PackIcon>
                         </Button>
                         <Border Grid.Column="4" Name="BackBorder" Visibility="Hidden" Cursor="Hand">
-                            <Button Name="BackBtn" Width="Auto" Content="Назад" Click="BackBtn_Click" Cursor="Hand"></Button>
+                            <Button Name="BackBtn" Width="Auto" Content="Назад" Click="BackBtn_Click" Background="LightGray" Foreground="Black" Cursor="Hand"></Button>
                         </Border>
                     </Grid>
                 </Grid>
             </Border>
-            <Frame Name="BusSheduleFrame" Grid.Row="1" />
+            <Frame Name="BusSheduleFrame" Grid.Row="1" Background="LightGray" />
         </Grid>
     </Border>
 </Page>

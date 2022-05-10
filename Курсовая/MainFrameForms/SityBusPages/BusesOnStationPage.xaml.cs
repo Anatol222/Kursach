@@ -11,9 +11,9 @@ namespace Курсовая.MainFrameForms.SityBusPages
     {
         private DataBase data;
 
-        private Frame BusSheduleFrame;
-        private Button ByTicket;
-        private Button GoToBucket;
+        //private Frame BusSheduleFrame;
+        //private Button ByTicket;
+        //private Button GoToBucket;
         public List<BusTimeTable> BusList { get; set; }
         public BusesOnStationPage(Frame frame, Button ByTicket, Button GoToBucket, string busStop, string city)
         {
