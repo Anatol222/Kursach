@@ -78,10 +78,8 @@ namespace Курсовая
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) =>
             this.DragMove();
 
-        private void MainFrame_Loaded(object sender, RoutedEventArgs e)
-        {
-            PagesNavigation.Navigate(SityBusPage);
-        }
+        private void MainFrame_Loaded(object sender, RoutedEventArgs e)=>
+            PagesNavigation.Navigate(PlanePage);
 
         private void Minimize_Click(object sender, RoutedEventArgs e)=>
             WindowState = WindowState.Minimized;
