@@ -4,7 +4,7 @@ namespace ProfileClassLibrary.TrainClasses
 {
     public class Train
     {
-        public Train(string trainType, string trainNumber, string trainRoute, DateTime departureTime, string departureSity, DateTime arrivalTime, string arrivalSity, TimeSpan durationTime)
+        public Train(string trainType, string trainNumber, string trainRoute, DateTime departureTime, string departureSity, DateTime arrivalTime, string arrivalSity, TimeSpan durationTime, int idTrain)
         {
             this.trainType = trainType;
             this.trainNumber = trainNumber;
@@ -14,6 +14,7 @@ namespace ProfileClassLibrary.TrainClasses
             this.arrivalTime = arrivalTime;
             this.arrivalSity = arrivalSity;
             this.durationTime = durationTime;
+            IdTrain = idTrain;
         }
         public string trainType { get; set; }
         public string trainNumber { get; set; }
@@ -24,5 +25,6 @@ namespace ProfileClassLibrary.TrainClasses
         public DateTime arrivalTime { get; set; }
         public string arrivalSity { get; set; }
         public TimeSpan durationTime { get; set; }
+        public int IdTrain { get; set; }
     }
 }

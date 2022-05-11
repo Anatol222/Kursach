@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Курсовая.MainFrameForms.PlanePages;
 using Курсовая.MainFrameForms.SityBusPages;
 using Курсовая.ProgrammInterface;
 using Курсовая.Setting;
@@ -31,22 +32,34 @@ namespace Курсовая.MainFrameForms
 
         private CountOfBusTickets countOfBusTickets;
 
-        public TrainPage()
+        public TrainPage(List<Train> trains)
         {
             InitializeComponent();
-            DataContext= this;
+            Trains = trains.ToList();
+            Constructor();
+        }
+        private void Constructor()
+        {
+            DataContext = this;
 
             navigation = new ProgrammNavigation();
             userDataVerification = new UserDataVerification();
+            dataProcessing = new DataProcessing();
+
             Notification = navigation.Display;
             Warning = userDataVerification.Display;
             TicketEvent = Display;
 
-            dataProcessing = new DataProcessing();
-            Trains = StartTrain();
             DepartureTrain.DisplayDateStart = DateTime.Now;
             DepartureTrain.Text = DateTime.Now.ToShortDateString();
             ReserveListTrains = Trains.ToList();
+
+        }
+        public TrainPage()
+        {
+            InitializeComponent();
+            Trains = StartTrain();
+            Constructor();
         }
         public void Display(string buttonContent)
         {
@@ -98,7 +111,7 @@ namespace Курсовая.MainFrameForms
         private List<Train> StartTrain()
         {
             List<Train> trainList = new List<Train>();
-            string query = "SELECT NameTrain,Direction,Departure,Arrival,TrainType FROM Train;";
+            string query = "SELECT NameTrain,Direction,Departure,Arrival,TrainType,Id FROM Train;";
             SqlCommand command = new SqlCommand(query,data.GetConnection());
             data.OpenConnection();
             try
@@ -111,7 +124,7 @@ namespace Курсовая.MainFrameForms
                             string[] city = ((string)reader.GetValue(1)).Replace(" - ", "!").Split('!');
                             DateTime departure = Convert.ToDateTime(Convert.ToString(reader.GetValue(2)).Substring(0, 5));
                             DateTime arrival = Convert.ToDateTime(Convert.ToString(reader.GetValue(3)).Substring(0,5));
-                            trainList.Add(new Train((string)reader.GetValue(4),(string)reader.GetValue(0), (string)reader.GetValue(1), departure,city[0], arrival,city[1], arrival-departure));
+                            trainList.Add(new Train((string)reader.GetValue(4),(string)reader.GetValue(0), (string)reader.GetValue(1), departure,city[0], arrival,city[1], arrival-departure,Convert.ToInt32(reader.GetValue(5))));
                         }
                         catch (Exception) { }
             }
@@ -137,7 +150,7 @@ namespace Курсовая.MainFrameForms
                                 while (reader.Read())
                                     try
                                     {
-                                        trains.Add(new Train((string)reader.GetValue(2), (string)reader.GetValue(0), (string)reader.GetValue(1), firstStation.DTime, firstStation.Station, secondStation.DTime, secondStation.Station, secondStation.DTime - firstStation.DTime));
+                                        trains.Add(new Train((string)reader.GetValue(2), (string)reader.GetValue(0), (string)reader.GetValue(1), firstStation.DTime, firstStation.Station, secondStation.DTime, secondStation.Station, secondStation.DTime - firstStation.DTime, firstStation.TrainId));
                                     }
                                     catch (Exception) { }
                         }
@@ -346,6 +359,15 @@ namespace Курсовая.MainFrameForms
                     Trains = Trains.Where(x => x.arrivalTime.Hour >= 00 && x.arrivalTime.Hour < 6).ToList();
             }
             FlightsListBox.ItemsSource = Trains;
+        }
+
+        private void NaviStation_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new TrainStationsPage(Trains[FlightsListBox.SelectedIndex].IdTrain, Trains[FlightsListBox.SelectedIndex].trainRoute, Trains, Trains[FlightsListBox.SelectedIndex].trainType));
+            }
+            catch (Exception) { }
         }
     }
 }

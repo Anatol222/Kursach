@@ -29,7 +29,7 @@
                     <TextBlock x:Name="TrainTypeTb" FontSize="18" FontWeight="Medium" Text="Региональные линии экономкласса"></TextBlock>
                     <TextBlock x:Name="TrainNameTb" FontSize="26" TextWrapping="Wrap" FontWeight="Medium" Text="6359, Лунинец — Брест-Центральный"></TextBlock>
                 </StackPanel>
-                <Button Grid.Column="3" Cursor="Hand" Margin="30 0" MaxWidth="200" Height="35" BorderBrush="Blue" Foreground="White" FontSize="16" Background="#4a59ea" BorderThickness="1">Назад</Button>
+                <Button Grid.Column="3" Cursor="Hand" Name="Close" Click="Close_Click" Margin="30 0" MaxWidth="200" Height="35" BorderBrush="Blue" Foreground="White" FontSize="16" Background="#4a59ea" BorderThickness="1">Назад</Button>
             </Grid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
                 
             </Grid>
             <ScrollViewer Grid.Row="4">
-                <ListBox ItemsSource="{Binding Trains}" Name="FlightsListBox">
+                <ListBox ItemsSource="{Binding Trains}" Name="FlightsListBox" >
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -87,10 +87,10 @@
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" x:Name="StationTb" FontSize="16" FontWeight="Medium" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Grid.Column="1" x:Name="ArriveTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Grid.Column="2" x:Name="DepartureTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Grid.Column="3" x:Name="DurationTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Text="{Binding Station}" Foreground="Black" x:Name="StationTb" FontSize="16" FontWeight="Medium" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="1" Text="{Binding Arrival}" x:Name="ArriveTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="2" Text="{Binding Departure}" x:Name="DepartureTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="3" Text="{Binding TrainStop}" x:Name="DurationTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     <TextBlock Grid.Column="4" x:Name="OnTheWayTimeTb" FontSize="16" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                                     
                                 </Grid>

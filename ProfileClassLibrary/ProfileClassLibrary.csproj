@@ -60,6 +60,7 @@
     <Compile Include="PlaneClass\DataMemberAttribute.cs" />
     <Compile Include="PlaneClass\Flight.cs" />
     <Compile Include="PlaneClass\Plane.cs" />
+    <Compile Include="TrainClasses\RouteStation.cs" />
     <Compile Include="TrainClasses\Train.cs" />
     <Compile Include="TrainClasses\TrainStation.cs" />
     <Compile Include="UserClasses\IAccount.cs" />

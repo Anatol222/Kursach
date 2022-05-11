@@ -8,7 +8,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrainPage">
-
+    <Page.Resources>
+        <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
+    </Page.Resources>
     <Border CornerRadius="20" Background="LightGray">
 
         <Grid>
@@ -109,7 +113,7 @@
 
                 <!--List body-->
                 <ScrollViewer Grid.Row="1">
-                    <ListBox  ItemsSource="{Binding Trains}" SelectionChanged="FlightsListBox_SelectionChanged"  Name="FlightsListBox">
+                    <ListBox  ItemsSource="{Binding Trains}" Template="{StaticResource AllowScroll}" SelectionChanged="FlightsListBox_SelectionChanged"  Name="FlightsListBox">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -144,7 +148,7 @@
                                                 <!--<Hyperlink Cursor="Hand" Name="TrainNameHL" Click="TrainNameHL_Click"></Hyperlink>-->
                                                 <TextBlock TextWrapping="Wrap" FontSize="16" Foreground="CornflowerBlue" FontWeight="Bold" Text="{Binding trainName}"></TextBlock>
                                             </Button>
-                                            <Button Grid.Row="2" HorizontalAlignment="Left" Margin="10 0 0 10" Cursor="Hand" Style="{StaticResource TransparentBtn}">
+                                            <Button Grid.Row="2" x:Name="NaviStation" Click="NaviStation_Click" HorizontalAlignment="Left" Margin="10 0 0 10" Cursor="Hand" Style="{StaticResource TransparentBtn}">
                                                 <TextBlock Text="Маршрут" Foreground="Black" TextDecorations="Underline"></TextBlock>
                                             </Button>
                                         </Grid>
