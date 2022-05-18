@@ -16,9 +16,11 @@ namespace Курсовая.MainFrameForms
     public partial class TrainPage : Page
     {
         private DataBase data = new DataBase();
-        private IDataProcessing dataProcessing;
+        private CountOfBusTickets countOfBusTickets;
 
+        private IDataProcessing dataProcessing;
         private INavigation navigation;
+        private IWorkWithBusList workWithBusList;
         private IDataBaseUserDataVerification userDataVerification;
 
         private delegate void InvoceMessageBox(string messange);
@@ -30,7 +32,8 @@ namespace Курсовая.MainFrameForms
         private delegate void InvoceCountTicketsBox(string buttonContent);
         private event InvoceCountTicketsBox TicketEvent;
 
-        private CountOfBusTickets countOfBusTickets;
+        public List<Train> Trains { get; set; }
+        private List<Train> ReserveListTrains { get; set; }
 
         public TrainPage(List<Train> trains)
         {
@@ -38,6 +41,7 @@ namespace Курсовая.MainFrameForms
             Trains = trains.ToList();
             Constructor();
         }
+
         private void Constructor()
         {
             DataContext = this;
@@ -45,7 +49,7 @@ namespace Курсовая.MainFrameForms
             navigation = new ProgrammNavigation();
             userDataVerification = new UserDataVerification();
             dataProcessing = new DataProcessing();
-
+            workWithBusList = new WorkWithBusList();
             Notification = navigation.Display;
             Warning = userDataVerification.Display;
             TicketEvent = Display;
@@ -53,14 +57,15 @@ namespace Курсовая.MainFrameForms
             DepartureTrain.DisplayDateStart = DateTime.Now;
             DepartureTrain.Text = DateTime.Now.ToShortDateString();
             ReserveListTrains = Trains.ToList();
-
         }
+
         public TrainPage()
         {
             InitializeComponent();
-            Trains = StartTrain();
+            Trains = GetDataForOptimization.StartTrains;
             Constructor();
         }
+
         public void Display(string buttonContent)
         {
             if (countOfBusTickets != null)
@@ -68,26 +73,7 @@ namespace Курсовая.MainFrameForms
             countOfBusTickets = new CountOfBusTickets(buttonContent);
             countOfBusTickets.ShowDialog();
         }
-        public List<Train> Trains { get; set; }
-        private List<Train> ReserveListTrains { get; set; }
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void RouteHL_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TrainNameHL_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void trainRoute_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public List<TrainStation> GetStation(string query, string station)
         {
             List<TrainStation> trainStations = new List<TrainStation>();
@@ -107,29 +93,6 @@ namespace Курсовая.MainFrameForms
             catch (Exception ) { }
             finally { data.CloseConnection(); }
             return trainStations;
-        }
-        private List<Train> StartTrain()
-        {
-            List<Train> trainList = new List<Train>();
-            string query = "SELECT NameTrain,Direction,Departure,Arrival,TrainType,Id FROM Train;";
-            SqlCommand command = new SqlCommand(query,data.GetConnection());
-            data.OpenConnection();
-            try
-            {
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                    while (reader.Read())
-                        try
-                        {
-                            string[] city = ((string)reader.GetValue(1)).Replace(" - ", "!").Split('!');
-                            DateTime departure = Convert.ToDateTime(Convert.ToString(reader.GetValue(2)).Substring(0, 5));
-                            DateTime arrival = Convert.ToDateTime(Convert.ToString(reader.GetValue(3)).Substring(0,5));
-                            trainList.Add(new Train((string)reader.GetValue(4),(string)reader.GetValue(0), (string)reader.GetValue(1), departure,city[0], arrival,city[1], arrival-departure,Convert.ToInt32(reader.GetValue(5))));
-                        }
-                        catch (Exception) { }
-            }
-            catch (Exception ) { }
-            return trainList;
         }
         private List<Train> GetTrains(List<TrainStation> first, List<TrainStation> second)
         {
@@ -161,7 +124,6 @@ namespace Курсовая.MainFrameForms
             }
             return trains;
         }
-
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             string query = $"SELECT Id,TrainId,Departure,Station FROM TrainRoute WHERE Station LIKE '%{FirstStation.Text}%';";
@@ -244,19 +206,25 @@ namespace Курсовая.MainFrameForms
             TicketEvent?.Invoke("Добавить");
             if (SityBusPage.CountOfTickets > 0)
             {
-                string [] date = DepartureTrain.Text.Split('.');
-                string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
-                    $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[1]}-{date[0]}-{date[2]}', 0, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
-                if (AddTicketIntoBD(query))
-                    Notification?.Invoke("Билет добавлен в корзину, не забудьте оплатить");
-                else
-                    Notification?.Invoke("Возникла ошибка при добавлении билета");
+                try
+                {
+                    string[] date = DepartureTrain.Text.Split('.');
+                    string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
+                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[0]}-{date[1]}-{date[2]}', 0, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
+                    if (AddTicketIntoBD(query))
+                    {
+                        Notification?.Invoke("Билет добавлен в корзину, не забудьте оплатить");
+                        MainFrame.BasketItemsCount += 1;
+                        MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+                        Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
+                        badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+                        SityBusPage.CountOfTickets = 0;
+                    }
+                    else
+                        Notification?.Invoke("Возникла ошибка при добавлении билета");
+                }
+                catch (Exception) { }
             }
-            MainFrame.BasketItemsCount += 1;
-            MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
-            Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
-            badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
-            SityBusPage.CountOfTickets = 0;
         }
 
         private void ByTicket_Click(object sender, RoutedEventArgs e)
@@ -267,19 +235,23 @@ namespace Курсовая.MainFrameForms
                 Warning?.Invoke("Вы уверены, что хотите приобрести билет?", "Купить");
                 if (SityBusPage.ConfirmBuyTicket)
                 {
-                    string[] date = DepartureTrain.Text.Split('.');
-                    string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
-                    $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[1]}-{date[0]}-{date[2]}', 1, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
-                    if (AddTicketIntoBD(query))
+                    try
                     {
-                        Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
-                        MainFrame.BasketItemsCount += 1;
-                        MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
-                        Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
-                        badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+                        string[] date = DepartureTrain.Text.Split('.');
+                        string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
+                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[0]}-{date[1]}-{date[2]}', 1, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
+                        if (AddTicketIntoBD(query))
+                        {
+                            Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");
+                            MainFrame.BasketItemsCount += 1;
+                            MainFrame.basketButton.GetBindingExpression(TagProperty).UpdateTarget();
+                            Badged badged = (Badged)MainFrame.basketButton.Template.FindName("basketItemsCount", MainFrame.basketButton);
+                            badged.GetBindingExpression(Badged.BadgeProperty).UpdateTarget();
+                        }
+                        else
+                            Notification?.Invoke("Возникла ошибка при покупке билета");
                     }
-                    else
-                        Notification?.Invoke("Возникла ошибка при покупке билета");
+                    catch (Exception) { }
                 }
                 SityBusPage.ConfirmBuyTicket = false;
             }
@@ -322,8 +294,10 @@ namespace Курсовая.MainFrameForms
                 FlightsListBox.ItemsSource = Trains;
             }
         }
+
         private List<Train> ReserveListDeparture { get; set; } = new List<Train>();
         private bool _depArrival { get; set; }
+
         private void DepArrival_Click(object sender, RoutedEventArgs e)
         {
             if ((string)((RadioButton)sender).Content == "Отправление")
@@ -331,6 +305,7 @@ namespace Курсовая.MainFrameForms
             else if((string)((RadioButton)sender).Content == "Прибытие")
                 _depArrival= false;
         }
+
         private void TimeArrival_Click(object sender, RoutedEventArgs e)
         {
             if (ReserveListDeparture.Count==0)
@@ -369,5 +344,7 @@ namespace Курсовая.MainFrameForms
             }
             catch (Exception) { }
         }
+
+        private void FlightsListBox_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)=> workWithBusList.BucketListBoxFirst(sender, e);
     }
 }

@@ -22,8 +22,9 @@ namespace Курсовая.MainFrameForms
         private event InvoceMessageBox Notification;
 
         public List<BucketItem> _bucket;
-        public static int BasketItemsCount { get; set; }
         public List<BucketItem> Bucket { get { return _bucket; } set { _bucket = value; } }
+        public static int BasketItemsCount { get; set; }
+
         public BucketPage()
         {
             InitializeComponent();
@@ -34,12 +35,14 @@ namespace Курсовая.MainFrameForms
             navigation = new ProgrammNavigation();
 
             Notification = navigation.Display;
-
+            
             _bucket = (new Bucket()).GetItems(MainFrame.user.Email, dataBase.GetConnection());
-            DeleteOverdueTickets();
-            BasketItemsCount = _bucket.Count;
 
+            DeleteOverdueTickets();
+
+            BasketItemsCount = _bucket.Count;
         }
+
         private async void DeleteOverdueTickets()
         {
             bool overueTicket = default;
@@ -84,9 +87,7 @@ namespace Курсовая.MainFrameForms
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
                 if (child != null && child is childItem)
-                {
                     return (childItem)child;
-                }
                 else
                 {
                     childItem childOfChild = FindVisualChild<childItem>(child);
@@ -106,14 +107,11 @@ namespace Курсовая.MainFrameForms
                 ((Image)(((Button)sender).Content)).GetBindingExpression(Image.SourceProperty).UpdateTarget();
                 
                 ListBoxItem myListBoxItem = (ListBoxItem)(BucketListBox.ItemContainerGenerator.ContainerFromItem(BucketListBox.Items.CurrentItem));
-                // Getting the ContentPresenter of myListBoxItem
                 ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
                 
-                // Finding textBlock from the DataTemplate that is set on that ContentPresenter
                 DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
                 Button RemoveBtn = (Button)myDataTemplate.FindName("RemoveBtn", myContentPresenter);
                 ((Image)(RemoveBtn.Content)).GetBindingExpression(Image.SourceProperty).UpdateTarget();
-                
 
                 new NotificationWindow("Вы успешно оплатили билет. Приятной поездки!").ShowDialog();
                 string query = $"UPDATE ShoppingBasket SET TicketStatus = 1 WHERE Id = {Bucket[BucketListBox.SelectedIndex].Id}; ";

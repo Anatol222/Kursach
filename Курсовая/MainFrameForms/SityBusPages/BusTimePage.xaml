@@ -82,9 +82,9 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Border Grid.Column="1" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="15">
-                <TextBlock x:Name="InfoBus" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       FontSize="25"></TextBlock>
+            <Border Grid.Column="1" CornerRadius="40" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="25 0">
+                <TextBlock x:Name="InfoBus" TextWrapping="Wrap" FontWeight="Medium" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="22"></TextBlock>
             </Border>
         </Grid>
 

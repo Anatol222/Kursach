@@ -9,7 +9,7 @@ namespace ProfileClassLibrary
 {
     public class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-HOHELQO;Initial Catalog=allData;Integrated Security=True");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=Zver;Initial Catalog=allData;Integrated Security=True");
         public void OpenConnection()
         {
             if (sqlConnection.State == System.Data.ConnectionState.Closed)

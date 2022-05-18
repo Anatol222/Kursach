@@ -37,14 +37,8 @@ namespace ConsoleFree
                 smtp.EnableSsl = true;
                 smtp.Send(message);
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Почта перегружена");
-            }
-            
-
+            catch (Exception){MessageBox.Show("Почта перегружена");}
         }
-        //tolya.bob@inbox.ru
         public void SendMessageNewPassword(string password,string email)
         {
             try
@@ -63,10 +57,7 @@ namespace ConsoleFree
                 smtp.EnableSsl = true;
                 smtp.Send(message);
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Почта перегружена");
-            }
+            catch (Exception){MessageBox.Show("Почта перегружена");}
         }
         public string CreatingPassword()
         {

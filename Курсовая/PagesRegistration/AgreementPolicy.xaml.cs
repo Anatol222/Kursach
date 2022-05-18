@@ -83,8 +83,5 @@ namespace Курсовая.PagesRegistration
             }
             dataBase.CloseConnection();
         }
-
-        
-       
     }
 }

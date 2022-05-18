@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 
 namespace Курсовая
 {
-    
     public partial class ChangePassword : Window
     {
         private CipherPassword cipherPassword;
@@ -19,7 +18,11 @@ namespace Курсовая
         private IRegComeIn regComeIn;
         private INavigation navigation;
 
+        private delegate void InvoceMessageBox(string message);
+        private event InvoceMessageBox Notification;
+
         public static bool IsChangePasswor { get; private set; }
+
         public ChangePassword()
         {
             InitializeComponent();
@@ -37,9 +40,6 @@ namespace Курсовая
 
             Notification += navigation.Display;
         }
-
-        private delegate void InvoceMessageBox(string message);
-        private event InvoceMessageBox Notification;
 
         private void PasswordChacking_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.PasswordProcessing(sender, e);
@@ -76,10 +76,7 @@ namespace Курсовая
                         else
                             Notification?.Invoke("Не удается обновить пароль");
                     }
-                    catch (System.Exception)
-                    {
-                        return false;
-                    }
+                    catch (System.Exception) { return false;}
                 }
                 else
                     Notification?.Invoke("Новый пароль не совпадает, или не соответствует требованием");
@@ -89,11 +86,9 @@ namespace Курсовая
             return false;
         }
 
-        //Имя кнопки -ShowOrHidePassword
         private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e) =>
             regComeIn.ShowOrHidePassword(OldTextBox, OldPasswordBox, ShowOrHidePassword);
 
-        //Имя кнопки - ShowOrHideNewPassword
         private void ShowOrHidТNewePassword_Click(object sender, RoutedEventArgs e) =>
             regComeIn.ShowOrHidePassword(NewTextBox, NewPasswordBox, ShowOrHideNewPassword);
     }

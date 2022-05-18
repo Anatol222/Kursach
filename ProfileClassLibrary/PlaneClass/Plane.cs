@@ -5,6 +5,14 @@ namespace ProfileClassLibrary.PlaneClass
 {
     public class Plane
     {
+        public string ImagePath { get; set; }
+        public string FlightName { get; set; }
+        public string Direction { get; set; }
+        public string Gate { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public string Status { get; set; }
+
         public Plane(int airlineId)
         {
             string imageName = default;
@@ -25,12 +33,5 @@ namespace ProfileClassLibrary.PlaneClass
             else if (imageName == "Аэрофлот")
                 ImagePath = "https://airport.by/upload/images/3a4144634cb5678c4c6fb1aad958c551.png";
         }
-        public string ImagePath { get; set; }
-        public string FlightName { get; set; }
-        public string Direction { get; set; }
-        public string Gate { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public DateTime DepartureDate { get; set; }
-        public string Status { get; set; }
     }
 }

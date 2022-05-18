@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProfileClassLibrary.PlaneClass
+﻿namespace ProfileClassLibrary.PlaneClass
 {
     [DataContract]
     public class Flight
@@ -19,22 +13,24 @@ namespace ProfileClassLibrary.PlaneClass
         public Status status { get; set; }
         [DataMember]
         public Airline airline { get; set; }
-        
         [DataMember]
         public string[] numbers_gate { get; set; }
     }
+
     [DataContract]
     public class Airport
     {
         [DataMember]
         public string title { get; set; }
     }
+
     [DataContract]
     public class Status
     {
         [DataMember]
         public string title { get; set; }
     }
+
     [DataContract]
     public class Airline
     {
@@ -43,6 +39,7 @@ namespace ProfileClassLibrary.PlaneClass
         [DataMember]
         public Logo logo { get; set; }
     }
+
     [DataContract]
     public class Logo
     {

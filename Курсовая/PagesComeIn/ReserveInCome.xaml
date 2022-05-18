@@ -13,37 +13,37 @@
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="ReserveInCome" Height="449" Width="440">
-    <Border CornerRadius="50" Background="#d8edf0" BorderBrush="LightGreen" BorderThickness="2">
+    <Border CornerRadius="10" Background="#9bb4e8" >
         <Grid>
-            <TextBlock FontSize="16"  Text="   Для смены пароля и почты вам необходимо ввести код, который мы отправили на вашу резервную почту. После подверждения кода, он станет вашым паролем, который мы рекомендуем изменить в учётной записи, и резервная почта станет основной почтой, с помощью которой вы сможете входить в приложение" TextWrapping="Wrap" Margin="10,36,10,267"/>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="10,183,0,0" Width="47">
+            <TextBlock FontSize="16" Padding="7 0"  Text="   Для смены пароля и почты вам необходимо ввести код, который мы отправили на вашу резервную почту. После подверждения кода, он станет вашым паролем, который мы рекомендуем изменить в учётной записи, и резервная почта станет основной почтой, с помощью которой вы сможете входить в приложение" TextWrapping="Wrap" Margin="10,36,10,267"/>
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="10,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FirstSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="62,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="62,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="SecondSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="114,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="114,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="ThirdSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="166,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="166,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FourthSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="217,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="217,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="FifthSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="269,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="269,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="SixthSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="321,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="321,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="SeventhSymbol" Foreground="Black" TextChanged="ChangeFocus_TextChanged" Width="46"></TextBox>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" BorderBrush="LightGreen" BorderThickness="1.5" MinWidth="10" Margin="373,183,0,0" Width="47">
+            <Border Style="{DynamicResource BorderStyle}"  MinWidth="10" Margin="373,183,0,0" Width="47">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="Symbol_PreviewTextInput" MinWidth="10" x:Name="EighthSymbol" Foreground="Black" Width="46"></TextBox>
             </Border>
             <TextBlock TextWrapping="Wrap" FontSize="16" Text="   Если код не пришёл на вашу резурвную элетронную почту, повторите попытку:" Margin="10,230,10,162"></TextBlock>
-            <Button Style="{DynamicResource TransparentBtnStyle}" Foreground="Blue" FontStyle="Italic" BorderBrush="Transparent" BorderThickness="0" FontSize="12"  x:Name="Retry" Margin="217,252,85,170" Content="Повторить попытку"  Click="Retry_Click"></Button>
-            <Button Style="{DynamicResource ButtonStyle}" Content="Подтвердить" Click="Confirm_Click" Margin="218,333,20,63"/>
-            <Button Style="{DynamicResource ButtonStyle}" Content="Отмена" Click="Cancellation_Click" Margin="20,333,218,63"/>
+            <Button Style="{DynamicResource TransparentBtnStyle}" Foreground="Blue" FontStyle="Italic" BorderBrush="Transparent" BorderThickness="0" FontSize="13"  x:Name="Retry" Margin="217,252,85,170" Content="Повторить попытку"  Click="Retry_Click"></Button>
+            <Button Style="{DynamicResource ButtonStyle}" Height="45" Width="150" Content="Подтвердить" Click="Confirm_Click" Margin="218,333,20,63"/>
+            <Button Style="{DynamicResource ButtonStyle}" Height="45" Width="150" Content="Отмена" Click="Cancellation_Click" Margin="20,333,218,63"/>
         </Grid>
     </Border>
 </Window>

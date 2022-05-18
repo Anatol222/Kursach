@@ -12,14 +12,14 @@
         AllowsTransparency="True"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="SaveNewUserData" Height="200" Width="270">
-    <Border CornerRadius="50" Background="LightYellow" BorderBrush="LightGreen" BorderThickness="2">
+        Title="SaveNewUserData" Height="200" Width="400">
+    <Border CornerRadius="20" Background ="{StaticResource PrimaryBackgroundColor}" BorderBrush="Gray" BorderThickness="1">
         <Grid Background="Transparent">
             <Border>
-                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" x:Name="NotificationBox" Width="Auto" Margin="10,25,10,44"/>
+                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" x:Name="NotificationBox" Width="Auto" Margin="10,0,10,44"/>
             </Border>
-            <Button Style="{DynamicResource ButtonStyle}" x:Name="Confirm" Click="Confirm_Click" Margin="125,146,10,15"/>
-            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" x:Name="Cancellation" Click="Cancellation_Click" Margin="10,146,141,15"/>
+            <Button Style="{DynamicResource ButtonStyle}" x:Name="Confirm" Click="Confirm_Click" Height="40" Width="150" Margin="213,135,35,23"/>
+            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" x:Name="Cancellation" Click="Cancellation_Click" Height="40" Width="150" Margin="35,135,213,23"/>
         </Grid>
     </Border>
 </Window>

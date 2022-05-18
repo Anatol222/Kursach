@@ -30,6 +30,7 @@ namespace Курсовая.MainFrameForms
         public static bool ConfirmBuyTicket {get;set;}
         public static int CountOfTickets { get;set;}
         public static string BusType { get; set; }
+        public List<string> sities { get; set; }
 
         public SityBusPage()
         {
@@ -37,6 +38,7 @@ namespace Курсовая.MainFrameForms
             FillInCities();
             BusType = default;
         }
+
         public SityBusPage(string query, string locationText)
         {
             Constructor();
@@ -44,6 +46,7 @@ namespace Курсовая.MainFrameForms
             LocationTextBlock.Text = "Выберите " + locationText;
             BusType = LocationTextBlock.Text;
         }
+
         private void Constructor()
         {
             InitializeComponent();
@@ -57,8 +60,6 @@ namespace Курсовая.MainFrameForms
             DataContext = this;
         }
 
-        public List<string> sities { get; set; }
-
         private void SityComboBox_SelectionChanged(object sender, RoutedEventArgs e)=>
             BusSheduleFrame.Navigate(new BusNumbersPage(BusSheduleFrame, BackBorder, ByTicket, GoToBucket, SityComboBox.SelectedItem.ToString()));
 
@@ -67,6 +68,7 @@ namespace Курсовая.MainFrameForms
             if (BusSheduleFrame.NavigationService.CanGoBack)
                 BusSheduleFrame.NavigationService.GoBack();
         }
+
         private async void FillInCities()
         {
             string query = "SELECT City FROM PublicBusCities;";
@@ -83,6 +85,7 @@ namespace Курсовая.MainFrameForms
             catch (Exception) { }
             finally { data.CloseConnection(); }
         }
+
         private async void FillInCities(string query)
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
@@ -143,6 +146,7 @@ namespace Курсовая.MainFrameForms
             }
             CountOfTickets = 0;
         }
+
         private bool AddTicketIntoBD(string query)
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
@@ -152,6 +156,7 @@ namespace Курсовая.MainFrameForms
             finally { data.CloseConnection(); }
             return true;
         }
+
         public void Display(string buttonContent)
         {
             if (countOfBusTickets != null)

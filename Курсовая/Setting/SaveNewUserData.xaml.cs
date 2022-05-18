@@ -46,7 +46,6 @@ namespace Курсовая.Setting
                 ProfilePage.IsSaveNewData = false;
             if (NotificationBox.Text == "Не все поля заполнены. Нажмите продолжить, если не хотите ничего менять")
                 ProfilePage.IsEmptyFields = true;
-
         }
     }
 }

@@ -77,18 +77,22 @@ namespace Курсовая.PagesComeIn
 
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
             navigation.Cancellation(comeIn);
+
         private void Registration_Click(object sender, RoutedEventArgs e)=>
             navigation.SwitchAnotherWindon(comeIn, new Registration());
 
         private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.EmailTextInputFull(sender, e);
+
         private void Password_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.PasswordProcessing(sender, e);
 
         private void TextClear_GotFocus(object sender, RoutedEventArgs e) =>
             regComeIn.TextClear(sender,e);
+
         private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e)=>
             regComeIn.ShowOrHidePassword(ViewPassword, FirstPassword, ShowOrHidePassword);
+
         private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
            regComeIn.ViewChangingPassword(FirstPassword,ViewPassword);
 
@@ -147,15 +151,11 @@ namespace Курсовая.PagesComeIn
                     else
                         Notification?.Invoke("Не удается обновить пароль");
                 }
-                catch
-                {
-                    Notification?.Invoke("Ошибка при обновлении пароля");
-                }
+                catch { Notification?.Invoke("Ошибка при обновлении пароля");}
                 dataBase.CloseConnection();
             }
             else
                 Notification?.Invoke("Аккаунт с такой почтой не зарегистрирован");
-
         }
 
         private async void InCome_Click(object sender, RoutedEventArgs e)
@@ -187,10 +187,7 @@ namespace Курсовая.PagesComeIn
                     {
                         if (_saveUser)
                         {
-                            List<SaveUser> list = new List<SaveUser>()
-                            {
-                            new SaveUser(_email,_password,_saveUser)
-                            };
+                            List<SaveUser> list = new List<SaveUser>() { new SaveUser(_email,_password,_saveUser)};
                             File.WriteAllText("saveUser.json", JsonConvert.SerializeObject(list));
                         }
                         else

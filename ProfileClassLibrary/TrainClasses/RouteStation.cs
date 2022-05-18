@@ -9,6 +9,7 @@
             _arrival = arrival;
             _trainStop = trainStop;
         }
+
         private string _station;
         public string Station { get { return _station; } }
 

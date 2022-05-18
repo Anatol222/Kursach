@@ -44,7 +44,6 @@ namespace Курсовая.MainFrameForms.SityBusPages
                     while (reader.Read())
                         return ((string)reader.GetValue(0));
                 }
-
             }
             catch (Exception) { }
             finally{ data.CloseConnection();}

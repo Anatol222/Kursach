@@ -23,6 +23,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
             Confirm.Content = buttonText;
         }
+
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -47,8 +48,8 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
         private void CountTicket_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.NumberProcessing(sender,e);
+
         private void TextClear_GotFocus(object sender, RoutedEventArgs e) =>
             regComeIn.TextClear(sender, e);
-
     }
 }

@@ -29,6 +29,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
         public TimeOfDirection(Frame frame, Button ByTicket, Button GoToBucket, string city, DateTime time,string busName,string dayOfWeekBus,string busStopName,string route,string busRoute)
         {
             InitializeComponent();
+
+            data = new DataBase();
+            this.ByTicket = ByTicket;
+            this.GoToBucket = GoToBucket;
+            BusSheduleFrame = frame;
+
             DataContext = this;
             nextTime = time;
             BusName = busName;
@@ -39,6 +45,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             City = city;
             StringTime = time.ToShortTimeString();
             StringDayOfWeekBus = dayOfWeekBus;
+
             if (dayOfWeekBus == "Будни")
                 DayOfWeekBus = "WeekdayTime";
             else if (dayOfWeekBus == "Выходные")
@@ -47,18 +54,16 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 DayOfWeekBus = "Saturday";
             else if (dayOfWeekBus == "Воскресенье")
                 DayOfWeekBus = "Sunday";
+
             string query = default;
             if (SityBusPage.BusType == default)
                 query = $"SELECT BStop FROM BusStop  WHERE BusId = (SELECT Id FROM Bus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
             else
                 query = $"SELECT BStop FROM RegionalBusStop  WHERE RegionalBusId = (SELECT Id FROM RegionalBus WHERE {BusRoute}Route = '{Route}' AND BusName = '{BusName}') AND BusRoute = '{BusRoute}'; ";
-            data = new DataBase();
-            this.ByTicket = ByTicket;
-            this.GoToBucket = GoToBucket;
-            BusSheduleFrame = frame;
 
             AllInfoAbouts = GetInfoBus(GetBusStop(query), busStopName);
         }
+
         private void StationBtn_Click(object sender, RoutedEventArgs e)=>
             BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame, ByTicket, GoToBucket, BusStop, City));
 
@@ -70,6 +75,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                     { nextTime = time; return time; }
             return timeList[0].StopTimeList[0];
         }
+
         private DateTime GetPastTime(List<StopDateTime> timeList)
         {
             for (int i = timeList.Count - 2; i >= 0; i--)
@@ -78,6 +84,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                     { nextTime = timeList[i].StopTimeList[j]; return timeList[i].StopTimeList[j]; }
             return timeList[timeList.Count - 1].StopTimeList[0];
         }
+
         private List<AllBusStop> GetBusStop(string query)
         {
             SqlCommand command = new SqlCommand(query, data.GetConnection());
@@ -96,6 +103,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             finally { data.CloseConnection();}
             return busStopList;
         }
+
         private List<AllInfoAboutLocationBus> FillInInfoBus(List<AllBusStop> before, List<AllBusStop> after)
         {
             DateTime beforeTime = nextTime;
@@ -114,6 +122,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             }
             return finishBusList;
         }
+
         private AllInfoAboutLocationBus GetDataFromBD(AllBusStop allBusStops, bool beforeTrue)
         {
             AllInfoAboutLocationBus busList = new AllInfoAboutLocationBus();
@@ -163,6 +172,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             finally { data.CloseConnection(); }
             return busList;
         }
+
         private List<AllInfoAboutLocationBus> GetInfoBus(List<AllBusStop> busStopList, string busStopName)
         {
             List<AllBusStop> before = new List<AllBusStop>();

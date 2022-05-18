@@ -16,6 +16,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
         private IWorkWithBusList workWithBusList;
 
+        public List<Bus> BusList { get; set; }
         private readonly string _city;
         
         public BusNumbersPage(Frame frame,Border BackBorder, Button ByTicket, Button GoToBucket, string city)
@@ -34,8 +35,6 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 BusList = BusItems.GetBuses($"SELECT BusName FROM RegionalBus WHERE RegionalBusDistrictId = (SELECT Id FROM RegionalBusDistrict WHERE District ='{_city}');");
         }
 
-        public List<Bus> BusList { get; set; }
-
         private void BusNumberNav_Click(object sender, System.Windows.RoutedEventArgs e)=>
             BusSheduleFrame.Navigate(new StationsPage( BusList[BusNaumList.SelectedIndex].Number, _city, BusSheduleFrame, ByTicket,GoToBucket,BorderBack));
 
@@ -44,6 +43,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             if (!BusSheduleFrame.NavigationService.CanGoBack)
                 BorderBack.Visibility = System.Windows.Visibility.Hidden;
         }
+
         private void BusNaumList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
             workWithBusList.BucketListBoxFirst(sender,e);
     }

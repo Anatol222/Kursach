@@ -12,17 +12,17 @@
         AllowsTransparency="True"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="CountOfBusTickets" Height="200" Width="270">
-    <Border CornerRadius="50" Background="LightYellow" BorderBrush="LightGreen" BorderThickness="2">
+        Title="CountOfBusTickets" Height="200" Width="400">
+    <Border CornerRadius="20" Background ="{StaticResource PrimaryBackgroundColor}" BorderBrush="Gray" BorderThickness="1">
         <Grid Background="Transparent">
             <Border>
                 <TextBlock Text="Введите количество билетов" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" x:Name="NotificationBox" Width="Auto" Margin="10,25,10,44"/>
             </Border>
-            <Border Style="{DynamicResource BorderStyle}" Background="AliceBlue" Margin="0,106,0,0" HorizontalAlignment="Center">
+            <Border Style="{DynamicResource BorderStyle}" Background="AliceBlue" Margin="0,90,0,0" HorizontalAlignment="Center">
                 <TextBox Style="{DynamicResource TextNew}" PreviewTextInput="CountTicket_PreviewTextInput" GotFocus="TextClear_GotFocus" x:Name="CountTicket" Text="Введите кол. билетов" ></TextBox>
             </Border>
-            <Button Style="{DynamicResource ButtonStyle}" x:Name="Confirm" Click="Confirm_Click" Margin="125,146,10,15"/>
-            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" x:Name="Cancellation" Click="Cancellation_Click" Margin="10,146,141,15"/>
+            <Button Style="{DynamicResource ButtonStyle}" x:Name="Confirm" Click="Confirm_Click" Height="40" Width="150" Margin="214,143,34,15"/>
+            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" x:Name="Cancellation" Height="40" Width="150" Click="Cancellation_Click" Margin="38,143,210,15"/>
         </Grid>
     </Border>
 </Window>
