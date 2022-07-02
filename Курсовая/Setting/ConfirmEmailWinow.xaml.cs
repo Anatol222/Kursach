@@ -43,8 +43,10 @@ namespace Курсовая.Setting
             SendMessageEmail();
             StartTimer();
         }
+
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
            navigation.Cancellation(this);
+
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             string code = FirstSymbol.Text;
@@ -70,12 +72,9 @@ namespace Курсовая.Setting
                         navigation.Cancellation(this);
                     }
                 }
-                catch (Exception)
-                {
-                    Notification?.Invoke("Не удается обновить почту");
-                }
+                catch (Exception){ Notification?.Invoke("Не удается обновить почту");}
                 dataBase.CloseConnection();
-        }
+            }
             else
                 Notification?.Invoke("Неверный код");
         }

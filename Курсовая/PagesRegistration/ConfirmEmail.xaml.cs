@@ -49,6 +49,7 @@ namespace Курсовая.PagesRegistration
             _email = email;
             _password = cipherPassword.encode(password);
             _codeConfirm = codeConfirm;
+
             StartTimer();
         }
 
@@ -57,11 +58,13 @@ namespace Курсовая.PagesRegistration
         
         private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.EmailTextInput(sender, e);
+
         private void Symbol_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.SymbolProcessing(sender, e);
         
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
            navigation.Cancellation(confirmEmail);
+
         private void ReturnRegistr_Click(object sender, RoutedEventArgs e) =>
             navigation.SwitchAnotherWindon(confirmEmail, new Registration(_firstName, _lastName, _patronymic, _number, _password));
 
@@ -101,7 +104,6 @@ namespace Курсовая.PagesRegistration
             else if (FirstSymbol.Text.Length==1)
                 SecondSymbol.Focus();
         }
-        
        
         private void StartTimer()
         {
@@ -129,6 +131,7 @@ namespace Курсовая.PagesRegistration
             if(_ok)
             TimerCode.Text = new DateTime(2003, 10, 20, 00, _mm, _ss).ToString(@"mm\:ss");
         }
+
         private void StaticRules()
         {
             FirstSymbol.MaxLength = 1;

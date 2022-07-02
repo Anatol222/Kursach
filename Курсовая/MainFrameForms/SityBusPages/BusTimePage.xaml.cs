@@ -19,9 +19,11 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
         private DataBase data;
         public static InfoAboutBus aboutBus;
+
         private IWorkWithBusList workWithBusList;
 
         const string _weekdayTime = "WeekdayTime", _weekendTime = "WeekendTime", _sundayTime = "Sunday", _saturday = "Saturday";
+
         readonly List<StopTime> _weekdayList, _weekendList, _sundayList, _saturdayList;
         public List<Day> DaysList { get; set; }
         public List<StopTime> StopTimes { get; private set; }
@@ -60,6 +62,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             _weekendList = GetTimeBD(_weekendTime, "Выходные");
             _saturdayList = GetTimeBD(_saturday, "Суббота");
             _sundayList = GetTimeBD(_sundayTime, "Воскресенье");
+
             if ((int)DateTime.Now.DayOfWeek <= 5)
                 SwitchDay(_weekdayList.ToList(), "Будни");
             else 
@@ -71,12 +74,14 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 else if (_weekendList.Count != 0)
                     SwitchDay(_weekendList.ToList(), "Выходные");
             }
+
             PastTimeBus = GetPastTime(_weekdayList).ToShortTimeString() + " ( " + Math.Truncate((DateTime.Now - GetPastTime(_weekdayList)).TotalMinutes) + " мин. назад )";
             NearestTimeBus = GetNearestTime(_weekdayList).ToShortTimeString() + " (Через: " + Math.Ceiling((GetNearestTime(_weekdayList) - DateTime.Now).TotalMinutes) + " мин.)";
             InfoBus.Text = $"Расписание автобуса {busName} на остановке {bStop} - {city}";
             if(SityBusPage.BusType != default)
                 StationBtn.IsEnabled = false;
         }
+
         private void SwitchDay(List<StopTime> stopTimes, string day)
         {
             InitializeComponent();
@@ -84,6 +89,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             StopTimes = stopTimes;
             daysTextBlock.Text = day;
         }
+
         private void StationBtn_Click(object sender, RoutedEventArgs e)=>
             BusSheduleFrame.NavigationService.Navigate(new BusesOnStationPage(BusSheduleFrame,ByTicket,GoToBucket,BusStop,City));
 
@@ -107,6 +113,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                     SwitchDay(_sundayList.ToList(), "Воскресенье");
             }
         }
+
         private DateTime GetNearestTime(List<StopTime> timeList)
         {
             foreach (var item in timeList)
@@ -115,6 +122,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                         return time.Time;
             return timeList[0].StopTimeList[0].Time;
         }
+
         private DateTime GetPastTime(List<StopTime> timeList)
         {
             for (int i = timeList.Count - 2; i >= 0; i--)
@@ -123,6 +131,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                         return timeList[i].StopTimeList[j].Time;
             return timeList[timeList.Count - 1].StopTimeList[0].Time;
         }
+
         private List<StopTime> GetTimeBD(string dayOfWeek, string dayOf)
         {
             string query = default;
@@ -163,6 +172,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 DaysList.Add(new Day(dayOf));
             return timeList;
         }
+
         private void TimeList_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
             workWithBusList.BucketListBoxSecond(sender, e);
     }

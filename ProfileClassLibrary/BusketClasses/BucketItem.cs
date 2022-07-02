@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace ProfileClassLibrary.BusketClasses
 {
@@ -10,8 +9,20 @@ namespace ProfileClassLibrary.BusketClasses
         SityBus,
         Bus
     }
+
     public class BucketItem
     {
+        public bool _purchaceStatus;
+        public TransportType _TransportType;
+        public string Direction { get; private set; }
+        public DateTime DepartureTime { get; private set; }
+        public DateTime DepartureDate { get; private set; }
+        public string TransportNumber { get; private set; }
+        public int TicketNum { get; private set; }
+        public int Id { get; private set; }
+        public string TypeService { get; private set; }
+        public int TicketWhichTransport { get; private set; }
+
         public BucketItem(string direction, DateTime departureTime, DateTime departureDate, string transportNumber, int ticketNum, bool status, TransportType trType, string typeService, int id)
         {
             Direction = direction;
@@ -25,14 +36,7 @@ namespace ProfileClassLibrary.BusketClasses
             Id = id;
             TicketWhichTransport = (int)trType;
         }
-        string Encode(string s)
-        {
-            Encoding encoding = new UTF8Encoding();
-            byte[] bytes = Encoding.UTF8.GetBytes(s);
-            string str = encoding.GetString(bytes);
-            return str;
 
-        }
         public string TransportTypeIcon
         {
             get
@@ -67,16 +71,5 @@ namespace ProfileClassLibrary.BusketClasses
                     return "/./Images/BucketPageIcons/Удалить из корзыны.png";
             }
         }
-
-        public bool _purchaceStatus;
-        public TransportType _TransportType;
-        public string Direction { get; private set; }
-        public DateTime DepartureTime { get; private set; }
-        public DateTime DepartureDate { get; private set; }
-        public string TransportNumber { get; private set; }
-        public int TicketNum { get; private set; }
-        public int Id { get; private set; }
-        public string TypeService { get; private set; }
-        public int TicketWhichTransport { get; private set; }
     }
 }

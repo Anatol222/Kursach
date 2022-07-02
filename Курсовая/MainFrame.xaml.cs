@@ -12,7 +12,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Курсовая.MainFrameForms;
 using Курсовая.Setting;
 
 namespace Курсовая
@@ -30,7 +29,9 @@ namespace Курсовая
         Uri ProfilePage = new Uri("MainFrameForms/ProfilePage.xaml", UriKind.RelativeOrAbsolute);
        
         private string _email { get; }
+        public static int BasketItemsCount { get; set; }
         private bool ALTtrue;
+
         public MainFrame()
         {
 
@@ -39,7 +40,6 @@ namespace Курсовая
             ChangeData();
             BasketItemsCount = CountTicketsInBasket();
         }
-        public static int BasketItemsCount { get; set; }
         public MainFrame(string email)
         {
             InitializeComponent();
@@ -83,6 +83,7 @@ namespace Курсовая
 
         private void Minimize_Click(object sender, RoutedEventArgs e)=>
             WindowState = WindowState.Minimized;
+
         private void Restore_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
@@ -90,21 +91,28 @@ namespace Курсовая
             else
                 WindowState = WindowState.Normal;
         }
+
         private void Close_Click(object sender, RoutedEventArgs e) =>
             Close();
 
         private void Menu_Click(object sender, RoutedEventArgs e) =>
             ChangeData();
+
         private void Plane_Click(object sender, RoutedEventArgs e)=>
             PagesNavigation.Navigate(PlanePage);
+
         private void Train_Click(object sender, RoutedEventArgs e)=>
             PagesNavigation.Navigate(TrainPage);
+
         private void SityBus_Click(object sender, RoutedEventArgs e) =>
            PagesNavigation.Navigate(SityBusPage);
+
         private void Bus_Click(object sender, RoutedEventArgs e)=>
             PagesNavigation.Navigate(BusPage);
+
         private void Bucket_Click(object sender, RoutedEventArgs e) =>
             PagesNavigation.Navigate(BusketPage);
+
         private void OpenSetting_Click(object sender, RoutedEventArgs e) =>
             PagesNavigation.Navigate(ProfilePage);
 
@@ -165,7 +173,7 @@ namespace Курсовая
         }
 
         private void Clock_Tick(object sender, EventArgs e) =>
-            RealTime.Text = DateTime.Now.ToString(@"HH\:mm\:ss");
+            RealTime.Text = DateTime.Now.ToString(@"HH\:mm");
 
         private int CountTicketsInBasket()
         {
@@ -186,5 +194,8 @@ namespace Курсовая
             finally { data.CloseConnection(); }
             return countTickets;
         }
+
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
+            Menu.IsChecked = false;
     }
 }

@@ -14,10 +14,10 @@ namespace Курсовая
         public static Window windowEntrance;
         public static InfoAboutProgramm infoWindow;
         private PopupNotifier popup = null;
-        public MainRoot()
-        {
+
+        public MainRoot()=>
             InitializeComponent();
-        }
+
         private void LinkVk_Click(object sender, RoutedEventArgs e) =>
             Process.Start("https://vk.com/anatol_prog");
 
@@ -29,7 +29,6 @@ namespace Курсовая
 
         private void Login_Click(object sender, RoutedEventArgs e) =>
             SetIn(new ComeIn());
-        
 
         private void SetIn(Window window)
         {
@@ -47,6 +46,7 @@ namespace Курсовая
             else
                 windowEntrance.Activate();
         }
+
         private void CloseProgramm_Click(object sender, RoutedEventArgs e) =>
             Application.Current.Shutdown();
 

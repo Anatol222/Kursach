@@ -6,12 +6,14 @@ namespace ProfileClassLibrary.BusClasses
 {
     public class Direction
     {
-        public Direction(string name) =>
-            DrName = name;
         public string DrName { get; set; }
 
         public List<Busstation> _busStations;
         public List<Busstation> busStations { get { return _busStations; } set { _busStations = value; } }
+
+        public Direction(string name) =>
+            DrName = name;
+
         public static List<Busstation> GetStations(string query)
         {
             DataBase data = new DataBase();

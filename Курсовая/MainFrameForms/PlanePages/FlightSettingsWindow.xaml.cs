@@ -1,22 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Курсовая.MainFrameForms.SityBusPages
 {
-    /// <summary>
-    /// Логика взаимодействия для BusTicketOrderWindow.xaml
-    /// </summary>
     public partial class FlightSettingsWindow : Window
     {
         public FlightSettingsWindow()
@@ -25,26 +12,26 @@ namespace Курсовая.MainFrameForms.SityBusPages
             DataContext = this;
             OlderTb.Text = Convert.ToString(OlderCount);
         }
+
         private int OlderCount = 1;
         private int KidCount = 0;
         private int BabyCount = 0;
         private int HandLugCount = 0;
         private int LuggageCount = 0;
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
             DragMove();
-        }
-        private void CancelBtn_Click(object sender, RoutedEventArgs e)
-        {
+
+        private void CancelBtn_Click(object sender, RoutedEventArgs e)=>
             this.Close();
-        }
+
         private void IsReadyBtn_Click(object sender, RoutedEventArgs e)
         {
             PlanePage.PeopleCount = OlderCount + KidCount + BabyCount;
             PlanePage.AllLuggageCount = HandLugCount + LuggageCount;
             Close();
         }
+
         private void OlderBtnMinus_Click(object sender, RoutedEventArgs e)
         {
             if (OlderCount >= 2 && OlderCount <= 8 - KidCount - BabyCount)
@@ -77,6 +64,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             }
 
         }
+
         private void OlderBtnPlus_Click(object sender, RoutedEventArgs e)
         {
             if (OlderCount == 8 - KidCount - BabyCount - 1)
@@ -106,6 +94,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
             }
         }
+
         private void KidBtnMinus_Click(object sender, RoutedEventArgs e)
         {
             if (KidCount > 1 && KidCount <= (8 - OlderCount - BabyCount))
@@ -114,6 +103,12 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 BabyBtnPlus.IsEnabled = true;
                 OlderBtnPlus.IsEnabled = true;
                 KidCount -= 1;
+                if (HandLugCount > OlderCount * 2 + KidCount)
+                {
+                    HandLugCount -= 1;
+                    HandLugTb.Text = Convert.ToString(HandLugCount);
+                    HandLugBtnPlus.IsEnabled = false;
+                }
                 KidTb.Text = Convert.ToString(KidCount);
             }
             else
@@ -132,6 +127,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 }
             }
         }
+
         private void KidBtnPlus_Click(object sender, RoutedEventArgs e)
         {
             if (KidCount == (8 - OlderCount - BabyCount - 1))
@@ -162,6 +158,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
             }
         }
+
         private void BabyBtnMinus_Click(object sender, RoutedEventArgs e)
         {
             if (BabyCount > 1 && BabyCount <= (8 - OlderCount - KidCount))
@@ -182,6 +179,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 OlderBtnPlus.IsEnabled = true;
             }
         }
+
         private void BabyBtnPlus_Click(object sender, RoutedEventArgs e)
         {
             if (BabyCount == (8 - OlderCount - KidCount - 1))
@@ -209,6 +207,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
 
             }
         }
+
         private void LugBtnMinus_Click(object sender, RoutedEventArgs e)
         {
             if (LuggageCount > 1)
@@ -224,6 +223,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 LugTb.Text = Convert.ToString(LuggageCount);
             }
         }
+
         private void LugBtnplus_Click(object sender, RoutedEventArgs e)
         {
             if (LuggageCount < OlderCount * 4)
@@ -236,6 +236,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             }
 
         }
+
         private void HandLugBtnMinus_Click(object sender, RoutedEventArgs e)
         {
             if (HandLugCount > 1)
@@ -251,9 +252,10 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 HandLugBtnMinus.IsEnabled = false;
             }
         }
+
         private void HandLugBtnPlus_Click(object sender, RoutedEventArgs e)
         {
-            if (LuggageCount < OlderCount * 2 + KidCount)
+            if (HandLugCount < OlderCount * 2 + KidCount)
             {
                 HandLugCount += 1;
                 HandLugTb.Text = Convert.ToString(HandLugCount);

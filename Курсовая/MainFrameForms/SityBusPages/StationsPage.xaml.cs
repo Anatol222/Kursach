@@ -28,6 +28,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
         private readonly string _city;
         protected static string querySecondRoute = default;
         protected static string queryFirstRoute = default;
+
         public StationsPage() {}
 
         public StationsPage(string busNum, string city, Frame BusSheduleFrame,Button ByTicket,Button GoToBucket, Border BackBorder)
@@ -57,6 +58,7 @@ namespace Курсовая.MainFrameForms.SityBusPages
             _busName = busNum;
             _city = city;
         }
+
         private void BusStationNav_Click(object sender, RoutedEventArgs e)=>
             BusSheduleFrame.NavigationService.Navigate(new BusTimePage(BusSheduleFrame, ByTicket, GoToBucket,ClickedStationName,ClickedDrName,_busName,BusRoute(),_city));
         
@@ -83,11 +85,13 @@ namespace Курсовая.MainFrameForms.SityBusPages
                 return "First";
             return "Second";
         }
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ByTicket.Visibility = Visibility.Hidden;
             GoToBucket.Visibility = Visibility.Hidden;
         }
+
         private void StationsListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
             workWithBusList.BucketListBoxSecond(sender,e);
 

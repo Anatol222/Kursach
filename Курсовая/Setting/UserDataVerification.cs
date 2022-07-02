@@ -8,10 +8,9 @@ namespace Курсовая.Setting
     {
         private SaveNewUserData saveNewUserData;
         private DataBase dataBase;
-        public UserDataVerification()
-        {
+
+        public UserDataVerification()=>
             dataBase = new DataBase();
-        }
 
         public void Display(string conten, string buttonText)
         {
@@ -33,14 +32,8 @@ namespace Курсовая.Setting
                 sqlDataAdapter.SelectCommand = sqlCommand;
                 sqlDataAdapter.Fill(dataTable);
             }
-            catch (System.Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                dataBase.CloseConnection();
-            }
+            catch (System.Exception) { return false;}
+            finally {dataBase.CloseConnection();}
             return dataTable.Rows.Count > 0;
         }
     }

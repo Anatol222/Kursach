@@ -14,7 +14,7 @@
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         Title="Registration" Height="450" Width="400">
-    <Border CornerRadius="50" Background="#d8edf0" BorderBrush="LightGreen" BorderThickness="2">
+    <Border CornerRadius="10" Background="#9bb4e8">
         <Grid>
             <TextBlock Style="{StaticResource TextStyle}" FontSize="18" Text="Присоединяйтесь к Horizon" Margin="0,30,0,0" VerticalAlignment="Top"></TextBlock>
             <Button x:Name="Button_log" Click="ComeIn_Click" Style="{DynamicResource TransparentBtnStyle}" Content="Войти" Focusable="False" Margin="10,58,292,360" Background="#00000000"></Button>
@@ -63,8 +63,8 @@
 
             <TextBox x:Name="ViewPassword" Style="{DynamicResource TextNew}" PreviewTextInput="Password_PreviewTextInput" Visibility="Hidden" Foreground="Black" HorizontalAlignment="Left" Margin="28,311,0,0" VerticalAlignment="Top" TextChanged="ViewPassword_TextChanged"></TextBox>
 
-            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}"  Click="Cancellation_Click" Margin="40,368,198,28"/>
-            <Button Content="Далее" Style="{DynamicResource ButtonStyle}" Click="ConfirmEmail_Click" Margin="198,368,40,28"></Button>
+            <Button Content="Отмена" Style="{DynamicResource ButtonStyle}" Height="40" Width="150" Click="Cancellation_Click" Margin="40,368,198,28"/>
+            <Button Content="Далее" Style="{DynamicResource ButtonStyle}" Height="40" Width="150" Click="ConfirmEmail_Click" Margin="198,368,40,28"></Button>
             <Button x:Name="ShowOrHidePassword" Style="{x:Null}" Click="ShowOrHidePassword_Click" Template="{StaticResource MaxMinBtn}" Margin="179,341,179,78" Cursor="Hand">
                 <Image Source="../Images/view.png"></Image>
             </Button>

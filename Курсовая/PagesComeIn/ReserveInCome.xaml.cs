@@ -26,6 +26,7 @@ namespace Курсовая.PagesComeIn
         public ReserveInCome(string password, string reserveEmail, string email)
         {
             InitializeComponent();
+
             cipherPassword = new CipherPassword();
             inCome = this;
             dataBase = new DataBase();
@@ -110,7 +111,5 @@ namespace Курсовая.PagesComeIn
             else if (FirstSymbol.Text.Length == 1)
                 SecondSymbol.Focus();
         }
-
-
     }
 }

@@ -7,9 +7,8 @@ namespace Курсовая.Setting
     {
         [DataMember]
         public string IconAn { get; set; }
-        public IconUser(string icon)
-        {
+
+        public IconUser(string icon)=>
             IconAn = icon;
-        }
     }
 }

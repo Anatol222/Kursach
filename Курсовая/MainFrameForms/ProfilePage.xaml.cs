@@ -16,7 +16,6 @@ using Курсовая.MainFrameForms;
 
 namespace Курсовая
 {
-
     public partial class ProfilePage : Page
     {
         private DataBase dataBase;
@@ -79,6 +78,7 @@ namespace Курсовая
 
             }
         }
+
         public void ChangeIcon(string linkIcon, Button button)
         {
             Image image = new Image();
@@ -90,6 +90,7 @@ namespace Курсовая
             button.Content = image;
 
         }
+
         private void ChoiceIcon_Click(object sender, RoutedEventArgs e)
         {
             _switchIcon++;
@@ -121,6 +122,7 @@ namespace Курсовая
             ChangeIcon("../Images/ProfileIcon/ExitOut.png", Exit);
 
         }
+
         private void ExitAccount()
         {
             StartWindow startWindow = new StartWindow();
@@ -137,7 +139,6 @@ namespace Курсовая
             ChangeIcon("../Images/ProfileIcon/Wallet.png", Wallet);
         }
 
-
         private void HotkeysInfo_Click(object sender, RoutedEventArgs e)
         {
             ChangeIcon("../Images/ProfileIcon/Hotkeys2.png", HotkeysInfo);
@@ -146,6 +147,7 @@ namespace Курсовая
             ChangeIcon("../Images/ProfileIcon/Hotkeys.png", HotkeysInfo);
 
         }
+
         private void InfoAboutUser()
         {
             LastNameBox.Text = MainFrame.user.LastName;
@@ -168,6 +170,7 @@ namespace Курсовая
 
         private void MaleBtn_Click(object sender, RoutedEventArgs e) =>
             GenderColor(Brushes.White, Brushes.Aqua);
+
         private void FemaleBtn_Click(object sender, RoutedEventArgs e) =>
             GenderColor(Brushes.RosyBrown, Brushes.White);
 
@@ -178,7 +181,6 @@ namespace Курсовая
             if (female == Brushes.White)
                 whatGender = 0;
             else whatGender = 1; 
-
         }
 
         private bool ConfirmComeIn()
@@ -217,12 +219,12 @@ namespace Курсовая
                 {
                     if (!userDataVerification.Verification($"SELECT * FROM PersonalLoginData WHERE Email = '{EmailBox.Text.Trim()}'") || EmailBox.Text.Trim() == MainFrame.user.Email)
                     {
-                        if (!userDataVerification.Verification($"SELECT * FROM PersonalLoginData WHERE Email='{ReserveEmail.Text.Trim()}' OR ReserveEmail = '{ReserveEmail.Text.Trim()}'"))
+                        if (!userDataVerification.Verification($"SELECT * FROM PersonalLoginData WHERE Email='{ReserveEmail.Text.Trim()}' OR ReserveEmail = '{ReserveEmail.Text.Trim()}'") || ReserveEmail.Text.Trim() ==MainFrame.user.ReserveEmail)
                         {
                             try
                             {
                                 string query = $"UPDATE UserPersonalData SET FirstName='{FirstNameBox.Text.Trim()}',LastName='{LastNameBox.Text.Trim()}',Number='{NumberBox.Text.Trim()}'," +
-                                    $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).ToString(@"MM/dd/yyyy")}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
+                                    $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).Month}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Day}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Year}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
                                 SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
                                 dataBase.OpenConnection();
                                 if (await sqlCommand.ExecuteNonQueryAsync() == 1)
@@ -246,7 +248,6 @@ namespace Курсовая
                                     EditAccess(false, "../Images/ProfileIcon/EditTrue.png");
                                     MainFrame.user = new User(EmailBox.Text);
                                     InfoAboutUser();
-
                                 }
                                 else
                                     Notification?.Invoke("Не удается обновить личные данные");
@@ -269,10 +270,13 @@ namespace Курсовая
 
         private void PhoneNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.PhoneNumberProcessing(sender, e);
+
         private void Latters_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.LattersProcessing(sender, e);
+
         private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.EmailTextInputFull(sender, e);
+
         private void Birthday_PreviewTextInput(object sender, TextCompositionEventArgs e)=>
             dataProcessing.Birthday(sender, e);
 
@@ -311,7 +315,5 @@ namespace Курсовая
                     ExitAccount();
             }
         }
-
-        
     }
 }

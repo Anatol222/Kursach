@@ -5,6 +5,14 @@ namespace ProfileClassLibrary.PlaneClass
 {
     public class Plane
     {
+        public string ImagePath { get; set; }
+        public string FlightName { get; set; }
+        public string Direction { get; set; }
+        public string Gate { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime DepartureDate { get; set; }
+        public string Status { get; set; }
+
         public Plane(int airlineId)
         {
             string imageName = default;
@@ -21,16 +29,11 @@ namespace ProfileClassLibrary.PlaneClass
             }
             catch (Exception) { }
             if (imageName == "Белавиа")
-                ImagePath = "https://airport.by/upload/images/4e3bdc6556844bde1c84c53fc65a8cc6.png";
+                ImagePath = @"\Images\PlaneIcons\Белавиа.png";
             else if (imageName == "Аэрофлот")
-                ImagePath = "https://airport.by/upload/images/3a4144634cb5678c4c6fb1aad958c551.png";
+                ImagePath = @"\Images\PlaneIcons\Аэрофлот.png";
+            else if (imageName == "Uzbekistan Airways")
+                ImagePath = @"\Images\PlaneIcons\УзбекисанАвиа.png";
         }
-        public string ImagePath { get; set; }
-        public string FlightName { get; set; }
-        public string Direction { get; set; }
-        public string Gate { get; set; }
-        public DateTime DepartureTime { get; set; }
-        public DateTime DepartureDate { get; set; }
-        public string Status { get; set; }
     }
 }

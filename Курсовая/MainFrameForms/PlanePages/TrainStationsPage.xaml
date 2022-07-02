@@ -6,8 +6,12 @@
       xmlns:local="clr-namespace:Курсовая.MainFrameForms.PlanePages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TrainStationsPage">
-
+      Title="Расписание поезда">
+    <Page.Resources>
+        <ControlTemplate x:Key="AllowScroll" TargetType="ListBox">
+            <ItemsPresenter></ItemsPresenter>
+        </ControlTemplate>
+    </Page.Resources>
     <Border CornerRadius="20" Background="{StaticResource PrimaryBackgroundColor}">
         <Grid >
             <Grid.RowDefinitions>
@@ -63,7 +67,7 @@
                 
             </Grid>
             <ScrollViewer Grid.Row="4">
-                <ListBox ItemsSource="{Binding Trains}" Name="FlightsListBox" >
+                <ListBox ItemsSource="{Binding Trains}" Name="FlightsListBox" Template="{StaticResource AllowScroll}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

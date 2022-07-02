@@ -3,38 +3,36 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Курсовая.ProgrammInterface;
+using Курсовая.Setting;
 
 namespace Курсовая.MainFrameForms.PlanePages
 {
-    /// <summary>
-    /// Логика взаимодействия для TrainStationsPage.xaml
-    /// </summary>
     public partial class TrainStationsPage : Page
     {
         private DataBase data;
+
+        private IWorkWithBusList workWithBusList;
+
+        public List<RouteStation> Stations { get; set; }
+        private List<Train> AllTrains;
+
         public TrainStationsPage(int trainId, string route, List<Train> allTrains,string trainType)
         {
             InitializeComponent();
-            data = new DataBase();  
+            data = new DataBase();
+            workWithBusList = new WorkWithBusList();
             AllTrains = allTrains.ToList();
             TrainNameTb.Text = route;
             TrainTypeTb.Text = trainType;
             Stations = GetStation(trainId);
             FlightsListBox.ItemsSource = Stations;
         }
-        public List<RouteStation> Stations { get; set; }
-        private List<Train> AllTrains;
+
         private void Close_Click(object sender, RoutedEventArgs e)=>
             NavigationService.Navigate(new TrainPage(AllTrains));
 
@@ -66,5 +64,8 @@ namespace Курсовая.MainFrameForms.PlanePages
             finally { data.CloseConnection(); }
             return trains;
         }
+
+        private void FlightsListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)=>
+            workWithBusList.BucketListBoxFirst(sender, e);
     }
 }

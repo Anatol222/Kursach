@@ -3,7 +3,7 @@
     internal interface IDataBaseUserDataVerification
     {
         bool Verification(string query);
-        void Display(string conten, string buttonText);
 
+        void Display(string conten, string buttonText);
     }
 }

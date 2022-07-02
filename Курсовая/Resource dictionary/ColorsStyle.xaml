@@ -7,7 +7,7 @@
         <Setter Property="MinWidth" Value="175"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="CornerRadius" Value="10"/>
-        <Setter Property="Background" Value="Beige"/>
+        <Setter Property="Background" Value="#c3c9d6"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Height" Value="25"/>

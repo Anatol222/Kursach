@@ -89,10 +89,7 @@ namespace Курсовая.PagesRegistration
                 _firstPassword = FirstPassword.Password;
                 _secondPassword = ConfirmPassword.Password;
             }
-            catch (Exception)
-            {
-                Notification?.Invoke("Ошибка при регистрации");
-            }
+            catch (Exception) { Notification?.Invoke("Ошибка при регистрации");}
 
             if ((_lastName != "" && _lastName != "Ведите фамилию") && (_firstName != "" && _firstName != "Ведите имя")
                 && (_patronymic != "" && _patronymic != "Ведите отчество") && (_email != "" && _email != "Ведите эл. почту")
@@ -118,22 +115,28 @@ namespace Курсовая.PagesRegistration
 
         private void PhoneNumber_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.PhoneNumberProcessing(sender, e);
+
         private void Latters_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.LattersProcessing(sender, e);
+
         private void Email_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
            dataProcessing.EmailTextInput(sender, e);
+
         private void Password_PreviewTextInput(object sender, TextCompositionEventArgs e) =>
             dataProcessing.PasswordProcessing(sender, e);
 
         private void Cancellation_Click(object sender, RoutedEventArgs e) =>
             navigation.Cancellation(registration);
+
         private void ComeIn_Click(object sender, RoutedEventArgs e) =>
             navigation.SwitchAnotherWindon(registration, new ComeIn());
 
         private void TextClear_GotFocus(object sender, RoutedEventArgs e) =>
            regComeIn.TextClear(sender, e);
+
         private void ShowOrHidePassword_Click(object sender, RoutedEventArgs e) =>
             regComeIn.ShowOrHidePassword(ViewPassword, FirstPassword, ShowOrHidePassword);
+
         private void ViewPassword_TextChanged(object sender, TextChangedEventArgs e) =>
             regComeIn.ViewChangingPassword(FirstPassword, ViewPassword);
 
@@ -171,10 +174,7 @@ namespace Курсовая.PagesRegistration
                     return false;
                 }
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            catch (Exception){ return false;}
         }
     
         private void StaticMaxLenghtDataTable()
@@ -186,9 +186,5 @@ namespace Курсовая.PagesRegistration
             FirstPassword.MaxLength = 16;
             Email.MaxLength = 35;
         }
-
-        
-
-       
     }
 }

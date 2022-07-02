@@ -22,7 +22,6 @@ namespace ProfileClassLibrary.BusketClasses
                 {
                     while(reader.Read())
                     {
-                        
                         try {
                             string[] vs = (Convert.ToString(reader.GetValue(2))).Split(':');
                             string s = $"{vs[0]}:{vs[1]}";
@@ -35,7 +34,12 @@ namespace ProfileClassLibrary.BusketClasses
                             statusTicket = false;
                         else
                             statusTicket = true;
-                        items.Add(new BucketItem((string)reader.GetValue(1), dateTime, date,(string)reader.GetValue(6),Convert.ToInt32(reader.GetValue(5)), statusTicket, (TransportType)Convert.ToInt32(reader.GetValue(0)),(string)reader.GetValue(7),Convert.ToInt32(reader.GetValue(8))));
+                        items.Add(new BucketItem((string)reader.GetValue(1),
+                            dateTime,date,
+                            (string)reader.GetValue(6),
+                            Convert.ToInt32(reader.GetValue(5)),
+                            statusTicket, (TransportType)Convert.ToInt32(reader.GetValue(0)),
+                            (string)reader.GetValue(7),Convert.ToInt32(reader.GetValue(8))));
                     }
                 }
             }
