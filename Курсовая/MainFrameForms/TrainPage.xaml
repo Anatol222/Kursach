@@ -92,12 +92,12 @@
                             <Border BorderThickness="1" BorderBrush="Black" Width="1" Height="30" HorizontalAlignment="Right"></Border>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <Button x:Name="DepartureButton" Click="DepartureButton_Click"  VerticalAlignment="Center" Foreground="Black"  HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" BorderBrush="Transparent" Content="Прибытие" Background="Transparent"/>
+                            <Button x:Name="DepartureButton" Click="DepartureButton_Click"  VerticalAlignment="Center" Foreground="Black"  HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" BorderBrush="Transparent" Content="Отправление" Background="Transparent" Cursor="Hand"/>
                             <!--<TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Отправление</TextBlock>-->
                             <Border BorderThickness="1" BorderBrush="Black" Width="1" Height="30" HorizontalAlignment="Right"></Border>
                         </Grid>
                         <Grid Grid.Column="2">
-                            <Button x:Name="Arrival" Click="Arrival_Click" VerticalAlignment="Center" Foreground="Black"  HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" BorderBrush="Transparent" Content="Отправление" Background="Transparent"/>
+                            <Button x:Name="Arrival" Click="Arrival_Click" VerticalAlignment="Center" Foreground="Black"  HorizontalAlignment="Center" FontSize="16" FontWeight="Medium" BorderBrush="Transparent" Content="Прибытие" Background="Transparent"/>
                             <!--<TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Medium">Прибытие</TextBlock>-->
                             <Border BorderThickness="1" BorderBrush="Black" Width="1" Height="30" HorizontalAlignment="Right"></Border>
                         </Grid>
@@ -201,9 +201,9 @@
                             <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
                                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}" Padding="0" BorderBrush="{DynamicResource PrimaryHueMidBrush}" 
-                                                 Margin="4" IsChecked="True" Content="Прибытие" />
+                                                 Margin="4" IsChecked="True" Content="Отправление" />
                                     <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}" Padding="0" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-                                                 Margin="4" IsChecked="False" Content="Отправление" Click="DepArrival_Click"/>
+                                                 Margin="4" IsChecked="False" Content="Прибытие2" Click="DepArrival_Click"/>
                                 </StackPanel>
                                 <RadioButton GroupName="TimeRB" Name="TimeArrival" Margin="0 0 0 10" Content="Утро (с 06.00 - 11.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>
                                 <RadioButton GroupName="TimeRB" Margin="0 0 0 10" Content="День (с 12.00 - 17.59)" FontSize="14" Click="TimeArrival_Click"></RadioButton>

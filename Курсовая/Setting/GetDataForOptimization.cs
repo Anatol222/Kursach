@@ -51,7 +51,7 @@ namespace Курсовая.Setting
         public void ChangingDatePlane()
         {
             DataBase dataBase = new DataBase();
-            QueryBD($"DELETE FROM Plane WHERE ((DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND DepartureDate <= '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}') OR DepartureDate < '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}');");
+            QueryBD($"DELETE FROM Plane WHERE ((DepartureTime< '{DateTime.Now.ToString(@"HH\:mm")}' AND DepartureDate <= '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}') OR DepartureDate < '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}');");
             string query = $"SELECT * FROM Plane WHERE Landing IS NOT NULL;";
             SqlCommand command = new SqlCommand(query, dataBase.GetConnection());
             dataBase.OpenConnection();
@@ -136,19 +136,19 @@ namespace Курсовая.Setting
                         if (item.numbers_gate.Length != 0)
                         {
                             query = $"SELECT Id FROM Plane WHERE Flight ='{item.flight}' AND Direction ='{item.airport.title}' AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' " +
-                                $"AND DepartureDate = '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}';";
+                                $"AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';";
                             command = new SqlCommand(query, data.GetConnection());
                             try
                             {
                                 if (command.ExecuteNonQuery() > 0)
                                     query = $"UPDATE Plane SET Landing = '{item.numbers_gate[0]}' WHERE Flight = '{item.flight}'" +
                                   $" AND Direction ='{item.airport.title}' AND DepartureTime ='{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}' " +
-                                  $"AND DepartureDate ='{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}';";
+                                  $"AND DepartureDate ='{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';";
                                 else
                                     query = $"INSERT INTO Plane(AirlineId,Flight,Direction,DepartureTime,StatusPlane,DepartureDate,Landing) " +
                                          $"VALUES((SELECT ID FROM Airline WHERE Company = '{item.airline.title}'),'{item.flight}','{item.airport.title}'," +
                                          $"'{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}','{item.status.title}'," +
-                                         $"'{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}', '{item.numbers_gate[0]}'); ";
+                                         $"'{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}', '{item.numbers_gate[0]}'); ";
                             }
                             catch (Exception) { }
                             access = false;
@@ -159,7 +159,7 @@ namespace Курсовая.Setting
                             query = $"INSERT INTO Plane(AirlineId,Flight,Direction,DepartureTime,StatusPlane,DepartureDate) " +
                                          $"VALUES((SELECT ID FROM Airline WHERE Company = '{item.airline.title}'),'{item.flight}','{item.airport.title}'," +
                                          $"'{Convert.ToDateTime(item.plan).ToString(@"HH\:mm")}','{item.status.title}'," +
-                                         $"'{((DateTime)date).Day}-{((DateTime)date).Month}-{((DateTime)date).Year}'); ";
+                                         $"'{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}'); ";
                             access = true;
                         }
                         command = new SqlCommand(query, data.GetConnection());
@@ -180,7 +180,7 @@ namespace Курсовая.Setting
                 }
                 catch (Exception) { }
             }
-            query = $"DELETE FROM Plane WHERE Landing IS NULL AND DepartureDate = '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}';";
+            query = $"DELETE FROM Plane WHERE Landing IS NULL AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}';";
             command = new SqlCommand(query, data.GetConnection());
             data.OpenConnection();
             try { command.ExecuteNonQuery(); }

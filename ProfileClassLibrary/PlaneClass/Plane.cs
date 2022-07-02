@@ -29,9 +29,11 @@ namespace ProfileClassLibrary.PlaneClass
             }
             catch (Exception) { }
             if (imageName == "Белавиа")
-                ImagePath = "https://airport.by/upload/images/4e3bdc6556844bde1c84c53fc65a8cc6.png";
+                ImagePath = @"\Images\PlaneIcons\Белавиа.png";
             else if (imageName == "Аэрофлот")
-                ImagePath = "https://airport.by/upload/images/3a4144634cb5678c4c6fb1aad958c551.png";
+                ImagePath = @"\Images\PlaneIcons\Аэрофлот.png";
+            else if (imageName == "Uzbekistan Airways")
+                ImagePath = @"\Images\PlaneIcons\УзбекисанАвиа.png";
         }
     }
 }

@@ -238,7 +238,7 @@ namespace Курсовая.MainFrameForms
             {
                 string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService)" +
                     $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), '1', '{Planes[FlightsListBox.SelectedIndex].Direction}'," +
-                    $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
+                    $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
                     $"0, {PeopleCount}, '{Planes[FlightsListBox.SelectedIndex].FlightName}', '{(string)FlightClass.Content}'); ";
                 if (AddTicketIntoBD(query))
                 {
@@ -261,7 +261,7 @@ namespace Курсовая.MainFrameForms
             {
                 string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName,TypeService)" +
                 $"VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), '1', '{Planes[FlightsListBox.SelectedIndex].Direction}'," +
-                $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
+                $" '{Planes[FlightsListBox.SelectedIndex].DepartureTime.ToString(@"HH\:mm")}', '{Planes[FlightsListBox.SelectedIndex].DepartureDate.Month}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Day}-{Planes[FlightsListBox.SelectedIndex].DepartureDate.Year}', " +
                 $"1, {PeopleCount}, '{Planes[FlightsListBox.SelectedIndex].FlightName}', '{(string)FlightClass.Content}'); ";
                 if (AddTicketIntoBD(query))
                 {
@@ -291,9 +291,9 @@ namespace Курсовая.MainFrameForms
             DateTime date = DateTime.Now.AddDays(1);
             string s = DayComboBox.Text.ToString();
             if (DayComboBox.Text.ToString() == "Завтра")
-                return $" AND DepartureDate = '{((DateTime)date).Day}-{((DateTime)date).Month}-{((DateTime)date).Year}' ";
+                return $" AND DepartureDate = '{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}' ";
             else if (DayComboBox.Text.ToString() == "Сегодня")
-                return $" AND DepartureDate = '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}' ";
+                return $" AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}' ";
             else
                 return "";
         }
@@ -303,9 +303,9 @@ namespace Курсовая.MainFrameForms
             string dateSelect = default;
             DateTime date = DateTime.Now.AddDays(1);
             if (DayComboBox.SelectedIndex == 0)
-                dateSelect = $"AND DepartureDate = '{((DateTime)date).Day}-{((DateTime)date).Month}-{((DateTime)date).Year}' ";
+                dateSelect = $"AND DepartureDate = '{((DateTime)date).Month}-{((DateTime)date).Day}-{((DateTime)date).Year}' ";
             else if (DayComboBox.SelectedIndex == 1)
-                dateSelect = $" AND DepartureDate = '{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}' ";
+                dateSelect = $" AND DepartureDate = '{DateTime.Now.Month}-{DateTime.Now.Day}-{DateTime.Now.Year}' ";
             else
                 dateSelect = "";
             string query = $"SELECT AirlineId,Flight,Direction,Landing,DepartureTime,StatusPlane,DepartureDate  FROM Plane WHERE Direction LIKE '%{DirectionBox.Text}%'" +

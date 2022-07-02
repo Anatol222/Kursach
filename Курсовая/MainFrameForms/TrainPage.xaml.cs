@@ -34,6 +34,7 @@ namespace Курсовая.MainFrameForms
 
         public List<Train> Trains { get; set; }
         private List<Train> ReserveListTrains { get; set; }
+        private List<Train> StartTrains { get; set; }
 
         public TrainPage(List<Train> trains)
         {
@@ -57,6 +58,7 @@ namespace Курсовая.MainFrameForms
             DepartureTrain.DisplayDateStart = DateTime.Now;
             DepartureTrain.Text = DateTime.Now.ToShortDateString();
             ReserveListTrains = Trains.ToList();
+            StartTrains = Trains.ToList();
         }
 
         public TrainPage()
@@ -113,7 +115,12 @@ namespace Курсовая.MainFrameForms
                                 while (reader.Read())
                                     try
                                     {
-                                        trains.Add(new Train((string)reader.GetValue(2), (string)reader.GetValue(0), (string)reader.GetValue(1), firstStation.DTime, firstStation.Station, secondStation.DTime, secondStation.Station, secondStation.DTime - firstStation.DTime, firstStation.TrainId));
+                                        TimeSpan TimeAllWay;
+                                        if (secondStation.DTime < firstStation.DTime)
+                                            TimeAllWay = (new TimeSpan(23, 59, 0) - (firstStation.DTime -  secondStation.DTime));
+                                        else
+                                            TimeAllWay = secondStation.DTime - firstStation.DTime;
+                                        trains.Add(new Train((string)reader.GetValue(2), (string)reader.GetValue(0), (string)reader.GetValue(1), firstStation.DTime, firstStation.Station, secondStation.DTime, secondStation.Station, TimeAllWay, firstStation.TrainId));
                                     }
                                     catch (Exception) { }
                         }
@@ -126,13 +133,21 @@ namespace Курсовая.MainFrameForms
         }
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            string query = $"SELECT Id,TrainId,Departure,Station FROM TrainRoute WHERE Station LIKE '%{FirstStation.Text}%';";
-            List<TrainStation> firstStation = GetStation(query, FirstStation.Text);
-            query = $"SELECT Id,TrainId,Direction,Station FROM TrainRoute WHERE Station LIKE '%{SecondStation.Text}%';";
-            List<TrainStation> seconStation = GetStation(query, SecondStation.Text);
-            Trains = GetTrains(firstStation, seconStation);
-            ReserveListTrains = Trains.ToList();
-            FlightsListBox.ItemsSource = Trains;
+            if (FirstStation.Text != "")
+            {
+                string query = $"SELECT Id,TrainId,Departure,Station FROM TrainRoute WHERE Station LIKE '%{FirstStation.Text}%';";
+                List<TrainStation> firstStation = GetStation(query, FirstStation.Text);
+                query = $"SELECT Id,TrainId,Direction,Station FROM TrainRoute WHERE Station LIKE '%{SecondStation.Text}%';";
+                List<TrainStation> seconStation = GetStation(query, SecondStation.Text);
+                Trains = GetTrains(firstStation, seconStation);
+                ReserveListTrains = Trains.ToList();
+                FlightsListBox.ItemsSource = Trains;
+            }
+            else if(FlightsListBox.ItemsSource !=StartTrains.ToList())
+            {
+                Trains = StartTrains.ToList();
+                FlightsListBox.ItemsSource = StartTrains.ToList();
+            }
         }
 
         private bool DepartureSort { get; set; }
@@ -210,7 +225,7 @@ namespace Курсовая.MainFrameForms
                 {
                     string[] date = DepartureTrain.Text.Split('.');
                     string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
-                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[0]}-{date[1]}-{date[2]}', 0, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
+                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[1]}-{date[0]}-{date[2]}', 0, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
                     if (AddTicketIntoBD(query))
                     {
                         Notification?.Invoke("Билет добавлен в корзину, не забудьте оплатить");
@@ -239,7 +254,7 @@ namespace Курсовая.MainFrameForms
                     {
                         string[] date = DepartureTrain.Text.Split('.');
                         string query = $"INSERT INTO ShoppingBasket(IdPersonalLoginData,TicketWhichTransport,RouteTicket,DepartureTime,DepartureDate,TicketStatus,CountTickets,TransportName)" +
-                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[0]}-{date[1]}-{date[2]}', 1, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
+                        $" VALUES((SELECT Id FROM PersonalLoginData WHERE Email = '{MainFrame.user.Email}'), 0, '{Trains[FlightsListBox.SelectedIndex].trainRoute}', '{((DateTime)Trains[FlightsListBox.SelectedIndex].departureTime).ToShortTimeString()}','{date[1]}-{date[0]}-{date[2]}', 1, {SityBusPage.CountOfTickets}, '{Trains[FlightsListBox.SelectedIndex].trainNumber}'); ";
                         if (AddTicketIntoBD(query))
                         {
                             Notification?.Invoke("Спасибо за покупку. Билет у вас в корзине");

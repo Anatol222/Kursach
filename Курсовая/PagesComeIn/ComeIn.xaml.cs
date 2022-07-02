@@ -201,7 +201,7 @@ namespace Курсовая.PagesComeIn
                 else
                     Notification?.Invoke("Такого аккаунта не существует");
             }
-            catch (Exception) { }
+            catch (Exception) { Notification?.Invoke("Возникла ошибка при хводе"); }
             finally { dataBase.CloseConnection(); }
         }
 

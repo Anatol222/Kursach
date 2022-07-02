@@ -224,7 +224,7 @@ namespace Курсовая
                             try
                             {
                                 string query = $"UPDATE UserPersonalData SET FirstName='{FirstNameBox.Text.Trim()}',LastName='{LastNameBox.Text.Trim()}',Number='{NumberBox.Text.Trim()}'," +
-                                    $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).Day}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Month}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Year}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
+                                    $"Patronymic='{PatronymicBox.Text.Trim()}',Birthday='{Convert.ToDateTime(BirthdayBox.Text.Trim()).Month}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Day}-{Convert.ToDateTime(BirthdayBox.Text.Trim()).Year}',Gender ={whatGender} WHERE Number='{MainFrame.user.Phone}';";
                                 SqlCommand sqlCommand = new SqlCommand(query, dataBase.GetConnection());
                                 dataBase.OpenConnection();
                                 if (await sqlCommand.ExecuteNonQueryAsync() == 1)

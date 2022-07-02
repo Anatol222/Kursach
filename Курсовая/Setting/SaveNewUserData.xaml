@@ -12,7 +12,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        Title="SaveNewUserData" Height="200" Width="400">
+        Title="Уведомление" Height="200" Width="400">
     <Border CornerRadius="20" Background ="{StaticResource PrimaryBackgroundColor}" BorderBrush="Gray" BorderThickness="1">
         <Grid Background="Transparent">
             <Border>
